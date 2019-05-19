@@ -5,12 +5,10 @@
 NewPageModel::NewPageModel(QObject *parent)
     : QAbstractTableModel(parent)
 {
-   // insert({"abc",QDateTime(),"def"});
 }
 
 QVariant NewPageModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    // FIXME: Implement me!
     if(orientation == Qt::Horizontal)
     {
         if(role == Qt::DisplayRole)
