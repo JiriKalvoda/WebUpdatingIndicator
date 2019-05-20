@@ -7,7 +7,6 @@
 #include <QSortFilterProxyModel>
 #include <QIdentityProxyModel>
 
-#include "deleteproxy.h"
 
 class PageViewer : public QWidget
 {
