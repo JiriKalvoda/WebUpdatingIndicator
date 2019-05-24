@@ -35,17 +35,14 @@ int NewPageModel::rowCount(const QModelIndex &) const
 
 int NewPageModel::columnCount(const QModelIndex &) const
 {
-    //if (!parent.isValid())
-      //  return 0;
     return 4;
-
-    // FIXME: Implement me!
 }
 
 QVariant NewPageModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
         return QVariant();
+    if(role == IdRole || role == Qt::ToolTipRole) return QVariant(v[index.row()].id);
     if(index.column()==0)
     {
         if(role == Qt::DisplayRole || role == Qt::UserRole) return QVariant(v[index.row()].pageName);
@@ -95,11 +92,13 @@ bool NewPageModel::insertRows(int row, int count, const QModelIndex &parent)
 }
 bool NewPageModel::insert(NewPageItem in)
 {
-    beginInsertRows(QModelIndex(), 0, 0+1-1);
+    int poz=v.size();
+    //while(poz&&in<v[poz-1]) poz--;
+    beginInsertRows(QModelIndex(), poz, poz+1-1);
     // FIXME: Implement me!
-    v.push_front(in);
+    v.insert(poz,in);
     endInsertRows();
-    qDebug() << "INSERTROWS";
+    qDebug() << "INSERTROWS " << poz;
     return 1;
 }
 
@@ -111,14 +110,36 @@ bool NewPageModel::removeRows(int row, int count, const QModelIndex &parent)
             NewPageItem & it  = v[i];
             QSqlQuery dotaz;
             QString q = QString("update newPage set del = 1 where ")
-                    +"pageName = '"+it.pageName
-                    +"' and time = '"+it.time.toString("yyyy-MM-dd hh:mm:ss.zzz")
-                    +"' and fileName = '"+it.fileName
-                    +"'";
+                    +"id = "+QString::number(it.id);;
             qDebug()<<q;
             dotaz.exec(q);
         }
         v.remove(row,count);
     endRemoveRows();
     return 1;
+}
+void NewPageModel::hideHistPage(int id)
+{
+    auto lb = std::lower_bound(v.begin(),v.end(),NewPageItem{"",QDateTime(),"",0,id});
+    if(lb->id != id) return;
+    int row = lb - v.begin();
+    removeRows(row,1);
+}
+
+void NewPageModel::deleteHistPage(int id)
+{
+    // TODO delete file
+    {
+        QSqlQuery dotaz;
+        QString q = QString("delete from newPage where ")
+            +"id = "+QString::number(id);
+        qDebug()<<q;
+        dotaz.exec(q);
+    }
+    auto lb = std::lower_bound(v.begin(),v.end(),NewPageItem{"",QDateTime(),"",0,id});
+    if(lb->id != id) return;
+    int row = lb - v.begin();
+    beginRemoveRows(QModelIndex(), row, row + 1 - 1);
+    v.remove(row,1);
+    endRemoveRows();
 }

@@ -4,9 +4,11 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QDir>
+#include <QModelIndexList>
+#include <newpagemodel.h>
+#include <background.h>
 
-
-PageViewer::PageViewer(QWidget *parent) : QWidget(parent)
+PageViewer::PageViewer(Background *bg, QWidget *parent) : QWidget(parent),bg(bg)
 {
     table = new QTableView;
     l = new QVBoxLayout;
@@ -37,6 +39,9 @@ PageViewer::PageViewer(QWidget *parent) : QWidget(parent)
     buttons->addWidget(buttons_middleLabel,1);
     buttons->addWidget(button_compare,0);
 
+    connect(button_delete,SIGNAL(clicked(bool)),this,SLOT(deleteSlot()));
+    connect(button_hide,SIGNAL(clicked(bool)),this,SLOT(hideSlot()));
+    connect(button_compare,SIGNAL(clicked(bool)),this,SLOT(compareSlot()));
 
     l->addWidget(table);
     l->addLayout(buttons);
@@ -60,4 +65,32 @@ void PageViewer::clicked(QModelIndex index)
         sort->removeRows(index.row(),1);
     }
 
+}
+
+void PageViewer::hideSlot()
+{
+    QModelIndexList list = table->selectionModel()->selectedIndexes();
+    QSet<int> selectedRows;
+    for(auto i=list.begin();i!=list.end();i++)
+        selectedRows.insert(sort->data(*i,NewPageModel::IdRole).toInt());
+    for(auto i=selectedRows.begin();i!=selectedRows.end();i++)
+        bg->newPages.hideHistPage(*i);
+    needActualization();
+}
+void PageViewer::deleteSlot()
+{
+    QModelIndexList list = table->selectionModel()->selectedIndexes();
+    QSet<int> selectedRows;
+    for(auto i=list.begin();i!=list.end();i++)
+        selectedRows.insert(sort->data(*i,NewPageModel::IdRole).toInt());
+    for(auto i=selectedRows.begin();i!=selectedRows.end();i++)
+        bg->newPages.deleteHistPage(*i);
+    needActualization();
+}
+void PageViewer::compareSlot()
+{
+    QModelIndexList list = table->selectionModel()->selectedIndexes();
+    QSet<int> selectedRows;
+    for(auto i=list.begin();i!=list.end();i++)
+        selectedRows.insert(sort->data(*i,NewPageModel::IdRole).toInt());
 }

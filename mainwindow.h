@@ -66,7 +66,7 @@ public slots:
     void makeHistoryWindow(bool);
 
     void closeEvent (QCloseEvent *event);
-    void exit();\
+    void exit();
 };
 
 #endif // MAINWINDOW_H

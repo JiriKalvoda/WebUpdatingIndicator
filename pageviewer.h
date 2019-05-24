@@ -10,12 +10,14 @@
 #include <QIdentityProxyModel>
 #include <QLabel>
 
+class Background;
 
 class PageViewer : public QWidget
 {
     Q_OBJECT
 public:
-    explicit PageViewer(QWidget *parent = 0);
+    explicit PageViewer(Background * bg,QWidget *parent = 0);
+    Background * bg;
     QTableView *table;
     QVBoxLayout *l;
     QHBoxLayout *buttons;
@@ -24,9 +26,12 @@ public:
     virtual void setModel(QAbstractItemModel *model);
     QSortFilterProxyModel *sort;
 signals:
-
+    void needActualization();
 public slots:
     void clicked(QModelIndex index);
+    void hideSlot();
+    void deleteSlot();
+    void compareSlot();
 };
 
 #endif // DELETETABLEVIEWER_H

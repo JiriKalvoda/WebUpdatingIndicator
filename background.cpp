@@ -65,6 +65,7 @@ Background::Background(QObject *parent) : QObject(parent)
             in.time  = dotaz.value("time").toDateTime();
             in.fileName  = dotaz.value("fileName").toString();
             in.del = dotaz.value("del").toBool();
+            in.id = dotaz.value("id").toInt();
             newPages.insert(in);
         }
     }
@@ -210,9 +211,7 @@ void Background::setBar(int in)
 void Background::pageChanged(QString name,QString fileName)
 {
     if(!isOkStart) return;
-    auto it = NewPageItem{name,QDateTime::currentDateTime(),fileName,0};
-    pageChanged_signal(it);
-    newPages.insert(it);
+    auto it = NewPageItem{name,QDateTime::currentDateTime(),fileName,0,-1};
     {
         QSqlQuery dotaz;
         QString q = QString("insert into newPage (pageName,time,fileName,del) ")
@@ -223,6 +222,15 @@ void Background::pageChanged(QString name,QString fileName)
         qDebug()<<q;
         dotaz.exec(q);
     }
+    {
+        QSqlQuery dotaz;
+        QString q = QString("select max(id) from newPage");
+        qDebug()<<q;
+        dotaz.exec(q);
+        if(dotaz.next()) it.id = dotaz.value(0).toInt();
+    }
+    pageChanged_signal(it);
+    newPages.insert(it);
 }
 
 void Background::errorCon(QString)
@@ -271,6 +279,7 @@ PageQuery * Background::history(QString query)
         in.time  = dotaz.value("time").toDateTime();
         in.fileName  = dotaz.value("fileName").toString();
         in.del = dotaz.value("del").toBool();
+        in.id = dotaz.value("id").toInt();
         out->insert(in);
     }
     return out;

@@ -11,7 +11,8 @@ struct NewPageItem
     QDateTime time;
     QString fileName;
     bool del;
-
+    int id;
+    operator < (NewPageItem const & dr){return id<dr.id;}
 };
 
 class NewPageModel : public QAbstractTableModel
@@ -19,6 +20,8 @@ class NewPageModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
+    static const int IdRole = Qt::UserRole+10;
+
     QVector<NewPageItem> v;
     explicit NewPageModel(QObject *parent = 0);
 
@@ -43,7 +46,8 @@ public:
     // Remove data:
     virtual bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
     virtual bool insert(NewPageItem in);
-
+    virtual void hideHistPage(int id);
+    virtual void deleteHistPage(int id);
 private:
 };
 
