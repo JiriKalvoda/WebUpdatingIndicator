@@ -9,6 +9,7 @@
 #include <QSortFilterProxyModel>
 #include <QIdentityProxyModel>
 #include <QLabel>
+#include <newpagemodel.h>
 
 class Background;
 
@@ -17,13 +18,14 @@ class PageViewer : public QWidget
     Q_OBJECT
 public:
     explicit PageViewer(Background * bg,QWidget *parent = 0);
+    NewPageModel * inputModel;
     Background * bg;
     QTableView *table;
     QVBoxLayout *l;
     QHBoxLayout *buttons;
     QPushButton *button_hide, *button_delete, *button_compare;
     QLabel * buttons_middleLabel;
-    virtual void setModel(QAbstractItemModel *model);
+    virtual void setModel(NewPageModel *model);
     QSortFilterProxyModel *sort;
 signals:
     void needActualization();

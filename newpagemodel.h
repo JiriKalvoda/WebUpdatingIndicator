@@ -5,6 +5,8 @@
 #include <QVector>
 #include <QString>
 #include <QDateTime>
+
+class Background;
 struct NewPageItem
 {
     QString pageName;
@@ -20,10 +22,11 @@ class NewPageModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
+    Background * bg;
     static const int IdRole = Qt::UserRole+10;
 
     QVector<NewPageItem> v;
-    explicit NewPageModel(QObject *parent = 0);
+    explicit NewPageModel(Background * bg,QObject *parent = 0);
 
     // Header:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;

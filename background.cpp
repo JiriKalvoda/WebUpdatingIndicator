@@ -13,7 +13,7 @@
 
 
 
-Background::Background(QObject *parent) : QObject(parent)
+Background::Background(QObject *parent) : QObject(parent),newPages(this)
 {
     lockFileLock = new QLockFile("runlock.dat");
     if(!lockFileLock->tryLock(10)) return;
@@ -269,7 +269,7 @@ void Background::changeActPeriod(int in)
 }
 PageQuery * Background::history(QString query)
 {
-    auto out = new PageQuery;
+    auto out = new PageQuery(this);
     QSqlQuery dotaz;
     dotaz.exec(query);
     while (dotaz.next())

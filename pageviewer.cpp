@@ -48,8 +48,9 @@ PageViewer::PageViewer(Background *bg, QWidget *parent) : QWidget(parent),bg(bg)
     setLayout(l);
 
 }
-void PageViewer::setModel(QAbstractItemModel *model)
+void PageViewer::setModel(NewPageModel *model)
 {
+    inputModel=model;
     sort->setSourceModel(model);
 }
 void PageViewer::clicked(QModelIndex index)
@@ -74,7 +75,7 @@ void PageViewer::hideSlot()
     for(auto i=list.begin();i!=list.end();i++)
         selectedRows.insert(sort->data(*i,NewPageModel::IdRole).toInt());
     for(auto i=selectedRows.begin();i!=selectedRows.end();i++)
-        bg->newPages.hideHistPage(*i);
+        inputModel->hideHistPage(*i);
     needActualization();
 }
 void PageViewer::deleteSlot()
@@ -84,7 +85,7 @@ void PageViewer::deleteSlot()
     for(auto i=list.begin();i!=list.end();i++)
         selectedRows.insert(sort->data(*i,NewPageModel::IdRole).toInt());
     for(auto i=selectedRows.begin();i!=selectedRows.end();i++)
-        bg->newPages.deleteHistPage(*i);
+        inputModel->deleteHistPage(*i);
     needActualization();
 }
 void PageViewer::compareSlot()

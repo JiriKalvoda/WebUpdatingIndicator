@@ -2,8 +2,8 @@
 #include <qDebug>
 #include <QSqlQuery>
 
-NewPageModel::NewPageModel(QObject *parent)
-    : QAbstractTableModel(parent)
+NewPageModel::NewPageModel(Background * bg,QObject *parent)
+    : QAbstractTableModel(parent),bg(bg)
 {
 }
 

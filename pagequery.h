@@ -9,10 +9,11 @@ class PageQuery : public NewPageModel
     Q_OBJECT
 
 public:
-    PageQuery();
+    PageQuery(Background *bg);
     QString error;
     virtual bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
-
+    virtual void hideHistPage(int id);
+    virtual void deleteHistPage(int id);
 };
 
 #endif // PAGEQUERY_H
