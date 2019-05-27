@@ -7,6 +7,7 @@
 #include <QModelIndexList>
 #include <newpagemodel.h>
 #include <background.h>
+#include <qmessagebox.h>
 
 PageViewer::PageViewer(Background *bg, QWidget *parent) : QWidget(parent),bg(bg)
 {
@@ -81,12 +82,18 @@ void PageViewer::hideSlot()
 void PageViewer::deleteSlot()
 {
     QModelIndexList list = table->selectionModel()->selectedIndexes();
-    QSet<int> selectedRows;
-    for(auto i=list.begin();i!=list.end();i++)
-        selectedRows.insert(sort->data(*i,NewPageModel::IdRole).toInt());
-    for(auto i=selectedRows.begin();i!=selectedRows.end();i++)
-        inputModel->deleteHistPage(*i);
-    needActualization();
+    QMessageBox::StandardButton reply =
+            QMessageBox::question(this, "Delete selected", QString("Are you realy want do delete ")+QString::number(list.size())+" selected record permanently (with history file)?",
+                                    QMessageBox::Yes|QMessageBox::No);
+    if (reply == QMessageBox::Yes)
+    {
+        QSet<int> selectedRows;
+        for(auto i=list.begin();i!=list.end();i++)
+            selectedRows.insert(sort->data(*i,NewPageModel::IdRole).toInt());
+        for(auto i=selectedRows.begin();i!=selectedRows.end();i++)
+            inputModel->deleteHistPage(*i);
+        needActualization();
+    }
 }
 void PageViewer::compareSlot()
 {
