@@ -3,6 +3,7 @@
 #include <QSqlQuery>
 #include <QColor>
 #include <QBrush>
+#include <QFile>
 NewPageModel::NewPageModel(Background * bg,QObject *parent)
     : QAbstractTableModel(parent),bg(bg)
 {
@@ -134,7 +135,20 @@ void NewPageModel::hideHistPage(int id)
 
 void NewPageModel::deleteHistPage(int id)
 {
-    // TODO delete file
+    {
+        QSqlQuery dotaz;
+        QString q = QString("select * from newPage where ")
+            +"id = "+QString::number(id);
+        qDebug()<<q;
+        dotaz.exec(q);
+        while(dotaz.next())
+        {
+            QFile file(QString("history/")+dotaz.value("fileName").toString());
+            file.remove();
+            qDebug()<<"remove file:"<<QString("history/")+dotaz.value("fileName").toString();
+        }
+    }
+
     {
         QSqlQuery dotaz;
         QString q = QString("delete from newPage where ")
