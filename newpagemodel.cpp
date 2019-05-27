@@ -1,7 +1,8 @@
 #include "newpagemodel.h"
 #include <qDebug>
 #include <QSqlQuery>
-
+#include <QColor>
+#include <QBrush>
 NewPageModel::NewPageModel(Background * bg,QObject *parent)
     : QAbstractTableModel(parent),bg(bg)
 {
@@ -42,7 +43,12 @@ QVariant NewPageModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
         return QVariant();
-    if(role == IdRole || role == Qt::ToolTipRole) return QVariant(v[index.row()].id);
+    if(role == IdRole || role == Qt::ToolTipRole)
+    {
+        return QVariant(v[index.row()].id);
+    }
+
+    if(role == Qt::ForegroundRole) return QVariant(QBrush(v[index.row()].del?Qt::red:Qt::black));
     if(index.column()==0)
     {
         if(role == Qt::DisplayRole || role == Qt::UserRole) return QVariant(v[index.row()].pageName);
@@ -78,8 +84,8 @@ Qt::ItemFlags NewPageModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
         return Qt::NoItemFlags;
-    if(v[index.row()].del)
-        return Qt::ItemIsSelectable;
+    //if(v[index.row()].del)
+      //  return Qt::ItemIsSelectable|Qt::ItemIsUserCheckable;
     return Qt::ItemIsEnabled|Qt::ItemIsSelectable; // FIXME: Implement me!
 }
 
