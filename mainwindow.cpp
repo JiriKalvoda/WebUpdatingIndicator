@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     consoleScr  = new QScrollArea();
     console = new QLabel();
     bar     = new QProgressBar ();
-    newPages = new PageViewer();
+    newPages = new PageViewer(bg);
 
     buttonL = new QHBoxLayout();
     start = new QPushButton();

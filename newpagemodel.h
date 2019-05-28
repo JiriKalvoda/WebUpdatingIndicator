@@ -5,13 +5,16 @@
 #include <QVector>
 #include <QString>
 #include <QDateTime>
+
+class Background;
 struct NewPageItem
 {
     QString pageName;
     QDateTime time;
     QString fileName;
     bool del;
-
+    int id;
+    operator < (NewPageItem const & dr){return id<dr.id;}
 };
 
 class NewPageModel : public QAbstractTableModel
@@ -19,8 +22,11 @@ class NewPageModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
+    Background * bg;
+    static const int IdRole = Qt::UserRole+10;
+
     QVector<NewPageItem> v;
-    explicit NewPageModel(QObject *parent = 0);
+    explicit NewPageModel(Background * bg,QObject *parent = 0);
 
     // Header:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
@@ -43,7 +49,8 @@ public:
     // Remove data:
     virtual bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
     virtual bool insert(NewPageItem in);
-
+    virtual void hideHistPage(int id);
+    virtual void deleteHistPage(int id);
 private:
 };
 

@@ -22,7 +22,8 @@ public:
     QLineEdit   * inputInput;
     QLabel      * inputSufix;
     QPushButton * inputButton;
-
+    QString lastQueryString;
+    QString error;
     PageViewer * viewer;
     PageQuery * query = 0;
     Background * bg;
@@ -31,6 +32,7 @@ signals:
 
 public slots:
     void load();
+    void reload();
 };
 
 #endif // HISTORYWINDOW_H

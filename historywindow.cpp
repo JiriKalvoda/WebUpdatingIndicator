@@ -23,7 +23,8 @@ HistoryWindow::HistoryWindow(Background * BG,QWidget * parent):QWidget(parent)
    inputButton->setText("Load");
    connect(inputButton,SIGNAL(clicked(bool)),this,SLOT(load()));
    l->addLayout(inputL);
-   viewer = new PageViewer;
+   viewer = new PageViewer(bg);
+   connect(viewer,SIGNAL(needActualization()),this,SLOT(reload()));
    l->addWidget(viewer);
    setLayout(l);
 }
@@ -32,6 +33,14 @@ void HistoryWindow::load()
 {
     viewer->setModel(0);
     if(query) delete query;
-    query = bg->history(QString("select * from newPage where ")+inputInput->text()+"");
+    lastQueryString = inputInput->text();
+    if(lastQueryString!="") query = bg->history(QString("select * from newPage where ")+lastQueryString+"");
+    viewer->setModel(query);
+}
+void HistoryWindow::reload()
+{
+    viewer->setModel(0);
+    if(query) delete query;
+    if(lastQueryString!="") query = bg->history(QString("select * from newPage where ")+lastQueryString+"");
     viewer->setModel(query);
 }
