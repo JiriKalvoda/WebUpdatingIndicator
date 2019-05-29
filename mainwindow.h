@@ -9,6 +9,7 @@
  #include <qstandarditemmodel>
 #include <QProgressBar>
 #include <QScrollArea>
+#include <QGroupBox>
 
  //#include "deletetableviewer.h"
  #include "background.h"
@@ -36,6 +37,7 @@ public:
 
     PageViewer * newPages;
     QScrollArea * consoleScr;
+    QHBoxLayout * consoleLayout;
     QLabel * console;
     QProgressBar *  bar;
 
@@ -44,6 +46,7 @@ public:
     QPushButton * stop;
     QLabel * timeInfo;
     QSpinBox * actPeriod;
+    QGroupBox * consoleBox;
 
     QIcon logo = QIcon("Logo.png");
     //QSystemTrayIcon * stico;
@@ -64,6 +67,7 @@ public slots:
     void jumpOnView();
     void redIcon();
     void makeHistoryWindow(bool);
+    void viewConsole(bool isYes);
 
     void closeEvent (QCloseEvent *event);
     void exit();

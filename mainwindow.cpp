@@ -25,6 +25,8 @@ MainWindow::MainWindow(QWidget *parent)
     console = new QLabel();
     bar     = new QProgressBar ();
     newPages = new PageViewer(bg);
+    consoleBox = new QGroupBox();
+    consoleLayout = new QHBoxLayout();
 
     buttonL = new QHBoxLayout();
     start = new QPushButton();
@@ -62,7 +64,14 @@ MainWindow::MainWindow(QWidget *parent)
     consoleScr->setWidgetResizable(1);
     connect(consoleScr->verticalScrollBar(),SIGNAL(rangeChanged(int,int)),
             this,SLOT(sliderRangeChanged(int,int)));
-    basicLayout->addWidget(consoleScr);
+    //basicLayout->addWidget(consoleScr);
+    basicLayout->addWidget(consoleBox);
+    consoleBox->setCheckable(1);
+    consoleBox->setChecked(0);
+    consoleBox->setTitle("View more information");
+    consoleBox->setLayout(consoleLayout);
+    consoleLayout->setMargin(0);
+    connect(consoleBox,SIGNAL(toggled(bool)),this,SLOT(viewConsole(bool)));
 
     basicWidget->setLayout(basicLayout);
     setCentralWidget(basicWidget);
@@ -177,4 +186,11 @@ void MainWindow::closeEvent (QCloseEvent *event)
 void MainWindow::exit()
 {
     qApp->quit();
+}
+void MainWindow::viewConsole(bool isYes)
+{
+    while (consoleLayout->takeAt(0) != 0)
+        consoleLayout->removeItem (consoleLayout->takeAt(0));
+    if(isYes)
+        consoleLayout->addWidget(consoleScr);
 }
