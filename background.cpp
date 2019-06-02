@@ -284,3 +284,4 @@ PageQuery * Background::history(QString query)
     }
     return out;
 }
+

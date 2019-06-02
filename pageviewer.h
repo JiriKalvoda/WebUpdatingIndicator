@@ -10,6 +10,7 @@
 #include <QIdentityProxyModel>
 #include <QLabel>
 #include <newpagemodel.h>
+#include <pagecomparatorgui.h>
 
 class Background;
 

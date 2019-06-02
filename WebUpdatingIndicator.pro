@@ -6,6 +6,9 @@
 
 QT       += core gui sql
 QT += network
+#QT += webengine
+#QT       += webkitwidgets
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = WebUpdatingIndicator
@@ -21,7 +24,9 @@ SOURCES += main.cpp\
     monitoredvar.cpp \
     newpagemodel.cpp \
     historywindow.cpp \
-    pagequery.cpp
+    pagequery.cpp \
+    pagecomparatorgui.cpp \
+    pagecomparator.cpp
 
 HEADERS  += background.h \
     conectionthread.h \
@@ -31,5 +36,7 @@ mainwindow.h \
     pageviewer.h \
  #   deleteproxy.h \
     historywindow.h \
-    pagequery.h
+    pagequery.h \
+    pagecomparatorgui.h \
+    pagecomparator.h
 

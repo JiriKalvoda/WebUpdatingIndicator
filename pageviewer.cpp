@@ -8,6 +8,7 @@
 #include <newpagemodel.h>
 #include <background.h>
 #include <qmessagebox.h>
+#include <QFile>
 
 PageViewer::PageViewer(Background *bg, QWidget *parent) : QWidget(parent),bg(bg)
 {
@@ -101,4 +102,10 @@ void PageViewer::compareSlot()
     QSet<int> selectedRows;
     for(auto i=list.begin();i!=list.end();i++)
         selectedRows.insert(sort->data(*i,NewPageModel::IdRole).toInt());
+    if(selectedRows.size()==2)
+    {
+        auto a = selectedRows.begin();
+        auto b = ++selectedRows.begin();
+        (new PageComparatorGui(*a,*b,bg))->show();
+    }
 }
