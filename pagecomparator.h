@@ -22,7 +22,7 @@ public:
 
     QSet<QString> openFile;
     void setNewPrefix();
-
+    QStringList parseData(QString in);
     QStringList loadFile(int id);
 public slots:
     void generate();

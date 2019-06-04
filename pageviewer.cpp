@@ -106,6 +106,6 @@ void PageViewer::compareSlot()
     {
         auto a = selectedRows.begin();
         auto b = ++selectedRows.begin();
-        (new PageComparatorGui(*a,*b,bg))->show();
+        (new PageComparatorGui(*b,*a,bg))->show();
     }
 }
