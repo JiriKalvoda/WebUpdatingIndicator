@@ -27,6 +27,8 @@ HistoryWindow::HistoryWindow(Background * BG,QWidget * parent):QWidget(parent)
    connect(viewer,SIGNAL(needActualization()),this,SLOT(reload()));
    l->addWidget(viewer);
    setLayout(l);
+
+   setAttribute(Qt::WA_DeleteOnClose);
 }
 
 void HistoryWindow::load()
