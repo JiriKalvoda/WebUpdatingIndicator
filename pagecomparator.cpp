@@ -44,7 +44,11 @@ void PageComparator::generate()
                         "<meta http-equiv=\"Pragma\" content=\"no-cache\">\n"
                         "<meta http-equiv=\"expires\" content=\"0\">\n"
                         "</head>\n"
-                        "<frameset  rows=\"*\" frameborder=\"0\" framespacing=\"0\">\n"
+                        "<frameset  rows=\"75,*\" frameborder=\"0\" framespacing=\"0\">\n"
+                        "<frameset  cols=\"*,*\" frameborder=\"0\" framespacing=\"0\">\n"
+                        "<frame name=\"page1\" src=\""+filePrefix+"aName.html"+"\" marginwidth=\"0\" marginheight=\"5\" scrolling=\"auto\" frameborder=\"no\" noresize>\n"
+                        "<frame name=\"page2\" src=\""+filePrefix+"bName.html"+"\" marginwidth=\"0\" marginheight=\"5\" scrolling=\"auto\" frameborder=\"no\" noresize>\n"
+                        "</frameset>\n"
                         "<frameset  cols=\"*,*\" frameborder=\"0\" framespacing=\"0\">\n"
                         "<frame name=\"page1\" src=\""+filePrefix+"a.html"+"\" marginwidth=\"0\" marginheight=\"5\" scrolling=\"auto\" frameborder=\"no\" noresize>\n"
                         "<frame name=\"page2\" src=\""+filePrefix+"b.html"+"\" marginwidth=\"0\" marginheight=\"5\" scrolling=\"auto\" frameborder=\"no\" noresize>\n"
@@ -79,6 +83,16 @@ void PageComparator::generate()
     fileB.open(QIODevice::WriteOnly);
     fileB.write(data_fileB.toUtf8());
     fileB.close();
+    QFile fileAName (fileDirPrefix+"aName.html");
+    openFile.insert(fileDirPrefix+"aName.html");
+    fileAName.open( QIODevice::WriteOnly);
+    fileAName.write(("<!DOCTYPE HTML>\n<HTML>\n<head>\n<body><h1 align=\"center\">\t"+QString::number(id_a)+"</h1></body></head>\n").toUtf8());
+    fileAName.close();
+    QFile fileBName (fileDirPrefix+"bName.html");
+    openFile.insert(fileDirPrefix+"bName.html");
+    fileBName.open(QIODevice::WriteOnly);
+    fileBName.write(("<!DOCTYPE HTML>\n<HTML>\n<head>\n<body><h1 align=\"center\">"+QString::number(id_b)+"</h1></body></head>\n").toUtf8());
+    fileBName.close();
 }
 void PageComparator::open()
 {
@@ -99,50 +113,59 @@ void PageComparator::load()
     auto b = loadFile(id_b);
     int * * strDiffLen = new int * [a.size()];
     strDiffLen[0] = new int [a.size()*b.size()];
+    qDebug()<<"PageComparator load init arr ok";
     for(int i=1;i<a.size();i++) strDiffLen[i]=strDiffLen[i-1]+b.size();
-    for(int i=a.size()-2;i>=0;i--)
+    for(int i=a.size()-1;i>=0;i--)
     {
-        for(int j=b.size()-2;j>=0;j--)
+        for(int j=b.size()-1;j>=0;j--)
         {
             int act = 1<<30;
             if(i+1<a.size()) act = std::min(act,strDiffLen[i+1][j]+1);
             if(j+1<b.size())act = std::min(act,strDiffLen[i][j+1]+1);
             if(i+1<a.size()&&j+1<b.size()) if(a[i+1]==b[j+1]) act = std::min(act,strDiffLen[i+1][j+1]);
+            if(i+1==a.size()&&j+1==b.size()) act = 0;
             strDiffLen[i][j]=act;
         }
     }
-    for(int i=0,j=0;i+1!=a.size() || j+1!=b.size();)
+    qDebug()<<"PageComparator load calc arr ok";
+    for(int i=0,j=0;;)
     {
         int act = strDiffLen[i][j];
         if(i+1<a.size()&&j+1<b.size()) if(a[i+1]==b[j+1]) if(act == strDiffLen[i+1][j+1])
         {
+            i++;j++;
            data << a[i];
            dataFile << ((1<<1)|(1<<0));
-           i++;j++;
            continue;
         }
         if(i+1<a.size()) if(act == strDiffLen[i+1][j]+1)
         {
+            i++;
            data << a[i];
            dataFile << ((1<<0));
-           i++;
            continue;
         }
         if(j+1<b.size()) if(act == strDiffLen[i][j+1]+1)
         {
+           j++;
            data << b[j];
            dataFile << ((1<<1));
-           j++;
            continue;
         }
+        if(i+1==a.size() && j+1==b.size())
+        {
+            break;
+        }
+        qDebug()<<"ERR PageComparator load init make" <<i<<" "<<j<<" from "<<a.size()<<" "<<b.size();
     }
+    qDebug()<<"PageComparator load init make ok";
     delete [] (strDiffLen[0]);
     delete [] strDiffLen;
 }
 #define PUSH {if(!empty) {out << "";empty=1;}}
 QStringList PageComparator::parseData(QString in)
 {
-    QStringList out = (QStringList()<< "");
+    QStringList out = (QStringList()<< ""<<"");
     bool empty = 1;
     bool inTag=0;
 //    bool lastSpace=0;
