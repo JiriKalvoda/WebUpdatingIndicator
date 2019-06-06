@@ -17,6 +17,8 @@ MainWindow::MainWindow(int argc, char *argv[],QWidget *parent):MainWindow(parent
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+    setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinMaxButtonsHint);
+
     bg = new Background();
     if(bg->errorStarting()) {close(); return;}
     basicLayout = new QVBoxLayout();
@@ -180,8 +182,7 @@ void MainWindow::makeHistoryWindow(bool)
 #include <QMessageBox>
 void MainWindow::closeEvent (QCloseEvent *event)
 {
-    setWindowState(Qt::WindowMinimized);
-        event->ignore();
+        event->accept();
 }
 void MainWindow::exit()
 {
