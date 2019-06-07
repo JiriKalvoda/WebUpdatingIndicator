@@ -1,11 +1,11 @@
 #include "pagecomparatorgui.h"
-#include <QDebug>
+#include <debug.h>
 
 PageComparatorGui::PageComparatorGui(int a, int b,Background * bg, QWidget *parent):
     QWidget(parent),comp(a,b,bg)
 {
 
-    qDebug() << "COMPARE " << a <<"; "<< b;
+    D_PAGECOMPARATOR qDebug() << "COMPARE " << a <<"; "<< b;
     l = new QHBoxLayout;
     button_generate = new QPushButton;
     button_generate->setText("Generate");

@@ -1,7 +1,7 @@
 #include "pagecomparator.h"
 #include <QFile>
 #include <QDesktopServices>
-#include <qdebug.h>
+#include <debug.h>
 
 
 PageComparator::PageComparator(int a,int b,Background * Bg,QObject *parent):
@@ -12,12 +12,12 @@ PageComparator::PageComparator(int a,int b,Background * Bg,QObject *parent):
 }
 PageComparator::~PageComparator()
 {
-    qDebug() << "~PageComparator";
+    D_PAGECOMPARATOR qDebug() << "~PageComparator";
     for(auto it=openFile.begin();it!=openFile.end();it++)
     {
         QFile file (*it);
         file.remove();
-        qDebug()<<"remove file "<<*it;
+        D_PAGECOMPARATOR qDebug()<<"remove file "<<*it;
     }
 }
 
@@ -113,7 +113,7 @@ void PageComparator::load()
     auto b = loadFile(id_b);
     int * * strDiffLen = new int * [a.size()];
     strDiffLen[0] = new int [a.size()*b.size()];
-    qDebug()<<"PageComparator load init arr ok";
+    D_PAGECOMPARATOR qDebug()<<"PageComparator load init arr ok";
     for(int i=1;i<a.size();i++) strDiffLen[i]=strDiffLen[i-1]+b.size();
     for(int i=a.size()-1;i>=0;i--)
     {
@@ -127,7 +127,7 @@ void PageComparator::load()
             strDiffLen[i][j]=act;
         }
     }
-    qDebug()<<"PageComparator load calc arr ok";
+    D_PAGECOMPARATOR qDebug()<<"PageComparator load calc arr ok";
     for(int i=0,j=0;;)
     {
         int act = strDiffLen[i][j];
@@ -156,9 +156,9 @@ void PageComparator::load()
         {
             break;
         }
-        qDebug()<<"ERR PageComparator load init make" <<i<<" "<<j<<" from "<<a.size()<<" "<<b.size();
+        D_PAGECOMPARATOR qDebug()<<"ERR PageComparator load init make" <<i<<" "<<j<<" from "<<a.size()<<" "<<b.size();
     }
-    qDebug()<<"PageComparator load init make ok";
+   D_PAGECOMPARATOR  qDebug()<<"PageComparator load init make ok";
     delete [] (strDiffLen[0]);
     delete [] strDiffLen;
 }
@@ -200,7 +200,7 @@ QStringList PageComparator::loadFile(int id)
         in.fileName  = dotaz.value("fileName").toString();
         in.del = dotaz.value("del").toBool();
         in.id = dotaz.value("id").toInt();
-        qDebug() << "LOAD: " << "history/"+in.fileName;
+        D_PAGECOMPARATOR qDebug() << "LOAD: " << "history/"+in.fileName;
         QFile file("history/"+in.fileName);
         file.open(QIODevice::ReadOnly);
         auto dat =QString::fromUtf8(file.readAll());

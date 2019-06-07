@@ -1,6 +1,6 @@
 #include "pageviewer.h"
 #include <QHeaderView>
-#include <qDebug>
+#include <debug.h>
 #include <QDesktopServices>
 #include <QUrl>
 #include <QDir>
@@ -57,10 +57,10 @@ void PageViewer::setModel(NewPageModel *model)
 }
 void PageViewer::clicked(QModelIndex index)
 {
-    qDebug ( ) << "clicked" << index.column() <<" "<< index.row();
+    D_PAGEVIEWER qDebug ( ) << "clicked" << index.column() <<" "<< index.row();
     if(index.column()== 1)
     {
-        //qDebug() << QUrl(QString("file:")+QDir::currentPath()+"/history/"+sort->data(index,Qt::DisplayRole).toString());
+        //D_PAGEVIEWER qDebug() << QUrl(QString("file:")+QDir::currentPath()+"/history/"+sort->data(index,Qt::DisplayRole).toString());
         QDesktopServices::openUrl(QUrl(QString("file:")+QDir::currentPath()+"/history/"+sort->data(index,Qt::DisplayRole).toString()));
     }
     if(index.column()==sort->columnCount()-1)

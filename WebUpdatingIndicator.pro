@@ -38,5 +38,6 @@ mainwindow.h \
     historywindow.h \
     pagequery.h \
     pagecomparatorgui.h \
-    pagecomparator.h
+    pagecomparator.h \
+    debug.h
 

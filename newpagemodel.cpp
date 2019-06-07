@@ -1,5 +1,5 @@
 #include "newpagemodel.h"
-#include <qDebug>
+#include <debug.h>
 #include <QSqlQuery>
 #include <QColor>
 #include <QBrush>
@@ -105,7 +105,7 @@ bool NewPageModel::insert(NewPageItem in)
     // FIXME: Implement me!
     v.insert(poz,in);
     endInsertRows();
-    qDebug() << "INSERTROWS " << poz;
+    D_NEWPAGEMODEL qDebug() << "INSERTROWS " << poz;
     return 1;
 }
 
@@ -118,7 +118,7 @@ bool NewPageModel::removeRows(int row, int count, const QModelIndex &parent)
             QSqlQuery dotaz;
             QString q = QString("update newPage set del = 1 where ")
                     +"id = "+QString::number(it.id);;
-            qDebug()<<q;
+            D_DATABASE qDebug()<<q;
             dotaz.exec(q);
         }
         v.remove(row,count);
@@ -139,13 +139,13 @@ void NewPageModel::deleteHistPage(int id)
         QSqlQuery dotaz;
         QString q = QString("select * from newPage where ")
             +"id = "+QString::number(id);
-        qDebug()<<q;
+        D_DATABASE qDebug()<<q;
         dotaz.exec(q);
         while(dotaz.next())
         {
             QFile file(QString("history/")+dotaz.value("fileName").toString());
             file.remove();
-            qDebug()<<"remove file:"<<QString("history/")+dotaz.value("fileName").toString();
+            D_NEWPAGEMODEL qDebug()<<"remove file:"<<QString("history/")+dotaz.value("fileName").toString();
         }
     }
 
@@ -153,7 +153,7 @@ void NewPageModel::deleteHistPage(int id)
         QSqlQuery dotaz;
         QString q = QString("delete from newPage where ")
             +"id = "+QString::number(id);
-        qDebug()<<q;
+        D_DATABASE qDebug()<<q;
         dotaz.exec(q);
     }
     auto lb = std::lower_bound(v.begin(),v.end(),NewPageItem{"",QDateTime(),"",0,id});

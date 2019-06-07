@@ -2,7 +2,7 @@
 
 #include "background.h"
 #include <qFile>
-#include <QDebug>
+#include <debug.h>
 #include <QUrl>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>

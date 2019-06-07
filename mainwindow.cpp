@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include <QDebug>
+#include <debug.h>
 #include <QScrollBar>
 #include <QMenuBar>
 #include <QMenu>
@@ -127,7 +127,7 @@ void MainWindow::setConsole()
             (consoleScr->verticalScrollBar()->maximum());
     consoleScr->verticalScrollBar()->setValue
             (consoleScr->verticalScrollBar()->maximum());*/
-    //qDebug() << consoleScr->horizontalScrollBar()->minimum();
+    //D_MAINWINDOW qDebug() << consoleScr->horizontalScrollBar()->minimum();
 }
 void MainWindow::sliderRangeChanged(int min, int max)
 {
@@ -145,7 +145,7 @@ void MainWindow::changeTimeInfo()
 {
     timeInfo->setText(QString("Last sucesfull act: ")+bg->timeLastOk->toDateTime().toString("d.M.yy h:mm")+"\n"
                               "Next actualization: "+bg->timeNextRun->toDateTime().toString("d.M.yy h:mm"));
-    qDebug()<<"changeTimeInfo";
+    D_MAINWINDOW qDebug()<<"changeTimeInfo";
 }
 void MainWindow::changeActPeriod()
 {
@@ -170,11 +170,11 @@ void MainWindow::jumpOnView()
     //setWindowState(Qt::WindowMaximized);
     //hide();
     //show();
-    //qDebug()<<"------------------JUMPONVIEW";
+    //D_MAINWINDOW qDebug()<<"------------------JUMPONVIEW";
 }
 void MainWindow::makeHistoryWindow(bool)
 {
-    qDebug()<<"makeHistoryWindow";
+    D_MAINWINDOW qDebug()<<"makeHistoryWindow";
     (new HistoryWindow(bg))->show();
 }
 

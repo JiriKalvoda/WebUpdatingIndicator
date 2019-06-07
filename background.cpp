@@ -1,5 +1,5 @@
 #include "background.h"
-#include <qDebug>
+#include <debug.h>
 #include <qFile>
 
 #include <QUrl>
@@ -22,11 +22,11 @@ Background::Background(QObject *parent) : QObject(parent),newPages(this)
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("webchecker.db");
     db.open();
-    if (!db.isOpen())
+    D_DATABASE if (!db.isOpen())
         qDebug() << db.lastError().text();
     QStringList list = db.tables();
     for (auto t : list)
-    qDebug() << t << "\n";
+    D_DATABASE qDebug() << t << "\n";
       //  QSqlQuery ().exec("drop table settings");
     if(!list.contains("newPage"))
     {
@@ -52,7 +52,7 @@ Background::Background(QObject *parent) : QObject(parent),newPages(this)
         QSqlQuery dotaz;
         dotaz.exec("insert into newPage (pageName,time,fileName,del) "
                    "values ('abcFF','2022-03-03 12:33:44.555','def',0)");
-        qDebug() << db.lastError().text();
+        D_DATABASE qDebug() << db.lastError().text();
         //insert into newPage (pageName,time,fileName,del)values ('is-suplovani','2019-04-22 20:53:53.202','is-suplovani--19-04-22-20-53-53.html',0)
     }*/
     {
@@ -103,9 +103,9 @@ void Background::actDbSetings()
             +"', actPeriod = "+QString::number(actPeriod->toInt())
             +" , timeStartLastAct = '"+timeStartLastAct->toDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz")
             +"'";
-    qDebug()<<q;
+    D_DATABASE qDebug()<<q;
     dotaz.exec(q);
-    qDebug()<<dotaz.lastError().text();
+    D_DATABASE qDebug()<<dotaz.lastError().text();
 }
 
 void Background::inportDbSetings()
@@ -113,7 +113,7 @@ void Background::inportDbSetings()
     if(!isOkStart) return;
     QSqlQuery dotaz;
     QString q = QString("select * from settings");
-    qDebug()<<q;
+    D_DATABASE qDebug()<<q;
     dotaz.exec(q);
     if(dotaz.next())
     {
@@ -124,7 +124,7 @@ void Background::inportDbSetings()
     else
     {
         dotaz.exec("insert into settings (actPeriod) values (0)");
-        qDebug()<<"insert";
+        D_DATABASE qDebug()<<"insert";
     }
 }
 
@@ -137,8 +137,8 @@ void Background::inport(QString file_name)
     QJsonParseError err;
     QJsonDocument j = QJsonDocument::fromJson(file_data,&err);
     file.close();
-    // qDebug() <<err.errorString() ;
-    //qDebug() << j.isNull() << j.isObject() << j.isEmpty();
+    //D_JSON qDebug() <<err.errorString() ;
+    //D_JSON qDebug() << j.isNull() << j.isObject() << j.isEmpty();
     if(j.isArray())
     {
         auto a = j.array();
@@ -157,21 +157,20 @@ void Background::inport(QString file_name)
                 if(obj.value("diff"        )!= QJsonValue::Undefined) act.diff      = obj["diff"];
                 pageList.push_back(act);
             }
-            else qDebug() << "------------- JSON ITEM ERROR";
+            else D_JSON qDebug() << "------------- JSON ITEM ERROR";
         }
     }
-    else qDebug() << "------------- JSON ERROR";
+    else D_JSON qDebug() << "------------- JSON ERROR";
 }
 void Background::actualization()
 {
     if(!isOkStart) return;
-   // qDebug()<<"NED ACT";
     barColor="green";
     if(!conTh->isRunning())
     {
         conTh->stop=0;
         conTh->init(pageList);
-        qDebug() << "Strt Thred";
+        D_THRED qDebug() << "Strt Thred";
         conTh->start();
         timeStartLastAct = QDateTime::currentDateTime();
         if(actPeriod->toInt())
@@ -219,13 +218,13 @@ void Background::pageChanged(QString name,QString fileName)
                 +"','"+it.time.toString("yyyy-MM-dd hh:mm:ss.zzz")
                 +"','"+it.fileName
                 +"',0)";
-        qDebug()<<q;
+        D_DATABASE qDebug()<<q;
         dotaz.exec(q);
     }
     {
         QSqlQuery dotaz;
         QString q = QString("select max(id) from newPage");
-        qDebug()<<q;
+        D_DATABASE qDebug()<<q;
         dotaz.exec(q);
         if(dotaz.next()) it.id = dotaz.value(0).toInt();
     }
@@ -245,7 +244,7 @@ void Background::endOfRun(int errors, int)
     if(!errors)
     {
         timeLastOk = QDateTime::currentDateTime();
-        qDebug()<<"set timeLastOk";
+        D_THRED qDebug()<<"set timeLastOk";
     }
 }
 void Background::changeActPeriod(int in)
