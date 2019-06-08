@@ -48,7 +48,7 @@ public:
     QSpinBox * actPeriod;
     QGroupBox * consoleBox;
 
-    QIcon logo = QIcon("Logo.png");
+    QIcon logo = QIcon("Logo.ico");
     //QSystemTrayIcon * stico;
 
  //   QStandardItemModel model;
