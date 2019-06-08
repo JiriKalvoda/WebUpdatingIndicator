@@ -19,56 +19,12 @@ Background::Background(QObject *parent) : QObject(parent),newPages(this)
     if(!lockFileLock->tryLock(10)) return;
     isOkStart=1;
     //lockFileLock->lock();
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("webchecker.db");
-    db.open();
-    D_DATABASE if (!db.isOpen())
-        qDebug() << db.lastError().text();
-    QStringList list = db.tables();
-    for (auto t : list)
-    D_DATABASE qDebug() << t << "\n";
-      //  QSqlQuery ().exec("drop table settings");
-    if(!list.contains("newPage"))
-    {
-        QSqlQuery dotaz;
-        dotaz.exec("create table newPage ("
-                   "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                   "pageName VARCHAR, "
-                   "time DATETIME, "
-                   "fileName VARCHAR,"
-                   "del bit)"
-                   );
-    }
-    if(!list.contains("settings"))
-    {
-        QSqlQuery dotaz;
-        dotaz.exec("create table settings ("
-                   "timeLastOk DATETIME, "
-                   "timeStartLastAct DATETIME, "
-                   "actPeriod INTEGER)"
-                   );
-    }
-    /*{
-        QSqlQuery dotaz;
-        dotaz.exec("insert into newPage (pageName,time,fileName,del) "
-                   "values ('abcFF','2022-03-03 12:33:44.555','def',0)");
-        D_DATABASE qDebug() << db.lastError().text();
-        //insert into newPage (pageName,time,fileName,del)values ('is-suplovani','2019-04-22 20:53:53.202','is-suplovani--19-04-22-20-53-53.html',0)
-    }*/
-    {
-        QSqlQuery dotaz;
-        dotaz.exec("select * from newPage where del = 0");
-        while (dotaz.next())
-        {
-            NewPageItem in;
-            in.pageName = dotaz.value("pageName").toString();
-            in.time  = dotaz.value("time").toDateTime();
-            in.fileName  = dotaz.value("fileName").toString();
-            in.del = dotaz.value("del").toBool();
-            in.id = dotaz.value("id").toInt();
-            newPages.insert(in);
-        }
-    }
+
+    db = new Database;
+    auto in = db->selectFromNewPage("where del = 0");
+    for(auto & it:in)
+            newPages.insert(it);
+
     inport("pages.json");
     inportDbSetings();
 
@@ -97,24 +53,17 @@ Background::~Background()
 void Background::actDbSetings()
 {
     if(!isOkStart) return;
-    QSqlQuery dotaz;
-    QString q = QString("update settings set ")// (timeLastOk,timeNextRun,actPeriod,timeStartLastAct) ")
+    db->query( QString("update settings set ")// (timeLastOk,timeNextRun,actPeriod,timeStartLastAct) ")
             +"timeLastOk = '"+timeLastOk->toDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz")
             +"', actPeriod = "+QString::number(actPeriod->toInt())
             +" , timeStartLastAct = '"+timeStartLastAct->toDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz")
-            +"'";
-    D_DATABASE qDebug()<<q;
-    dotaz.exec(q);
-    D_DATABASE qDebug()<<dotaz.lastError().text();
+            +"'");
 }
 
 void Background::inportDbSetings()
 {
     if(!isOkStart) return;
-    QSqlQuery dotaz;
-    QString q = QString("select * from settings");
-    D_DATABASE qDebug()<<q;
-    dotaz.exec(q);
+    QSqlQuery dotaz = db->query("select * from settings");
     if(dotaz.next())
     {
         timeLastOk = dotaz.value("timeLastOk");
@@ -123,8 +72,7 @@ void Background::inportDbSetings()
     }
     else
     {
-        dotaz.exec("insert into settings (actPeriod) values (0)");
-        D_DATABASE qDebug()<<"insert";
+        db->query("insert into settings (actPeriod) values (0)");
     }
 }
 
@@ -211,23 +159,9 @@ void Background::pageChanged(QString name,QString fileName)
 {
     if(!isOkStart) return;
     auto it = NewPageItem{name,QDateTime::currentDateTime(),fileName,0,-1};
-    {
-        QSqlQuery dotaz;
-        QString q = QString("insert into newPage (pageName,time,fileName,del) ")
-                +"values ('"+it.pageName
-                +"','"+it.time.toString("yyyy-MM-dd hh:mm:ss.zzz")
-                +"','"+it.fileName
-                +"',0)";
-        D_DATABASE qDebug()<<q;
-        dotaz.exec(q);
-    }
-    {
-        QSqlQuery dotaz;
-        QString q = QString("select max(id) from newPage");
-        D_DATABASE qDebug()<<q;
-        dotaz.exec(q);
-        if(dotaz.next()) it.id = dotaz.value(0).toInt();
-    }
+    db->insertIntoNewPage(it);
+    QSqlQuery dotaz = db->query("select max(id) from newPage");
+    if(dotaz.next()) it.id = dotaz.value(0).toInt();
     pageChanged_signal(it);
     newPages.insert(it);
 }
@@ -269,18 +203,9 @@ void Background::changeActPeriod(int in)
 PageQuery * Background::history(QString query)
 {
     auto out = new PageQuery(this);
-    QSqlQuery dotaz;
-    dotaz.exec(query);
-    while (dotaz.next())
-    {
-        NewPageItem in;
-        in.pageName = dotaz.value("pageName").toString();
-        in.time  = dotaz.value("time").toDateTime();
-        in.fileName  = dotaz.value("fileName").toString();
-        in.del = dotaz.value("del").toBool();
-        in.id = dotaz.value("id").toInt();
-        out->insert(in);
-    }
+    auto in = db->selectFromNewPage(query);
+    for(auto & it:in)
+            out->insert(it);
     return out;
 }
 

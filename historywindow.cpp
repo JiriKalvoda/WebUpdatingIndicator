@@ -5,7 +5,7 @@ HistoryWindow::HistoryWindow(Background * BG,QWidget * parent):QWidget(parent)
     bg = BG;
     label = new QLabel;
    l = new QVBoxLayout;
-   label->setText("history of pages");\
+   label->setText("history of pages");
    l->addWidget(label);
 
    inputL = new QHBoxLayout;
@@ -36,13 +36,13 @@ void HistoryWindow::load()
     viewer->setModel(0);
     if(query) delete query;
     lastQueryString = inputInput->text();
-    if(lastQueryString!="") query = bg->history(QString("select * from newPage where ")+lastQueryString+"");
+    if(lastQueryString!="") query = bg->history(QString(" where ")+lastQueryString+"");
     viewer->setModel(query);
 }
 void HistoryWindow::reload()
 {
     viewer->setModel(0);
     if(query) delete query;
-    if(lastQueryString!="") query = bg->history(QString("select * from newPage where ")+lastQueryString+"");
+    if(lastQueryString!="") query = bg->history(QString(" where ")+lastQueryString+"");
     viewer->setModel(query);
 }

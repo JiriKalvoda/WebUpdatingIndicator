@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     historywindow.cpp \
     pagequery.cpp \
     pagecomparatorgui.cpp \
-    pagecomparator.cpp
+    pagecomparator.cpp \
+    database.cpp
 
 HEADERS  += background.h \
     conectionthread.h \
@@ -39,5 +40,6 @@ mainwindow.h \
     pagequery.h \
     pagecomparatorgui.h \
     pagecomparator.h \
-    debug.h
+    debug.h \
+    database.h
 

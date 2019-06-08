@@ -12,6 +12,7 @@
 #include <QFile>
 #include <QLockFile>
 #include <pagequery.h>
+#include <database.h>
 #include "conectionthread.h"
 #include "monitoredvar.h"
 #include "newpagemodel.h"
@@ -28,7 +29,7 @@ public:
     MonitoredVar console;
     ConectionThread * conTh = 0;
     NewPageModel newPages;
-    QSqlDatabase db;
+    Database * db;
     QTimer startTimer;
     MonitoredVar barColor;
     MonitoredVar timeLastOk;

@@ -2,6 +2,8 @@
 #include <QFile>
 #include <QDesktopServices>
 #include <debug.h>
+#include <database.h>
+#include <newpagemodel.h>
 
 
 PageComparator::PageComparator(int a,int b,Background * Bg,QObject *parent):
@@ -190,18 +192,11 @@ QStringList PageComparator::parseData(QString in)
 
 QStringList PageComparator::loadFile(int id)
 {
-    QSqlQuery dotaz;
-    dotaz.exec(QString("")+"select * from newPage where id = "+QString::number(id));
-    if(dotaz.next())
+    auto in = bg->db->selectFromNewPage("where id = "+QString::number(id));
+    if(in.size())
     {
-        NewPageItem in;
-        in.pageName = dotaz.value("pageName").toString();
-        in.time  = dotaz.value("time").toDateTime();
-        in.fileName  = dotaz.value("fileName").toString();
-        in.del = dotaz.value("del").toBool();
-        in.id = dotaz.value("id").toInt();
-        D_PAGECOMPARATOR qDebug() << "LOAD: " << "history/"+in.fileName;
-        QFile file("history/"+in.fileName);
+        D_PAGECOMPARATOR qDebug() << "LOAD: " << "history/"+in[0].fileName;
+        QFile file("history/"+in[0].fileName);
         file.open(QIODevice::ReadOnly);
         auto dat =QString::fromUtf8(file.readAll());
         file.close();

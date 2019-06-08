@@ -4,6 +4,7 @@
 #include <QColor>
 #include <QBrush>
 #include <QFile>
+#include <background.h>
 NewPageModel::NewPageModel(Background * bg,QObject *parent)
     : QAbstractTableModel(parent),bg(bg)
 {
@@ -114,12 +115,8 @@ bool NewPageModel::removeRows(int row, int count, const QModelIndex &parent)
     beginRemoveRows(parent, row, row + count - 1);
         for(int i=row;i<row+count;i++)
         {
-            NewPageItem & it  = v[i];
-            QSqlQuery dotaz;
-            QString q = QString("update newPage set del = 1 where ")
-                    +"id = "+QString::number(it.id);;
-            D_DATABASE qDebug()<<q;
-            dotaz.exec(q);
+            bg->db->query(QString("update newPage set del = 1 where ")
+                    +"id = "+QString::number(v[i].id));
         }
         v.remove(row,count);
     endRemoveRows();
@@ -136,26 +133,17 @@ void NewPageModel::hideHistPage(int id)
 void NewPageModel::deleteHistPage(int id)
 {
     {
-        QSqlQuery dotaz;
-        QString q = QString("select * from newPage where ")
-            +"id = "+QString::number(id);
-        D_DATABASE qDebug()<<q;
-        dotaz.exec(q);
-        while(dotaz.next())
+        auto dotaz = bg->db->selectFromNewPage("where id = "+QString::number(id));
+        for(auto & it:dotaz)
         {
-            QFile file(QString("history/")+dotaz.value("fileName").toString());
+            QFile file(QString("history/")+it.fileName);
             file.remove();
-            D_NEWPAGEMODEL qDebug()<<"remove file:"<<QString("history/")+dotaz.value("fileName").toString();
+            D_NEWPAGEMODEL qDebug()<<"remove file:"<<QString("history/")+it.fileName;
         }
     }
 
-    {
-        QSqlQuery dotaz;
-        QString q = QString("delete from newPage where ")
-            +"id = "+QString::number(id);
-        D_DATABASE qDebug()<<q;
-        dotaz.exec(q);
-    }
+     bg->db->query(QString("delete from newPage where ")
+            +"id = "+QString::number(id));
     auto lb = std::lower_bound(v.begin(),v.end(),NewPageItem{"",QDateTime(),"",0,id});
     if(lb->id != id) return;
     int row = lb - v.begin();
