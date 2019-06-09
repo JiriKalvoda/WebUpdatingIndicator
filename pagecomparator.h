@@ -6,6 +6,7 @@
 #include <background.h>
 #include <QSet>
 #include <QStringList>
+#include <newpagemodel.h>
 
 class PageComparator : public QObject
 {
@@ -15,17 +16,20 @@ public:
     virtual ~PageComparator();
     Background * bg;
     int id_a, id_b;
+    NewPageItem page_a, page_b;
     QString filePrefix;
     QString fileDirPrefix;
     QStringList data;
     QList<int> dataFile;
-
+    int pageWriteiterator=0;
     QSet<QString> openFile;
     void setNewPrefix();
     QStringList parseData(QString in);
-    QStringList loadFile(int id);
+    QStringList loadFile(NewPageItem id);
+    void generateHeadHtml(char ab,NewPageItem  npit);
+    QString generateIframe(int id, bool viewSC);
 public slots:
-    void generate();
+    void generate(bool viewSC);
     void open();
     void load();
     void calculatePages(int id_a,int id_b);

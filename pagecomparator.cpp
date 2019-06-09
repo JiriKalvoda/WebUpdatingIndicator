@@ -7,10 +7,10 @@
 
 
 PageComparator::PageComparator(int a,int b,Background * Bg,QObject *parent):
-    QObject(parent),bg(Bg),id_a(a),id_b(b)
+    QObject(parent),bg(Bg)
 {
     setNewPrefix();
-    load();
+    calculatePages(a,b);
 }
 PageComparator::~PageComparator()
 {
@@ -29,90 +29,140 @@ void PageComparator::setNewPrefix()
     filePrefix=QString("")+QString::number(c++)+"-";
     fileDirPrefix=QString("comp/")+filePrefix;
 }
-
-void PageComparator::generate()
+void PageComparator::generateHeadHtml(char ab,NewPageItem  npit)
 {
+    QFile file (fileDirPrefix+ab+"Name.html");
+    openFile.insert(fileDirPrefix+ab+"Name.html");
+    file.open( QIODevice::WriteOnly);
+    file.write(("<!DOCTYPE HTML>\n<HTML>\n<head>\n"
+                "<body style=\"margin:0pt;padding:0pt\">"
+                "<h1 align=\"center\" style=\"margin:0pt;padding:3pt\">"+
+                     npit.pageName+" "+npit.time.toString("d.M.yy h:mm:ss")+
+                     "</h1></body></head>\n").toUtf8());
+    file.close();
+}
+
+void PageComparator::generate(bool viewSC)
+{
+    pageWriteiterator++;
+    QString body = QString("")+
+            "<div id=\"a\" style=\"position: absolute;left: 0%;width:50%;top: 0px;height: 100%;\">"
+            "<h1 style=\"text-align: center\">"
+            +page_a.pageName+" "+page_a.time.toString("d.M.yy h:mm:ss")+
+            "</h1>"
+            "<iframe src=\""+filePrefix+"a.html\" id=\"a-page\" "
+                    "style=\" position: absolute;left: 0px;width:100%;top: 70px;height: calc(100% - 70px );\">"
+            "</iframe>"
+            "</div>"
+            "<div id=\"b\" style=\"position: absolute;left: 50%;width:50%;top: 0px;height: 100%;\">"
+            "<h1 style=\"text-align: center\">"
+            +page_b.pageName+" "+page_b.time.toString("d.M.yy h:mm:ss")+
+            "</h1>"
+            "<iframe src=\""+filePrefix+"b.html\" id=\"b-page\" "
+                  "style=\" position: absolute;left: 0px;width:100%;top: 70px;height: calc(100% - 70px );\"></iframe>"
+            "</div>";
+    QString document = QString("")+
+             "<!DOCTYPE HTML>"
+             "<HTML>"
+             "<head>"
+             "<title>WebUpdatingIndicator - Copmepre page</title>"
+             "<meta http-equiv=\"Content-Type\">"
+             "<meta http-equiv=\"Cache-control\" content=\"no-cache\">"
+             "<meta http-equiv=\"Pragma\" content=\"no-cache\">"
+             "<meta http-equiv=\"expires\" content=\"0\">"
+             "<script>"
+             "function removeActSrc() {"
+             "    var element = document.getElementById(\"actScript\");"
+             "    if(element!=null) element.parentNode.removeChild(element);"
+             "}"
+             "function nacistJs(url) {"
+             "  removeActSrc();"
+             "  var script = document.createElement(\"script\");"
+             "  script.src = url;"
+             "  script.id=\"actScript\";"
+             "  document.getElementsByTagName('head')[0].appendChild(script);"
+             "};"
+             "function actFunction(){"
+             "  nacistJs(\""+filePrefix+"act.js\");"
+             " setTimeout(actFunction, 100);"
+             "};"
+             "actFunction();"
+             "var oldToken = "+QString::number(pageWriteiterator)+";"
+             "function ifnewact(token)"
+             "{"
+             "  if(token!=oldToken) location.reload(1);"
+             "}"
+             "</script>"
+             "</head>"
+             "<body>"
+             +body+
+             "</body>"
+             "</html>";
     QFile fileMain (fileDirPrefix+"main.html");
     openFile.insert(fileDirPrefix+"main.html");
     fileMain.open( QIODevice::WriteOnly);
-    fileMain.write(
-                (QString("")+
-                        "<!DOCTYPE HTML>\n"
-                        "<HTML>\n"
-                        "<head>\n"
-                        "<title>WebUpdatingIndicator - Copmepre page</title>\n"
-                        "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1250\">\n"
-                        "<meta http-equiv=\"Cache-control\" content=\"no-cache\">\n"
-                        "<meta http-equiv=\"Pragma\" content=\"no-cache\">\n"
-                        "<meta http-equiv=\"expires\" content=\"0\">\n"
-                        "</head>\n"
-                        "<frameset  rows=\"75,*\" frameborder=\"0\" framespacing=\"0\">\n"
-                        "<frameset  cols=\"*,*\" frameborder=\"0\" framespacing=\"0\">\n"
-                        "<frame name=\"page1\" src=\""+filePrefix+"aName.html"+"\" marginwidth=\"0\" marginheight=\"5\" scrolling=\"auto\" frameborder=\"no\" noresize>\n"
-                        "<frame name=\"page2\" src=\""+filePrefix+"bName.html"+"\" marginwidth=\"0\" marginheight=\"5\" scrolling=\"auto\" frameborder=\"no\" noresize>\n"
-                        "</frameset>\n"
-                        "<frameset  cols=\"*,*\" frameborder=\"0\" framespacing=\"0\">\n"
-                        "<frame name=\"page1\" src=\""+filePrefix+"a.html"+"\" marginwidth=\"0\" marginheight=\"5\" scrolling=\"auto\" frameborder=\"no\" noresize>\n"
-                        "<frame name=\"page2\" src=\""+filePrefix+"b.html"+"\" marginwidth=\"0\" marginheight=\"5\" scrolling=\"auto\" frameborder=\"no\" noresize>\n"
-                        "</frameset>\n"
-                        "</frameset>\n"
-                        "</html>\n"
-                        ).toUtf8());
+    fileMain.write((document).toUtf8());
     fileMain.close();
-    QString data_fileA,data_fileB;
+    QFile fileA (fileDirPrefix+"a.html");
+    openFile.insert(fileDirPrefix+"a.html");
+    fileA.open( QIODevice::WriteOnly);
+    fileA.write(generateIframe(0,viewSC).toUtf8());
+    fileA.close();
+    QFile fileB (fileDirPrefix+"b.html");
+    openFile.insert(fileDirPrefix+"b.html");
+    fileB.open(QIODevice::WriteOnly);
+    fileB.write(generateIframe(1,viewSC).toUtf8());
+    fileB.close();
+    QFile fileAct  (fileDirPrefix+"act.js");
+    openFile.insert(fileDirPrefix+"act.js");
+    fileAct.open(QIODevice::WriteOnly);
+    fileAct.write(QString(QString("")+"ifnewact("+QString::number(pageWriteiterator)+")").toUtf8());
+    fileAct.close();
+}
+QString PageComparator::generateIframe(int id, bool viewSC)
+{
+    QString out;
     QString beforeDiff = "<span style=\"background-color:red\">";
     QString afterDiff =  "</span>";
     for(int i=0;i<std::min(data.size(),dataFile.size());i++)
     {
         if(data[i][0] == '<')
         {
-            if(dataFile[i]&(1<<0)) data_fileA+=data[i].replace("\n","")+"\n";
-            if(dataFile[i]&(1<<1)) data_fileB+=data[i].replace("\n","")+"\n";
+            if(dataFile[i]&(1<<id)) out+=data[i];
         }
         else
         {
-            if(dataFile[i]&(1<<0)) data_fileA+=(dataFile[i]==3?"":beforeDiff)+data[i].replace("\n","")+(dataFile[i]==3?"":afterDiff)+"\n";
-            if(dataFile[i]&(1<<1)) data_fileB+=(dataFile[i]==3?"":beforeDiff)+data[i].replace("\n","")+(dataFile[i]==3?"":afterDiff)+"\n";
+            if(dataFile[i]&(1<<id)) out+=(dataFile[i]==3?"":beforeDiff)+data[i].replace("\n","")+(dataFile[i]==3?"":afterDiff)+"\n";
         }
     }
-    QFile fileA (fileDirPrefix+"a.html");
-    openFile.insert(fileDirPrefix+"a.html");
-    fileA.open( QIODevice::WriteOnly);
-    fileA.write(data_fileA.toUtf8());
-    fileA.close();
-    QFile fileB (fileDirPrefix+"b.html");
-    openFile.insert(fileDirPrefix+"b.html");
-    fileB.open(QIODevice::WriteOnly);
-    fileB.write(data_fileB.toUtf8());
-    fileB.close();
-    QFile fileAName (fileDirPrefix+"aName.html");
-    openFile.insert(fileDirPrefix+"aName.html");
-    fileAName.open( QIODevice::WriteOnly);
-    fileAName.write(("<!DOCTYPE HTML>\n<HTML>\n<head>\n<body><h1 align=\"center\">\t"+QString::number(id_a)+"</h1></body></head>\n").toUtf8());
-    fileAName.close();
-    QFile fileBName (fileDirPrefix+"bName.html");
-    openFile.insert(fileDirPrefix+"bName.html");
-    fileBName.open(QIODevice::WriteOnly);
-    fileBName.write(("<!DOCTYPE HTML>\n<HTML>\n<head>\n<body><h1 align=\"center\">"+QString::number(id_b)+"</h1></body></head>\n").toUtf8());
-    fileBName.close();
+    return out;
 }
 void PageComparator::open()
 {
     QDesktopServices::openUrl(QUrl(QString("file:")+QDir::currentPath()+"/"+fileDirPrefix+"main.html"));
 }
 void PageComparator::calculatePages(int a,int b)
-{
+{ 
+    page_a = page_b = NewPageItem();
     id_a=a;
+    auto tmp_a = bg->db->selectFromNewPage("where id = "+QString::number(id_a));
+    if(tmp_a.size()) page_a = tmp_a[0];
     id_b=b;
+    auto tmp_b = id_b==-1 ?
+               bg->db->selectFromNewPage(
+                    "where pageName = '"+page_a.pageName+
+                    "' and time < '"+page_a.time.toString("yyyy-MM-dd hh:mm:ss.zzz") +
+                    "' ORDER BY time DESC LIMIT 1")
+              :bg->db->selectFromNewPage("where id = "+QString::number(id_b));
+    if(tmp_b.size()) page_b = tmp_b[0];
     load();
-
 }
 void PageComparator::load()
 {
     data.clear();
     dataFile.clear();
-    auto a = loadFile(id_a);
-    auto b = loadFile(id_b);
+    auto a = loadFile(page_a);
+    auto b = loadFile(page_b);
     int * * strDiffLen = new int * [a.size()];
     strDiffLen[0] = new int [a.size()*b.size()];
     D_PAGECOMPARATOR qDebug()<<"PageComparator load init arr ok";
@@ -190,17 +240,16 @@ QStringList PageComparator::parseData(QString in)
     return out;
 }
 
-QStringList PageComparator::loadFile(int id)
+QStringList PageComparator::loadFile(NewPageItem in)
 {
-    auto in = bg->db->selectFromNewPage("where id = "+QString::number(id));
-    if(in.size())
+    if(in.fileName!="")
     {
-        D_PAGECOMPARATOR qDebug() << "LOAD: " << "history/"+in[0].fileName;
-        QFile file("history/"+in[0].fileName);
+        D_PAGECOMPARATOR qDebug() << "LOAD: " << "history/"+in.fileName;
+        QFile file("history/"+in.fileName);
         file.open(QIODevice::ReadOnly);
         auto dat =QString::fromUtf8(file.readAll());
         file.close();
         return parseData(dat);
     }
-    return QStringList();
+    return QStringList()<<"";
 }
