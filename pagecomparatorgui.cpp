@@ -6,10 +6,10 @@ PageComparatorGui::PageComparatorGui(int a, int b,Background * bg, QWidget *pare
 {
 
     D_PAGECOMPARATOR qDebug() << "COMPARE " << a <<"; "<< b;
-    l = new QHBoxLayout;
+    l = new QVBoxLayout;
     button_generate = new QPushButton;
     button_generate->setText("Generate");
-    connect(button_generate,SIGNAL(clicked(bool)),&comp,SLOT(generate(bool)));
+    connect(button_generate,SIGNAL(clicked(bool)),this,SLOT(generate()));
     l->addWidget(button_generate);
     button_open = new QPushButton;
     button_open->setText("Open");
@@ -17,11 +17,19 @@ PageComparatorGui::PageComparatorGui(int a, int b,Background * bg, QWidget *pare
     l->addWidget(button_open);
     setWindowFlags(Qt::WindowStaysOnTopHint);
 
+    check_sourceCode = new QCheckBox("View source code");
+    l->addWidget(check_sourceCode);
+
     setLayout(l);
 
-    comp.generate(0);
+    generate();
     comp.open();
 
     setAttribute(Qt::WA_DeleteOnClose);
 
+}
+
+void PageComparatorGui::generate()
+{
+    comp.generate(check_sourceCode->isChecked());
 }

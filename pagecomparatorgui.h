@@ -10,19 +10,22 @@
 #include <QString>
 #include <pagecomparator.h>
 #include <QPushButton>
+#include <QCheckBox>
 class Background;
 class PageComparatorGui : public QWidget
 {
     Q_OBJECT
 public:
     explicit PageComparatorGui(int a,int b,Background * bg,QWidget *parent = 0);
-    QHBoxLayout * l;
+    QVBoxLayout * l;
     PageComparator comp;
     QPushButton * button_generate;
     QPushButton * button_open;
+    QCheckBox * check_sourceCode;
 signals:
 
 public slots:
+    void generate();
 };
 
 #endif // PAGECOMPARATORGUI_H

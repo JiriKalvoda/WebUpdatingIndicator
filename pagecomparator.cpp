@@ -121,21 +121,42 @@ void PageComparator::generate(bool viewSC)
 }
 QString PageComparator::generateIframe(int id, bool viewSC)
 {
-    QString out;
-    QString beforeDiff = "<span style=\"background-color:red\">";
-    QString afterDiff =  "</span>";
-    for(int i=0;i<std::min(data.size(),dataFile.size());i++)
+    if(viewSC)
     {
-        if(data[i][0] == '<')
+        QString out="<!DOCTYPE HTML><HTML><head></head><body>\n";
+        QString beforeDiff = "<span style=\"background-color:red\">";
+        QString afterDiff =  "</span>";
+        for(int i=0;i<std::min(data.size(),dataFile.size());i++)
         {
-            if(dataFile[i]&(1<<id)) out+=data[i];
+            if(dataFile[i]&(1<<id))
+            {
+                QString toReplace=data[i];
+                toReplace.replace("&","&#38;").replace("<","&#60").replace(">","&#62;").replace("\n","<br/>");
+                 out+=(dataFile[i]==3?"":beforeDiff)
+                         +toReplace
+                         +(dataFile[i]==3?"":afterDiff)+"\n";
+            }
         }
-        else
-        {
-            if(dataFile[i]&(1<<id)) out+=(dataFile[i]==3?"":beforeDiff)+data[i].replace("\n","")+(dataFile[i]==3?"":afterDiff)+"\n";
-        }
+        return out+"\n</body>";
     }
-    return out;
+    else
+    {
+        QString out;
+        QString beforeDiff = "<span style=\"background-color:red\">";
+        QString afterDiff =  "</span>";
+        for(int i=0;i<std::min(data.size(),dataFile.size());i++)
+        {
+            if(data[i][0] == '<')
+            {
+                if(dataFile[i]&(1<<id)) out+=data[i];
+            }
+            else
+            {
+                if(dataFile[i]&(1<<id)) out+=(dataFile[i]==3?"":beforeDiff)+data[i]+(dataFile[i]==3?"":afterDiff)+"\n";
+            }
+        }
+        return out;
+    }
 }
 void PageComparator::open()
 {
