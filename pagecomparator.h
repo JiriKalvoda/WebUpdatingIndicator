@@ -26,7 +26,6 @@ public:
     void setNewPrefix();
     QStringList parseData(QString in);
     QStringList loadFile(NewPageItem id);
-    void generateHeadHtml(char ab,NewPageItem  npit);
     QString generateIframe(int id, bool viewSC);
 public slots:
     void generate(bool viewSC);

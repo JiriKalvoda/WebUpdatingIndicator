@@ -29,75 +29,64 @@ void PageComparator::setNewPrefix()
     filePrefix=QString("")+QString::number(c++)+"-";
     fileDirPrefix=QString("comp/")+filePrefix;
 }
-void PageComparator::generateHeadHtml(char ab,NewPageItem  npit)
-{
-    QFile file (fileDirPrefix+ab+"Name.html");
-    openFile.insert(fileDirPrefix+ab+"Name.html");
-    file.open( QIODevice::WriteOnly);
-    file.write(("<!DOCTYPE HTML>\n<HTML>\n<head>\n"
-                "<body style=\"margin:0pt;padding:0pt\">"
-                "<h1 align=\"center\" style=\"margin:0pt;padding:3pt\">"+
-                     npit.pageName+" "+npit.time.toString("d.M.yy h:mm:ss")+
-                     "</h1></body></head>\n").toUtf8());
-    file.close();
-}
+
 
 void PageComparator::generate(bool viewSC)
 {
     pageWriteiterator++;
     QString body = QString("")+
-            "<div id=\"a\" style=\"position: absolute;left: 0%;width:50%;top: 0px;height: 100%;\">"
-            "<h1 style=\"text-align: center\">"
+            "<div id=\"a\" style=\"position: absolute;left: 0%;width:50%;top: 0px;height: 100%;\">\n"
+            "<h1 style=\"text-align: center\">\n"
             +page_a.pageName+" "+page_a.time.toString("d.M.yy h:mm:ss")+
-            "</h1>"
+            "</h1>\n"
             "<iframe src=\""+filePrefix+"a.html\" id=\"a-page\" "
-                    "style=\" position: absolute;left: 0px;width:100%;top: 70px;height: calc(100% - 70px );\">"
-            "</iframe>"
-            "</div>"
-            "<div id=\"b\" style=\"position: absolute;left: 50%;width:50%;top: 0px;height: 100%;\">"
-            "<h1 style=\"text-align: center\">"
+                    "style=\" position: absolute;left: 0px;width:100%;top: 70px;height: calc(100% - 70px );\">\n"
+            "</iframe>\n"
+            "</div>\n"
+            "<div id=\"b\" style=\"position: absolute;left: 50%;width:50%;top: 0px;height: 100%;\">\n"
+            "<h1 style=\"text-align: center\">\n"
             +page_b.pageName+" "+page_b.time.toString("d.M.yy h:mm:ss")+
-            "</h1>"
+            "</h1>\n"
             "<iframe src=\""+filePrefix+"b.html\" id=\"b-page\" "
-                  "style=\" position: absolute;left: 0px;width:100%;top: 70px;height: calc(100% - 70px );\"></iframe>"
+                  "style=\" position: absolute;left: 0px;width:100%;top: 70px;height: calc(100% - 70px );\"></iframe>\n"
             "</div>";
     QString document = QString("")+
-             "<!DOCTYPE HTML>"
-             "<HTML>"
-             "<head>"
-             "<title>WebUpdatingIndicator - Copmepre page</title>"
-             "<meta http-equiv=\"Content-Type\">"
-             "<meta http-equiv=\"Cache-control\" content=\"no-cache\">"
-             "<meta http-equiv=\"Pragma\" content=\"no-cache\">"
-             "<meta http-equiv=\"expires\" content=\"0\">"
-             "<script>"
-             "function removeActSrc() {"
-             "    var element = document.getElementById(\"actScript\");"
-             "    if(element!=null) element.parentNode.removeChild(element);"
-             "}"
-             "function nacistJs(url) {"
-             "  removeActSrc();"
-             "  var script = document.createElement(\"script\");"
-             "  script.src = url;"
-             "  script.id=\"actScript\";"
-             "  document.getElementsByTagName('head')[0].appendChild(script);"
-             "};"
-             "function actFunction(){"
-             "  nacistJs(\""+filePrefix+"act.js\");"
-             " setTimeout(actFunction, 100);"
-             "};"
-             "actFunction();"
-             "var oldToken = "+QString::number(pageWriteiterator)+";"
-             "function ifnewact(token)"
-             "{"
-             "  if(token!=oldToken) location.reload(1);"
-             "}"
-             "</script>"
-             "</head>"
-             "<body>"
-             +body+
-             "</body>"
-             "</html>";
+             "<!DOCTYPE HTML>\n"
+             "<HTML>\n"
+             "<head>\n"
+             "<title>WebUpdatingIndicator - Copmepre page</title>\n"
+             "<meta http-equiv=\"Content-Type\">\n"
+             "<meta http-equiv=\"Cache-control\" content=\"no-cache\">\n"
+             "<meta http-equiv=\"Pragma\" content=\"no-cache\">\n"
+             "<meta http-equiv=\"expires\" content=\"0\">\n"
+             "<script>\n"
+             "function removeActSrc() {\n"
+             "    var element = document.getElementById(\"actScript\");\n"
+             "    if(element!=null) element.parentNode.removeChild(element);\n"
+             "}\n"
+             "function nacistJs(url) {\n"
+             "  removeActSrc();\n"
+             "  var script = document.createElement(\"script\");\n"
+             "  script.src = url;\n"
+             "  script.id=\"actScript\";\n"
+             "  document.getElementsByTagName('head')[0].appendChild(script);\n"
+             "};\n"
+             "function actFunction(){\n"
+             "  nacistJs(\""+filePrefix+"act.js\");\n"
+             " setTimeout(actFunction, 100);\n"
+             "};\n"
+             "actFunction();\n"
+             "var oldToken = "+QString::number(pageWriteiterator)+";\n"
+             "function ifnewact(token)\n"
+             "{\n"
+             "  if(token!=oldToken) location.reload(1);\n"
+             "}\n"
+             "</script>\n"
+             "</head>\n"
+             "<body>\n"
+             +body+"\n"
+             "</body>\n"
+             "</html>\n";
     QFile fileMain (fileDirPrefix+"main.html");
     openFile.insert(fileDirPrefix+"main.html");
     fileMain.open( QIODevice::WriteOnly);
@@ -235,22 +224,38 @@ void PageComparator::load()
     delete [] (strDiffLen[0]);
     delete [] strDiffLen;
 }
+bool substrComp(QString & s,int poz,QString comp)
+{
+    if(poz<0) return 0;
+    if(poz+comp.size()>s.size()) return 0;
+    for(int i=0;i<comp.size();i++)
+        if(s[poz+i] != comp[i])
+            return 0;
+    return 1;
+}
+
 #define PUSH {if(!empty) {out << "";empty=1;}}
 QStringList PageComparator::parseData(QString in)
 {
     QStringList out = (QStringList()<< ""<<"");
     bool empty = 1;
     bool inTag=0;
+    bool inScript=0;
+    bool inComent=0;
 //    bool lastSpace=0;
     for(int i=0;i<in.length();i++)
     {
-        if(!inTag && (in[i].isSpace())) PUSH;
-        if(in[i]=='<'&&!inTag) {PUSH;inTag=1;}
+        if(!inTag && !inComent && !inScript && (in[i].isSpace())) PUSH;
+        if(!inTag && !inComent && !inScript && substrComp(in,i,"<script")) {PUSH;inScript=1;}
+        if(!inTag && !inComent && !inScript && substrComp(in,i,"<!--")) {PUSH;inComent=1;}
+        if(!inTag && !inComent && !inScript && in[i]=='<' ) {PUSH;inTag=1;}
 
         out[out.size()-1]+=in[i];
         if(!in[i].isSpace()) empty=0;
 
         if(in[i]=='>'&&inTag) {PUSH;inTag=0;}
+        if(substrComp(in,i-8,"</script>")&&inScript) {PUSH;inScript=0;}
+        if(substrComp(in,i-2,"-->")      &&inComent) {PUSH;inComent=0;}
 
     }
     for(int i=0;i<out.length();i++)
