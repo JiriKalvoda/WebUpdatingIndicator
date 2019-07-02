@@ -1,5 +1,7 @@
 #include "pagecomparatorgui.h"
 #include <debug.h>
+#include <QApplication>
+#include <QDesktopWidget>
 
 PageComparatorGui::PageComparatorGui(int a, int b,Background * bg, QWidget *parent):
     QWidget(parent),comp(a,b,bg)
@@ -26,10 +28,16 @@ PageComparatorGui::PageComparatorGui(int a, int b,Background * bg, QWidget *pare
     comp.open();
 
     setAttribute(Qt::WA_DeleteOnClose);
-
+}
+void PageComparatorGui::showInGoodPlace()
+{
+    auto disSize =QApplication::desktop()->screenGeometry(QApplication::desktop()->screenNumber(this));
+    move(disSize.width()/2 - geometry().width()/2,0);
 }
 
 void PageComparatorGui::generate()
 {
     comp.generate(check_sourceCode->isChecked());
+
+
 }
