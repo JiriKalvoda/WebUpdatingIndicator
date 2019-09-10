@@ -31,7 +31,7 @@ void PageComparator::setNewPrefix()
 }
 
 
-void PageComparator::generate(bool viewSC)
+void PageComparator::generate(int flags)
 {
     pageWriteiterator++;
     QString body = QString("")+
@@ -95,22 +95,28 @@ void PageComparator::generate(bool viewSC)
     QFile fileA (fileDirPrefix+"a.html");
     openFile.insert(fileDirPrefix+"a.html");
     fileA.open( QIODevice::WriteOnly);
-    fileA.write(generateIframe(0,viewSC).toUtf8());
+    if(flags & FlagInOneFrame)
+        fileA.write(generateCombinationIframe(flags).toUtf8());
+    else
+        fileA.write(generateIframe(0,flags).toUtf8());
     fileA.close();
-    QFile fileB (fileDirPrefix+"b.html");
-    openFile.insert(fileDirPrefix+"b.html");
-    fileB.open(QIODevice::WriteOnly);
-    fileB.write(generateIframe(1,viewSC).toUtf8());
-    fileB.close();
+    if(!(flags & FlagInOneFrame))
+    {
+        QFile fileB (fileDirPrefix+"b.html");
+        openFile.insert(fileDirPrefix+"b.html");
+        fileB.open(QIODevice::WriteOnly);
+        fileB.write(generateIframe(1,flags).toUtf8());
+        fileB.close();
+    }
     QFile fileAct  (fileDirPrefix+"act.js");
     openFile.insert(fileDirPrefix+"act.js");
     fileAct.open(QIODevice::WriteOnly);
     fileAct.write(QString(QString("")+"ifnewact("+QString::number(pageWriteiterator)+")").toUtf8());
     fileAct.close();
 }
-QString PageComparator::generateIframe(int id, bool viewSC)
+QString PageComparator::generateIframe(int id, int flags)
 {
-    if(viewSC)
+    if(flags & FlagCourceCode)
     {
         QString out="<!DOCTYPE HTML><HTML><head></head><body>\n";
         QString beforeDiff = "<span style=\"background-color:red\">";
@@ -147,6 +153,64 @@ QString PageComparator::generateIframe(int id, bool viewSC)
         return out;
     }
 }
+QString PageComparator::generateCombinationIframe(int flags)
+{
+    if(flags & FlagCourceCode)
+    {
+        QString out="<!DOCTYPE HTML><HTML><head></head><body>\n";
+        QString beforeDiff1 = "<span style=\"background-color:red\">";
+        QString beforeDiff2 = "<span style=\"background-color:green\">";
+        QString afterDiff =  "</span>";
+        for(int i=0;i<std::min(data.size(),dataFile.size());i++)
+        {
+            if(dataFile[i]&3)
+            {
+                QString toReplace=data[i];
+                toReplace.replace("&","&#38;").replace("<","&#60").replace(">","&#62;").replace("\n","<br/>");
+                 out+=(dataFile[i]==3?"":dataFile[i]==1?beforeDiff1:beforeDiff2)
+                         +toReplace
+                         +(dataFile[i]==3?"":afterDiff)+"\n";
+            }
+        }
+        return out+"\n</body>";
+    }
+    else
+    {
+        auto closeTagA = genCloseTag(0);
+        auto closeTagB = genCloseTag(1);
+        QString out;
+        QString beforeDiff1 = "<span style=\"background-color:red\">";
+        QString beforeDiff2 = "<span style=\"background-color:green\">";
+        QString afterDiff =  "</span>";
+        for(int i=0;i<std::min(data.size(),dataFile.size());i++)
+        {
+            if(dataFile[i]&3)
+            {
+                QString toReplace=data[i];
+                toReplace.replace("&","&#38;").replace("<","&#60").replace(">","&#62;").replace("\n","<br/>");
+                 out+=(dataFile[i]==3?"":dataFile[i]==1?beforeDiff1:beforeDiff2)
+                         +toReplace
+                         +(dataFile[i]==3?"":afterDiff)+"\n";
+            }
+        }
+        return out;
+    }
+}
+QVector<int> PageComparator::genCloseTag(int p)
+{
+    QVector<int> out;
+    out.resize(data.size());
+    QList<int> stuck;
+    for(int i=data.size()-1;i>=0;i--)
+    {
+        if(dataFile[i] & (1<<p))
+        {
+            if(data[i].trim())
+                ;
+        }
+    }
+}
+
 void PageComparator::open()
 {
     QDesktopServices::openUrl(QUrl(QString("file:")+QDir::currentPath()+"/"+fileDirPrefix+"main.html"));

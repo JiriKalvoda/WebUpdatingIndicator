@@ -21,6 +21,8 @@ PageComparatorGui::PageComparatorGui(int a, int b,Background * bg, QWidget *pare
 
     check_sourceCode = new QCheckBox("View source code");
     l->addWidget(check_sourceCode);
+    check_oneFrame = new QCheckBox("Two page in one");
+    l->addWidget(check_oneFrame);
 
     setLayout(l);
 
@@ -37,7 +39,10 @@ void PageComparatorGui::showInGoodPlace()
 
 void PageComparatorGui::generate()
 {
-    comp.generate(check_sourceCode->isChecked());
+    comp.generate(
+            check_sourceCode->isChecked() * comp.FlagCourceCode |
+            check_oneFrame->isChecked() * comp.FlagInOneFrame
+        );
 
 
 }

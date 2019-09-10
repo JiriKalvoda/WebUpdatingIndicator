@@ -22,6 +22,7 @@ public:
     QPushButton * button_generate;
     QPushButton * button_open;
     QCheckBox * check_sourceCode;
+    QCheckBox * check_oneFrame;
     void showInGoodPlace();
 signals:
 

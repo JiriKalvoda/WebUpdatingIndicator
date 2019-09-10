@@ -5,13 +5,18 @@
 #include <QString>
 #include <background.h>
 #include <QSet>
+#include <QVector>
 #include <QStringList>
 #include <newpagemodel.h>
+
 
 class PageComparator : public QObject
 {
     Q_OBJECT
 public:
+    static const int FlagCourceCode = 1<<0;
+    static const int FlagInOneFrame = 1<<1;
+
     explicit PageComparator(int a,int b,Background * Bg,QObject *parent = 0);
     virtual ~PageComparator();
     Background * bg;
@@ -26,9 +31,11 @@ public:
     void setNewPrefix();
     QStringList parseData(QString in);
     QStringList loadFile(NewPageItem id);
-    QString generateIframe(int id, bool viewSC);
+    QString generateIframe(int id, int flags);
+    QString generateCombinationIframe(int flags);
+    QVector<int> genCloseTag(int p);
 public slots:
-    void generate(bool viewSC);
+    void generate(int flags);
     void open();
     void load();
     void calculatePages(int id_a,int id_b);
