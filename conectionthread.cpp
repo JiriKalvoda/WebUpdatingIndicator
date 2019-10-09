@@ -1,7 +1,7 @@
 #include "conectionthread.h"
 
 #include "background.h"
-#include <qFile>
+#include <QFile>
 #include <debug.h>
 #include <QUrl>
 #include <QNetworkAccessManager>

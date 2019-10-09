@@ -1,6 +1,6 @@
 #include "background.h"
 #include <debug.h>
-#include <qFile>
+#include <QFile>
 
 #include <QUrl>
 #include <QNetworkAccessManager>
