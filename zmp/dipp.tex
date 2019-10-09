@@ -1,0 +1,83 @@
+\pdfoutput=1
+\documentclass[twoside,12pt]{article}%
+\usepackage[utf8]{inputenc} % použito v případě jiného kódování
+% aktuální kódování: utf8
+\usepackage{dipp}
+\usepackage[czech]{babel}
+\usepackage{graphicx}
+\begin{document}
+
+\def\,{\penalty10000\hskip.25em}
+\pagestyle{headings}
+
+\cislovat{2}
+\bakalarska
+
+\titul{Vývoj aplikace na kontrolování změn na webových stránkách}{Jiří Kalvoda}{Mgr. Marek Blaha}{Blansko 2020}
+
+\podekovani{TODO poděkování}
+
+\prohlaseni{Prohlašuji, že jsem tuto práci vyřešil samostatně
+s~použitím literatury, kterou uvádím v~seznamu}{V~Blansku dne \today}
+
+\abstract{Kalvoda, J. }{Development an aplication for checking changes on web pages}{abstract}
+
+\abstrakt{Kalvoda, J. \NAZEV}
+{Tato závěrečná práce popisuje vývoj a použití aplikace na monitorování změn na webových stránkách.
+Aplikace je vyvíjena v jazyce c++ pomocí knihovny Qt. Díky tomu se jedná o multiplatformní software.
+Je dostupná včetně zdrojového kódu pod licencí GNU LGPL. Tato závěrečná práce obsahuje popis jejího fungování, implementace a použitého softwaru při jejím vývoji.}
+
+\obsah
+
+\kapitola{Úvod a~cíl práce}
+\sekce{Úvod do problematiky}
+
+Webové stránky se mohou neustále měnit, proto je dobré automaticky monitorovat jejich aktualizace.
+Tato aplikace umožňuje automatizovat tento problém a tím uživateli ušetřit čas a eliminovat lidský chybový faktor.
+
+Aplikace podporuje různé tolerance při načítání a porovnávání změn stránek.
+Například na stránce, kde se část neustále mění, mohu tuto část vypustit, nebo přímo porovnávat jen nějaké části a podobně. Díky práci s cookies je možné navázat i složitější spojení se serverem a provést definovanou sekvenci úkolů (např. přihlásit se a načíst nějaký soukromý obsah). Historie stránek se může ukládat a pak lze v~ní vyhledávat a zjišťovat rozdíly mezi verzemi pomocí grafického porovnávání napojeného na uživatelův oblíbený prohlížeč.
+
+\sekce{Cíl práce}
+
+Cílem této práce je vyvinout funkční aplikaci umožnující zjišťování aktualizací, archivaci a porovnávání webových stránek (případně i jiných dokumentů) a publikovat ji cílovým uživatelům na různých operačních systémech.
+K aplikaci také bude vypracována rozsáhlá uživatelská i technická dokumentace, která umožní její další vývoj.
+Umožním tedy dalším programátorům tuto aplikaci pohodlně modifikovat a upravovat dle svých potřeb.
+Cílem této práce je také aplikaci rozšířit mezi skupinu testovacích uživatelů a použít jejich připomínky a problémy k dalšímu vývoji a stabilizaci aplikace.
+
+\kapitola{Přehled literatury}
+
+\kapitola{Popis fungování a ovládání aplikace}
+\sekce{Instalace}
+\podsekce{Linux}
+\podsekce{Windows}
+\podsekce{macOS}
+
+\sekce{Seznam stránek na kontrolu}
+\podsekce{Adresa stránek}
+\podsekce{způsoby kontroly změn}
+\podsekce{Skupiny stránek, přihlášení a práce s cookie}
+
+\sekce{Spuštění kontroly, tabulka změn, informační konzole}
+
+\sekce{Otevření lokální kopie stránky, její napojení}
+
+\sekce{Historie změn a její procházení}
+
+\sekce{Grafické porovnávání verzí stránek}
+
+\sekce{Klávesové zkratky}
+
+\kapitola{Implementace aplikace}
+
+\sekce{Použitý software}
+\podsekce{Qt}
+\podsekce{Git}
+
+\sekce{Objektový model, rozdělení problému}
+\sekce{Pozadí aplikace}
+
+\sekce{Grafické uživatelské rozhraní}
+
+
+\end{document}
