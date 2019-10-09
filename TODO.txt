@@ -1,0 +1,2 @@
+mazání záznamù -- angliètina
+když jsou vybrány celé øádky, chce (poèítá) smazat všechny

@@ -126,7 +126,7 @@ QString PageComparator::generateIframe(int id, int flags)
             if(dataFile[i]&(1<<id))
             {
                 QString toReplace=data[i];
-                toReplace.replace("&","&#38;").replace("<","&#60").replace(">","&#62;").replace("\n","<br/>");
+                toReplace.replace("&","&#38;").replace("<","&#60").replace(">","&#62;").replace("\n","<br/>").replace(" ","&nbsp; ");
                  out+=(dataFile[i]==3?"":beforeDiff)
                          +toReplace
                          +(dataFile[i]==3?"":afterDiff)+"\n";
@@ -205,7 +205,7 @@ QVector<int> PageComparator::genCloseTag(int p)
     {
         if(dataFile[i] & (1<<p))
         {
-            if(data[i].trim())
+            //if(data[i].trimmed())
                 ;
         }
     }
@@ -325,6 +325,14 @@ QStringList PageComparator::parseData(QString in)
     for(int i=0;i<out.length();i++)
     {
         out[i]=out[i].trimmed();
+        if(i+1<out.length())
+        {
+            int p=0;
+            for(p=0;p<out[i+1].size() && out[i+1][p].isSpace();p++) ;
+            out[i] += out[i+1].mid(0,p);
+            out[i+1] += out[i+1].mid(p);
+
+        }
         if(i+1<out.length() && out[i+1][0].isSpace()) out[i]+=out[i+1][0];
     }
     return out;
