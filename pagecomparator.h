@@ -25,6 +25,7 @@ public:
     QString filePrefix;
     QString fileDirPrefix;
     QStringList data;
+    QStringList data_f[2];
     QList<int> dataFile;
     int pageWriteiterator=0;
     QSet<QString> openFile;

@@ -12,6 +12,7 @@ PageComparator::PageComparator(int a,int b,Background * Bg,QObject *parent):
     setNewPrefix();
     calculatePages(a,b);
 }
+
 PageComparator::~PageComparator()
 {
     D_PAGECOMPARATOR qDebug() << "~PageComparator";
@@ -114,6 +115,7 @@ void PageComparator::generate(int flags)
     fileAct.write(QString(QString("")+"ifnewact("+QString::number(pageWriteiterator)+")").toUtf8());
     fileAct.close();
 }
+
 QString PageComparator::generateIframe(int id, int flags)
 {
     if(flags & FlagCourceCode)
@@ -125,7 +127,7 @@ QString PageComparator::generateIframe(int id, int flags)
         {
             if(dataFile[i]&(1<<id))
             {
-                QString toReplace=data[i];
+                QString toReplace=data_f[id][i];
                 toReplace.replace("&","&#38;").replace("<","&#60").replace(">","&#62;").replace("\n","<br/>").replace(" ","&nbsp; ");
                  out+=(dataFile[i]==3?"":beforeDiff)
                          +toReplace
@@ -143,16 +145,17 @@ QString PageComparator::generateIframe(int id, int flags)
         {
             if(data[i][0] == '<')
             {
-                if(dataFile[i]&(1<<id)) out+=data[i];
+                if(dataFile[i]&(1<<id)) out+=data_f[id][i];
             }
             else
             {
-                if(dataFile[i]&(1<<id)) out+=(dataFile[i]==3?"":beforeDiff)+data[i]+(dataFile[i]==3?"":afterDiff)+"\n";
+                if(dataFile[i]&(1<<id)) out+=(dataFile[i]==3?"":beforeDiff)+data_f[id][i]+(dataFile[i]==3?"":afterDiff)+"\n";
             }
         }
         return out;
     }
 }
+
 QString PageComparator::generateCombinationIframe(int flags)
 {
     if(flags & FlagCourceCode)
@@ -196,6 +199,7 @@ QString PageComparator::generateCombinationIframe(int flags)
         return out;
     }
 }
+
 QVector<int> PageComparator::genCloseTag(int p)
 {
     QVector<int> out;
@@ -205,7 +209,7 @@ QVector<int> PageComparator::genCloseTag(int p)
     {
         if(dataFile[i] & (1<<p))
         {
-            //if(data[i].trimmed())
+            if(data[i].trimmed()[0]=='/')
                 ;
         }
     }
@@ -215,6 +219,7 @@ void PageComparator::open()
 {
     QDesktopServices::openUrl(QUrl(QString("file:")+QDir::currentPath()+"/"+fileDirPrefix+"main.html"));
 }
+
 void PageComparator::calculatePages(int a,int b)
 { 
     page_a = page_b = NewPageItem();
@@ -231,12 +236,15 @@ void PageComparator::calculatePages(int a,int b)
     if(tmp_b.size()) page_b = tmp_b[0];
     load();
 }
+
 void PageComparator::load()
 {
     data.clear();
+    data_f[0].clear();
+    data_f[1].clear();
     dataFile.clear();
-    auto a = loadFile(page_a);
-    auto b = loadFile(page_b);
+    QStringList a = loadFile(page_a);
+    QStringList b = loadFile(page_b);
     int * * strDiffLen = new int * [a.size()];
     strDiffLen[0] = new int [a.size()*b.size()];
     D_PAGECOMPARATOR qDebug()<<"PageComparator load init arr ok";
@@ -248,7 +256,7 @@ void PageComparator::load()
             int act = 1<<30;
             if(i+1<a.size()) act = std::min(act,strDiffLen[i+1][j]+1);
             if(j+1<b.size())act = std::min(act,strDiffLen[i][j+1]+1);
-            if(i+1<a.size()&&j+1<b.size()) if(a[i+1]==b[j+1]) act = std::min(act,strDiffLen[i+1][j+1]);
+            if(i+1<a.size()&&j+1<b.size()) if(a[i+1].trimmed()==b[j+1].trimmed()) act = std::min(act,strDiffLen[i+1][j+1]);
             if(i+1==a.size()&&j+1==b.size()) act = 0;
             strDiffLen[i][j]=act;
         }
@@ -257,10 +265,12 @@ void PageComparator::load()
     for(int i=0,j=0;;)
     {
         int act = strDiffLen[i][j];
-        if(i+1<a.size()&&j+1<b.size()) if(a[i+1]==b[j+1]) if(act == strDiffLen[i+1][j+1])
+        if(i+1<a.size()&&j+1<b.size()) if(a[i+1].trimmed()==b[j+1].trimmed()) if(act == strDiffLen[i+1][j+1])
         {
             i++;j++;
            data << a[i];
+           data_f[0] << a[i];
+           data_f[1] << b[j];
            dataFile << ((1<<1)|(1<<0));
            continue;
         }
@@ -268,6 +278,8 @@ void PageComparator::load()
         {
             i++;
            data << a[i];
+           data_f[0] << a[i];
+           data_f[1] << "";
            dataFile << ((1<<0));
            continue;
         }
@@ -275,6 +287,8 @@ void PageComparator::load()
         {
            j++;
            data << b[j];
+           data_f[0] << "";
+           data_f[1] << b[j];
            dataFile << ((1<<1));
            continue;
         }
@@ -287,7 +301,20 @@ void PageComparator::load()
    D_PAGECOMPARATOR  qDebug()<<"PageComparator load init make ok";
     delete [] (strDiffLen[0]);
     delete [] strDiffLen;
+   D_PAGECOMPARATOR
+   {
+       QString toWrite;
+       QFile debugFile ("comp/.debug.txt");
+       debugFile.open(QIODevice::WriteOnly);
+       for(int i=0;i<data.size();i++)
+       {
+           toWrite += QString::number(dataFile[i]) + " \"" + QString(data[i]).replace("\n","\\n") + "\"\n";
+       }
+       debugFile.write(toWrite.toUtf8());
+       debugFile.close();
+   }
 }
+
 bool substrComp(QString & s,int poz,QString comp)
 {
     if(poz<0) return 0;
@@ -320,7 +347,6 @@ QStringList PageComparator::parseData(QString in)
         if(in[i]=='>'&&inTag) {PUSH;inTag=0;}
         if(substrComp(in,i-8,"</script>")&&inScript) {PUSH;inScript=0;}
         if(substrComp(in,i-2,"-->")      &&inComent) {PUSH;inComent=0;}
-
     }
     for(int i=0;i<out.length();i++)
     {
@@ -330,8 +356,7 @@ QStringList PageComparator::parseData(QString in)
             int p=0;
             for(p=0;p<out[i+1].size() && out[i+1][p].isSpace();p++) ;
             out[i] += out[i+1].mid(0,p);
-            out[i+1] += out[i+1].mid(p);
-
+            out[i+1] = out[i+1].mid(p);
         }
         if(i+1<out.length() && out[i+1][0].isSpace()) out[i]+=out[i+1][0];
     }
@@ -347,7 +372,20 @@ QStringList PageComparator::loadFile(NewPageItem in)
         file.open(QIODevice::ReadOnly);
         auto dat =QString::fromUtf8(file.readAll());
         file.close();
-        return parseData(dat);
+        QStringList out = parseData(dat);
+       D_PAGECOMPARATOR
+       {
+           QString toWrite;
+           QFile debugFile ("comp/.debug"+in.fileName+".txt");
+           debugFile.open(QIODevice::WriteOnly);
+           for(int i=0;i<out.size();i++)
+           {
+           toWrite += "\"" + QString(out[i]).replace("\n","\\n") + "\"\n";
+           }
+           debugFile.write(toWrite.toUtf8());
+           debugFile.close();
+       }
+       return out;
     }
     return QStringList()<<"";
 }
