@@ -20,7 +20,7 @@ class Background : public QObject
 {
     Q_OBJECT
 private:
-    bool isOkStart;
+    bool isOkStart=0;
 public:
     explicit Background(QObject *parent = 0);
     virtual ~Background();

@@ -6,7 +6,7 @@
  #include <QHBoxLayout>
  #include <QWidget>
 #include <QLabel>
- #include <qstandarditemmodel>
+ #include <QStandardItemModel>
 #include <QProgressBar>
 #include <QScrollArea>
 #include <QGroupBox>

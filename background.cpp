@@ -1,6 +1,6 @@
 #include "background.h"
 #include <debug.h>
-#include <qFile>
+#include <QFile>
 
 #include <QUrl>
 #include <QNetworkAccessManager>
@@ -15,6 +15,7 @@
 
 Background::Background(QObject *parent) : QObject(parent),newPages(this)
 {
+    isOkStart=0;
     lockFileLock = new QLockFile("runlock.dat");
     if(!lockFileLock->tryLock(10)) return;
     isOkStart=1;

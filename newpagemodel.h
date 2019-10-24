@@ -14,7 +14,7 @@ struct NewPageItem
     QString fileName;
     bool del;
     int id;
-    operator < (NewPageItem const & dr){return id<dr.id;}
+    bool operator < (NewPageItem const & dr){return id<dr.id;}
 };
 
 class NewPageModel : public QAbstractTableModel
