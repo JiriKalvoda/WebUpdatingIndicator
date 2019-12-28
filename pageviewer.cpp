@@ -84,7 +84,7 @@ void PageViewer::deleteSlot()
 {
     QModelIndexList list = table->selectionModel()->selectedIndexes();
     QMessageBox::StandardButton reply =
-            QMessageBox::question(this, "Delete selected", QString("Are you realy want do delete ")+QString::number(list.size())+" selected record permanently (with history file)?",
+            QMessageBox::question(this, "Delete selected", QString("Are you really want do delete ")+QString::number(list.size())+" selected record permanently (with history file)?",
                                     QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes)
     {
@@ -106,6 +106,15 @@ void PageViewer::compareSlot()
     {
         auto a = selectedRows.begin();
         auto b = ++selectedRows.begin();
-        (new PageComparatorGui(*a,*b,bg))->show();
+        auto cGui = (new PageComparatorGui(*a,*b,bg));
+        cGui->show();
+        cGui->showInGoodPlace();
+    }
+    if(selectedRows.size()==1)
+    {
+        auto a = selectedRows.begin();
+        auto cGui = (new PageComparatorGui(*a,-1,bg));
+        cGui->show();
+        cGui->showInGoodPlace();
     }
 }
