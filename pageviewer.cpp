@@ -84,7 +84,7 @@ void PageViewer::deleteSlot()
 {
     QModelIndexList list = table->selectionModel()->selectedIndexes();
     QMessageBox::StandardButton reply =
-            QMessageBox::question(this, "Delete selected", QString("Are you realy want do delete ")+QString::number(list.size())+" selected record permanently (with history file)?",
+            QMessageBox::question(this, "Delete selected", QString("Are you really want do delete ")+QString::number(list.size())+" selected record permanently (with history file)?",
                                     QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes)
     {
