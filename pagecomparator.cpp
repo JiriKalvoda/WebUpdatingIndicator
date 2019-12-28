@@ -5,52 +5,18 @@
 #include <database.h>
 #include <newpagemodel.h>
 
-
-PageComparator::PageComparator(int a,int b,Background * Bg,QObject *parent):
-    QObject(parent),bg(Bg)
+bool substrComp(QString & s,int poz,QString comp)
 {
-    setNewPrefix();
-    calculatePages(a,b);
+    if(poz<0) return 0;
+    if(poz+comp.size()>s.size()) return 0;
+    for(int i=0;i<comp.size();i++)
+        if(s[poz+i] != comp[i])
+            return 0;
+    return 1;
 }
 
-PageComparator::~PageComparator()
+QString makeHtml(QString body, QString filePrefix, int pageWriteiterator)
 {
-    D_PAGECOMPARATOR qDebug() << "~PageComparator";
-    for(auto it=openFile.begin();it!=openFile.end();it++)
-    {
-        QFile file (*it);
-        file.remove();
-        D_PAGECOMPARATOR qDebug()<<"remove file "<<*it;
-    }
-}
-
-void PageComparator::setNewPrefix()
-{
-    static int c = 0;
-    filePrefix=QString("")+QString::number(c++)+"-";
-    fileDirPrefix=QString("comp/")+filePrefix;
-}
-
-
-void PageComparator::generate(int flags)
-{
-    pageWriteiterator++;
-    QString body = QString("")+
-            "<div id=\"a\" style=\"position: absolute;left: 0%;width:50%;top: 0px;height: 100%;\">\n"
-            "<h1 style=\"text-align: center\">\n"
-            +page_a.pageName+" "+page_a.time.toString("d.M.yy h:mm:ss")+
-            "</h1>\n"
-            "<iframe src=\""+filePrefix+"a.html\" id=\"a-page\" "
-                    "style=\" position: absolute;left: 0px;width:100%;top: 70px;height: calc(100% - 70px );\">\n"
-            "</iframe>\n"
-            "</div>\n"
-            "<div id=\"b\" style=\"position: absolute;left: 50%;width:50%;top: 0px;height: 100%;\">\n"
-            "<h1 style=\"text-align: center\">\n"
-            +page_b.pageName+" "+page_b.time.toString("d.M.yy h:mm:ss")+
-            "</h1>\n"
-            "<iframe src=\""+filePrefix+"b.html\" id=\"b-page\" "
-                  "style=\" position: absolute;left: 0px;width:100%;top: 70px;height: calc(100% - 70px );\"></iframe>\n"
-            "</div>";
     QString document = QString("")+
              "<!DOCTYPE HTML>\n"
              "<HTML>\n"
@@ -88,6 +54,60 @@ void PageComparator::generate(int flags)
              +body+"\n"
              "</body>\n"
              "</html>\n";
+    return document;
+}
+
+
+PageComparator::PageComparator(int a,int b,Background * Bg,QObject *parent):
+    QObject(parent),bg(Bg)
+{
+    setNewPrefix();
+    calculatePages(a,b);
+}
+
+PageComparator::~PageComparator()
+{
+    D_PAGECOMPARATOR qDebug() << "~PageComparator";
+    for(auto it=openFile.begin();it!=openFile.end();it++)
+    {
+        QFile file (*it);
+        file.remove();
+        D_PAGECOMPARATOR qDebug()<<"remove file "<<*it;
+    }
+}
+
+void PageComparator::setNewPrefix()
+{
+    static int c = 0;
+    filePrefix=QString("")+QString::number(c++)+"-";
+    fileDirPrefix=QString("comp/")+filePrefix;
+}
+
+
+void PageComparator::generate(int flags)
+{
+    pageWriteiterator++;
+    QString body = QString("")+
+            "<div id=\"a\" style=\"position: absolute;left: 0%;width: calc(50% - 2px );top: 0px;height: 100%;\">\n"
+            "<h1 style=\"text-align: center\">\n"
+            +page_a.pageName+" "+page_a.time.toString("d.M.yy h:mm:ss")+
+            "</h1>\n"
+            "</div>\n"
+            "<div id=\"b\" style=\"position: absolute;left: 50%;width: calc(50% - 4px );top: 0px;height: 100%;\">\n"
+            "<h1 style=\"text-align: center\">\n"
+            +page_b.pageName+" "+page_b.time.toString("d.M.yy h:mm:ss")+
+            "</h1>\n"
+            "</div>"+
+            ((flags&FlagInOneFrame)
+                ?"<iframe src=\""+filePrefix+"a.html\" id=\"a-page\" "
+                    "style=\" position: absolute;left: 0px;width: calc(100% - 4px );top: 70px;height: calc(100% - 75px );\">\n"
+                    "</iframe>\n"
+                :"<iframe src=\""+filePrefix+"a.html\" id=\"a-page\" "
+                    "style=\" position: absolute;left: 0px;width: calc(50% - 2px );top: 70px;height: calc(100% - 75px );\">\n"
+                    "</iframe>\n"
+            "<iframe src=\""+filePrefix+"b.html\" id=\"b-page\" "
+                    "style=\" position: absolute;left: 50%;width: calc(50% - 4px );top: 70px;height: calc(100% - 75px );\"></iframe>\n");
+    QString document = makeHtml(body,filePrefix,pageWriteiterator);
     QFile fileMain (fileDirPrefix+"main.html");
     openFile.insert(fileDirPrefix+"main.html");
     fileMain.open( QIODevice::WriteOnly);
@@ -156,6 +176,40 @@ QString PageComparator::generateIframe(int id, int flags)
     }
 }
 
+void PageComparator::writeTagBlock(QString & out,int file,int b,int e,QString before, QString after)
+{
+    for(int i=b;i<=e;i++)
+        if(dataFile[i]&file)
+        {
+            if(data[i][0] == '<')
+                out+=data[i];
+            else
+                out+=before+data[i]+after;
+        }
+}
+
+#define WRITEA \
+{if(dataFile[i] & (1<<0))\
+{\
+    if(closeTag[0][i]==-1)\
+    writeTagBlock(out,1<<0,i,i,beforeDiff1,afterDiff);\
+    else\
+    {\
+    writeTagBlock(out,1<<0,i,closeTag[0][i],beforeDiff1,afterDiff);\
+    skip_a = closeTag[0][i];\
+    }\
+}}
+#define WRITEB  \
+{if(dataFile[i] & (1<<1))\
+{\
+    if(closeTag[1][i]==-1)\
+    writeTagBlock(out,1<<1,i,i,beforeDiff2,afterDiff);\
+    else\
+    {\
+    writeTagBlock(out,1<<1,i,closeTag[1][i],beforeDiff2,afterDiff);\
+    skip_b = closeTag[1][i];\
+    }\
+}}
 QString PageComparator::generateCombinationIframe(int flags)
 {
     if(flags & FlagCourceCode)
@@ -179,40 +233,98 @@ QString PageComparator::generateCombinationIframe(int flags)
     }
     else
     {
-        auto closeTagA = genCloseTag(0);
-        auto closeTagB = genCloseTag(1);
+       D_PAGECOMPARATOR
+       {
+           QString toWrite;
+           QFile debugFile ("comp/.debug.txt");
+           debugFile.open(QIODevice::WriteOnly);
+           for(int i=0;i<data.size();i++)
+           {
+               toWrite += QString::number(dataFile[i]) +"|"+QString::number(closeTag[0][i])+"|"+QString::number(closeTag[1][i])
+                     +" \"" + QString(data[i]).replace("\n","\\n") + "\"\n";
+           }
+           debugFile.write(toWrite.toUtf8());
+           debugFile.close();
+       }
         QString out;
         QString beforeDiff1 = "<span style=\"background-color:red\">";
         QString beforeDiff2 = "<span style=\"background-color:green\">";
         QString afterDiff =  "</span>";
+        int skip_a=-1, skip_b=-1;
         for(int i=0;i<std::min(data.size(),dataFile.size());i++)
         {
             if(dataFile[i]&3)
             {
-                QString toReplace=data[i];
-                toReplace.replace("&","&#38;").replace("<","&#60").replace(">","&#62;").replace("\n","<br/>");
-                 out+=(dataFile[i]==3?"":dataFile[i]==1?beforeDiff1:beforeDiff2)
-                         +toReplace
-                         +(dataFile[i]==3?"":afterDiff)+"\n";
+                if(skip_a>=i)
+                {
+                    if(skip_b>=i)
+                    {
+
+                    }
+                    else
+                        WRITEB
+                }
+                else
+                {
+                    if(skip_b>=i)
+                        WRITEA
+                    else
+                    {
+                        if(((dataFile[i] & 3) == 3) && closeTag[0][i]==closeTag[1][i])
+                            writeTagBlock(out,3,i,i,"","");
+                        else
+                        {
+                            WRITEA
+                            WRITEB
+                        }
+                    }
+                }
             }
         }
         return out;
     }
 }
 
-QVector<int> PageComparator::genCloseTag(int p)
+int PageComparator::genCloseTag(int p)
 {
-    QVector<int> out;
-    out.resize(data.size());
+    D_PAGECOMPARATOR qDebug() <<"\n\n\n genCloseTag:"<< p;
+    QList<int> & out = closeTag[p];
+    out.clear();
     QList<int> stuck;
+    QList<QString> stuckTag;
+    for(int i=0;i<data.size();i++) out.push_back(-1);
     for(int i=data.size()-1;i>=0;i--)
     {
         if(dataFile[i] & (1<<p))
         {
-            if(data[i].trimmed()[0]=='/')
-                ;
+            QString s = data_f[p][i].trimmed();
+            if(s[0]=='<' && !substrComp(s,0,"<script") && !substrComp(s,0,"<!--"))
+            {
+               QString tag = s.mid(1,s.length()-1-1).trimmed();
+               D_PAGECOMPARATOR qDebug() <<"tag: "<< tag;
+               if(tag[s.length()-1]=='/') continue;
+               if(tag[0] == '/')
+               {
+                   stuck.push_back(i);
+                   stuckTag.push_back(tag.mid(1).trimmed().split(" ")[0]);
+               }
+               else
+               {
+                   if(stuck.size() && tag.trimmed().split(" ")[0] == stuckTag.last())
+                   {
+                       D_PAGECOMPARATOR qDebug() <<"ISPAIR";
+                       out[i]=stuck.last();
+                       out[stuck.last()]=i;
+                       stuck.pop_back();
+                       stuckTag.pop_back();
+                   }
+                   else
+                       D_PAGECOMPARATOR qDebug() <<tag.trimmed().split(" ")[0]<<"!="<<(stuck.size()?stuckTag.last():"NULPTR");
+               }
+            }
         }
     }
+    return bool(stuck.size());
 }
 
 void PageComparator::open()
@@ -313,16 +425,8 @@ void PageComparator::load()
        debugFile.write(toWrite.toUtf8());
        debugFile.close();
    }
-}
-
-bool substrComp(QString & s,int poz,QString comp)
-{
-    if(poz<0) return 0;
-    if(poz+comp.size()>s.size()) return 0;
-    for(int i=0;i<comp.size();i++)
-        if(s[poz+i] != comp[i])
-            return 0;
-    return 1;
+   genCloseTag(0);
+   genCloseTag(1);
 }
 
 #define PUSH {if(!empty) {out << "";empty=1;}}

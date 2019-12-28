@@ -27,6 +27,7 @@ public:
     QStringList data;
     QStringList data_f[2];
     QList<int> dataFile;
+    QList<int> closeTag[2];
     int pageWriteiterator=0;
     QSet<QString> openFile;
     void setNewPrefix();
@@ -34,7 +35,8 @@ public:
     QStringList loadFile(NewPageItem id);
     QString generateIframe(int id, int flags);
     QString generateCombinationIframe(int flags);
-    QVector<int> genCloseTag(int p);
+    void writeTagBlock(QString & out, int file, int b, int e, QString before, QString after);
+    int genCloseTag(int p);
 public slots:
     void generate(int flags);
     void open();
