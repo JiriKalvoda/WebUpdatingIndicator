@@ -1,0 +1,25 @@
+\sekce{Grafické porovnávání verzí stránek}
+V případě, že uživatel chce vidět rozdíly mezi dvěma verzemi stránek (popřípadě i mezi dvěma stránkami) je možné využít nastroje porovnání.
+Tento nástroj lze spustit kliknutím na tlačítko \c|Compare difference| pod tabulkou změn nebo pod tabulkou historie.
+Před kliknutím je potřeba vybrat jeden nebo dva řádky v příslušné tabulce.
+V případě, že jsou vybrány dva záznamy, provede se porovnání jejich souborů.
+V případě, že je vybrána pouze jedna stránka, provede se pouze porovnání mezi zvolenou verzí zvolené stránky a předchozí verzí dané stránky.
+Zobrazí se tedy rozdíly, které byly detekovány v daný moment.
+
+Při použití porovnání se ve výchozím prohlížeči otevře stránka obsahující dva rámy obsahující obě porovnávané stránky.
+Dále se také otevře ovládací okno.
+V ovládacím okně je možno nastavit dva přepínače:\\
+\c|View source code|, Při jeho zaškrtnutí se v prohlížeči zobrazí místo stránek jejich zdrojové kódy.
+Přepínač \c|Two page in one| místo dvou rámů zobrazí jen jeden, do kterého zobrazí sjednocení obou stránek.
+Tato funkce je zatím pouze v testovací verzi a může dojít k nesprávnému propojení stránek. Stabilní je pouze při propojení s zobrazením zdrojového kódu.
+Pro vytvoření grafického výstupu do prohlížeče dle zadaných kritérii je nutné zmáčknout tlačítko \c|Generate|.
+K znovuotevření stránky v prohlížeči slouží tlačítko \c|Open|.
+
+V jakékoliv verzi porovnávání se graficky zobrazují změny.
+V režimu se dvěma rámy se v každém z nich zobrazí přebývající text s červeným zvýrazněním.
+V případě režimu jednoho rámu se přibitý text zobrazí se zeleným podbarvením a odstraněný text červeně.
+V režimu zdrojového kódu se změny zobrazí na čemkoliv -- textu i html elementu či jiném prvku stránky.
+Když je ovšem porovnání formou stránek, jsou zvýrazněny pouze změny v čistém textu.
+
+Porovnávání stránek se provádí na úrovni slov a tagů.
+Aplikace se snaží najít jejich zobrazení na sebe s největším překryvem,  tedy nejmenším počtem rozdílů,

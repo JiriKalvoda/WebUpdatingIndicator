@@ -1,0 +1,98 @@
+\pdfoutput=1
+\documentclass[twoside,12pt]{article}%
+\usepackage[utf8]{inputenc} % použito v případě jiného kódování
+% aktuální kódování: utf8
+\usepackage{dipp}
+\usepackage[czech]{babel}
+\usepackage{graphicx}
+
+
+% ~~~~~ PACKAGE ~~~~~
+\usepackage[utf8]{inputenc}  % základní kódování
+\usepackage[czech]{babel}    % české nastavení
+\usepackage{amsmath, amssymb}   % matematické simboly
+% amsfonts
+\usepackage{graphicx}  % barvy a jiné
+\usepackage{lastpage}   % zjištění počtu stránek
+\usepackage{calc}  % snazší výpočty délek
+\usepackage{refcount} % převod reference na číslo - dvojstraný režim - dělení 2
+\usepackage{fancyhdr} % hlavičky
+\usepackage{etoolbox}  % změna geimetrie na určité stránky
+\usepackage{pgfplots} % geogebra
+\usepackage[final]{pdfpages} % geogebra v pdf
+%mathrsfs, pdf, tikz, mathrsfs
+\usepackage{listingsutf8} % zdrojové kódy
+\usepackage{hyperref}
+% ~~~~~ MATEMATICKÉ ~~~~~
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+\def\MATHINFO{}
+  \newcommand{\mathinfo}[2]{\if ^\MATHINFO^ \underbrace{\def\MATHINFO{1} {#1} \def\MATHINFO{} }_{\text{#2}} \else \overbrace{\def\MATHINFO{} {#1} \def\MATHINFO{1}}^{\text{#2}} \fi}
+\newcommand{\Mathinfo}[1]{\qquad \qquad \text{({#1})}}
+
+\newcommand{\tg}{\mathrm{tg}}
+\newcommand{\cotg}{\mathrm{cotg}}
+\newcommand{\sgn}{\mathrm{sgn}}
+\renewcommand{\angle}{\sphericalangle}
+\newcommand{\degre}{\ensuremath{^\circ}}
+\def\d{\degre}
+\newcommand{\pri}{\overleftrightarrow}
+\newcommand{\ppri}{\overrightarrow}
+\def\imp{\Rightarrow}
+\def\Imp{\quad\imp\quad}
+\def\ekv{\Leftrightarrow}
+\def\Ekv{\quad\ekv\quad}
+\def\rimp{\Leftarrow}
+\def\RImp{\quad\rimp\quad}
+\renewcommand{\*}{\cdot{}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\E{\mathbb{E}}
+\def\P{\mathbb{P}}
+\def\US{\leftrightarrow{}}
+
+\newcommand{\eqnl}[1][]{{#1}$$\\[-16px]$${}{#1}}
+
+\newcommand{\derivation}[2]{\frac{\partial}{\partial {#1}}\({#2}\)}
+\renewcommand{\j}[2][]{\ \mathrm{\if ^#1^ {#2} \else \frac{{#1}}{{#2}} \fi}}
+
+\def\f{\frac}
+\def\uv#1{„#1“}
+
+\newcounter{lemmaCounter}[section]
+\renewcommand{\thelemmaCounter}{\arabic{lemmaCounter}}
+\newtheorem{lemmaBlock}[lemmaCounter]{}
+\newenvironment{lemma}[3][]
+{
+
+	\refstepcounter{lemmaCounter}
+		\label{#2}
+	\textbf{Lemma \thelemmaCounter\if^#1^\else \ ({#1})\fi:}
+	\emph{{#3}}\\{}
+	Důkaz: 
+}
+{ 
+\hfill $\Box$
+
+}
+
+% ~~~~~ INFORMATICKÉ ~~~~~
+\newcommand{\refcodeline}[1]{{\footnotesize Viz \ref{#1}. řádek kódu na straně \pageref{#1}.}}
+\newcommand{\refcodeblock}[1]{{\footnotesize Viz \ref{#1}.-\ref{#1-end}. řádek kódu na straně \pageref{#1}.}}
+\definecolor {lightGrey}{RGB}{250,250,250}
+\newcommand{\Onotation}[1]{\ifmmode\mathcal{O}({#1})\else$\mathcal{O}({#1})$\fi}
+\renewcommand{\O}{\Onotation}
+\newcommand{\codeF}[1]{\lstinputlisting[ numbers = left, numberstyle = \tiny ,frame = shadowbox, backgroundcolor =\color{lightGrey}, showstringspaces=false]{#1} }
+\newcommand{\codeMain}{\codeF{main.cpp}}
+\lstset{language = C++,basicstyle =  \small \ttfamily, keywordstyle = \emph,commentstyle = \rmfamily ,  backgroundcolor =\color{lightGrey}, showstringspaces=false, escapeinside ={///}{/}, extendedchars=true, 
+literate={á}{{\'a}}1 {í}{{\'i}}1 {é}{{\'e}}1 {ý}{{\'y}}1 {ú}{{\'u}}1 {ó}{{\'o}}1 {ě}{{\v{e}}}1 {š}{{\v{s}}}1 {č}{{\v{c}}}1 {ř}{{\v{r}}}1 {ž}{{\v{z}}}1 {ď}{{\v{d}}}1 {ť}{{\v{t}}}1 {ň}{{\v{n}}}1 {ů}{{\r{u}}}1 {Á}{{\'A}}1 {Í}{{\'I}}1 {É}{{\'E}}1 {Ý}{{\'Y}}1 {Ú}{{\'U}}1 {Ó}{{\'O}}1 {Ě}{{\v{E}}}1 {Š}{{\v{S}}}1 {Č}{{\v{C}}}1 {Ř}{{\v{R}}}1 {Ž}{{\v{Z}}}1 {Ď}{{\v{D}}}1 {Ť}{{\v{T}}}1 {Ň}{{\v{N}}}1 {Ů}{{\r{U}}}1  ,}
+\def\c{\lstinline}
+
+
+
+

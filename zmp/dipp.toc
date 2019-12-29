@@ -12,15 +12,13 @@
 \contentsline {subsubsection}{Adresa str\IeC {\'a}nky a n\IeC {\'a}zev}{13}{section*.5}
 \contentsline {subsubsection}{Zp\IeC {\r u}soby kontroly zm\IeC {\v e}n}{14}{section*.6}
 \contentsline {subsubsection}{Skupiny str\IeC {\'a}nek, p\IeC {\v r}ihl\IeC {\'a}\IeC {\v s}en\IeC {\'\i } a pr\IeC {\'a}ce s cookie}{14}{section*.7}
-\contentsline {subsection}{\numberline {3.3}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } kontroly, tabulka zm\IeC {\v e}n, informa\IeC {\v c}n\IeC {\'\i } konzole}{15}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Otev\IeC {\v r}en\IeC {\'\i } lok\IeC {\'a}ln\IeC {\'\i } kopie str\IeC {\'a}nky, jej\IeC {\'\i } napojen\IeC {\'\i }}{15}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}Historie zm\IeC {\v e}n a jej\IeC {\'\i } proch\IeC {\'a}zen\IeC {\'\i }}{15}{subsection.3.5}
-\contentsline {subsection}{\numberline {3.6}Grafick\IeC {\'e} porovn\IeC {\'a}v\IeC {\'a}n\IeC {\'\i } verz\IeC {\'\i } str\IeC {\'a}nek}{15}{subsection.3.6}
-\contentsline {subsection}{\numberline {3.7}Kl\IeC {\'a}vesov\IeC {\'e} zkratky}{15}{subsection.3.7}
-\contentsline {section}{\numberline {4}Implementace aplikace}{16}{section.4}
-\contentsline {subsection}{\numberline {4.1}Pou\IeC {\v z}it\IeC {\'y} software}{16}{subsection.4.1}
-\contentsline {subsubsection}{Qt}{16}{section*.8}
-\contentsline {subsubsection}{Git}{16}{section*.9}
-\contentsline {subsection}{\numberline {4.2}Objektov\IeC {\'y} model, rozd\IeC {\v e}len\IeC {\'\i } probl\IeC {\'e}mu}{16}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Pozad\IeC {\'\i } aplikace}{16}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Grafick\IeC {\'e} u\IeC {\v z}ivatelsk\IeC {\'e} rozhran\IeC {\'\i }}{16}{subsection.4.4}
+\contentsline {subsection}{\numberline {3.3}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } kontroly, tabulka zm\IeC {\v e}n, informa\IeC {\v c}n\IeC {\'\i } konzole}{14}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Historie zm\IeC {\v e}n a jej\IeC {\'\i } proch\IeC {\'a}zen\IeC {\'\i }}{16}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Grafick\IeC {\'e} porovn\IeC {\'a}v\IeC {\'a}n\IeC {\'\i } verz\IeC {\'\i } str\IeC {\'a}nek}{17}{subsection.3.5}
+\contentsline {section}{\numberline {4}Implementace aplikace}{18}{section.4}
+\contentsline {subsection}{\numberline {4.1}Pou\IeC {\v z}it\IeC {\'y} software}{18}{subsection.4.1}
+\contentsline {subsubsection}{Qt}{18}{section*.8}
+\contentsline {subsubsection}{Git}{18}{section*.9}
+\contentsline {subsection}{\numberline {4.2}Objektov\IeC {\'y} model, rozd\IeC {\v e}len\IeC {\'\i } probl\IeC {\'e}mu}{18}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Pozad\IeC {\'\i } aplikace}{18}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Grafick\IeC {\'e} u\IeC {\v z}ivatelsk\IeC {\'e} rozhran\IeC {\'\i }}{18}{subsection.4.4}

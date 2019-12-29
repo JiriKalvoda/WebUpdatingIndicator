@@ -1,0 +1,49 @@
+\sekce{Spuštění kontroly, tabulka změn, informační konzole}
+Po spuštění aplikace se zobrazí hlavní okno.
+Jelikož aplikace by měla běžet jako služba, okno neobsahuje tlačítko zavřít.
+V případě, že uživatel skutečné chce uzavřít aplikaci a tím i zabránit dalším automatickým kontrolám, je možné aplikaci ukončit z menu kliknutím na \c|app| $\rightarrow$ \c|quit|.
+
+Pro manuální spuštění kontroly je možné kliknout na tlačítko \c|Start checking|.
+V případě, že již kontrola běží, po kliknutí se ukončí a ihned začne znovu od začátku.
+Po kliknutí na \c|Stop checking| se neprodleně prohledávání ukončí.
+
+Při průchodu se nalezené změny ihned zobrazují do tabulky změn.
+Tedy i v případě, že je prohledávání ukončeno v průběhu, doposud nalezené změny budou uloženy a zobrazeny.
+
+Aktuální stav průchodu je vidět na stavovém baru  nad tlačítky.
+V případě, že bar má červenou barvu, alespoň jedna stránka nebyla při posledním průchodu úspěšně načtena.
+Po kliknutí na zaškrtávací políčko \c|view more information| se zobrazí záznam provedených kontrolách a případně důvod jejich neúspěchu.
+Všechny chybové hlášky jsou obsaženy na řádcích uvozených několika vykřičníky.
+Nejčastěji se může uživatel setkat s těmito chybami:\\
+\c|Connection error - TIME OUT| nastane v případě, že načítání stránky bylo moc pomalé a tedy byl překročen časový limit na přístup na jednu stránku.\\ %TODO Opravit conection -> connection aplikaci
+\c|Cookie error - cookie not available| se zobrazí v případě, nastala chyba při načítání některé z předcházejících stránek ze stejné cookie skupiny.\\
+\c|Connection error - Network access is disabled.| znamená nedostupnost síťového připojení.\\
+\c|Connection error - Host not found.| informuje o nedostupnosti daného serveru. S největší pravděpodobností se  jedná o chybě zadanou stránku, nebo byla přesunutá.
+
+V boxu vpravo od tlačítek je možno nastavit automatické spouštění kontrolování.
+Do boxu stačí napsat počet minut mezi automatickými kontrolami.
+Automatické kontroly lze vypnout napsáním do políčka \c|0|.
+Datum a čas poslední úspěšné (tedy takové, ve které se načetly všechny stránky) kontroly je vidět mezi tlačítky boxem automatické aktualizace.
+V tomto místě je také vidět čas příští plánované kontroly.
+
+Informace o poslední kontrole a periodě automatické kontrole si aplikace ukládá do souboru databáze v pracovním adresáři aplikace.
+Při spuštění si tento soubor načte (pokud existuje).
+Nastavení automatické kontroly tedy vydrží i vypnutí a zapnutí aplikace.
+V případě, že měla kontrola proběhnout v momentě, kdy byla aplikace vypnutá, proběhne neprodleně po jejím spuštění.
+
+Všechny nalezené změny se zobrazují v tabulce změn umístěné v horní části hlavního okna aplikace.
+O každé změně se zobrazí řádek obsahující jméno stránky, čas detekování změny a jméno souboru, v němž je uložena aktuální verze.
+V případě, že uživatel chce data setřídit podle některé z těchto položek, může tak učinit kliknutím na hlavičku daného sloupce tabulky.
+Kliknutím na jméno souboru se ve výchozím prohlížeči otevře daná verze stránky.
+Aby bylo zajištěno správné fungovaní zobrazení, jsou všechny relativní odkazy (v rámci serveru) přepsány na absolutní doplněním názvu.
+Před všechny odkazy v atributech \c|href| s \c|src|, které neobsahují absolutní cestu je doplněn název serveru a složky.
+Díky tomu se při kontrole načítá pouze samostatná stránka, ale při zobrazení se načtou i obrázky, styly a další odkazované elementy.
+
+V případě, že už si uživatel danou změnu prohlédl, kliknutím na buňku v sloupci \c|Delete| ji může z tabulky změn odstranit.
+Tímto odstraněním nedojde k smazání záznamu o změně ani odstranění souboru s danou verzi stránky.
+Změna se již nabude zobrazovat v tabulce změn.
+Jiným způsobem odstraněni je vybrat jeden nebo několik řádků a pak kliknout na tlačítko \c|Hide| těsné pod tabulkou.
+
+Vybráním řádků a kliknutím na tlačítko \c|Delete| dojde k smazání vybraných záznamů změn včetně souborů obsahujících dané verze stránek.
+
+Všechny záznamy o změnách se ukládají do databáze a při spuštění aplikace se načtou všechny neskryté záznamy. 

@@ -29,7 +29,7 @@ je možné v zápisu stránky užít klíče \c|post|.
 %\c|formUsername=HugoKokoska&formPassword=BezpecneHeslo|.
 
 Nejjednodušší způsob, jak zjistit tyto informace pro požadovanou stránku je využít prohlížeč.
-Většina prohlížečů totiž umožnuje zobrazit informace o navázaném spojení.
+Většina prohlížečů totiž umožňuje zobrazit informace o navázaném spojení.
 Odsud stačí potřebné informace jen zkopírovat.
 V prohlížečích založených na jádře Chromium lze se lze pomocí klávesy \c|F12| dostat do vývojářského panelu.
 V záložce \c|Network| je možné najít příslušný soubor, jehož hlavičku je třeba použít.
@@ -37,7 +37,7 @@ V záložce \c|Network| je možné najít příslušný soubor, jehož hlavičku
 \podsekce{Způsoby kontroly změn}
 U některých stránek často mění její část, i když sledovaný obsah se nezmění.
 Pro omezení kontrolování je proto vhodné užít v zápisu položky \c|diff|.
-Ta by měla obsahovat speciální strukturu  popisující způsob ignorování změn\footnote{Případně, že struktura může obsahovat řetězec \c|\"ignore\"|, který má stejný efekt jako \c|\{\"ignore\":1\}|}.
+Ta by měla obsahovat speciální strukturu  popisující způsob ignorování změn\footnote{Případně může obsahovat řetězec \c|\"ignore\"|, který má stejný efekt jako \c|\{\"ignore\":1\}|}.
 Tato struktura může obsahovat následující položky:\\
 Klíč \c|ignore| s libovolnou hodnotou znamená, že stránka se vůbec nebude kontrolovat na změny.
 Toto je vhodné například když se jedná pouze o přihlašovací stránku, která neobsahuje žádaná data.\\
