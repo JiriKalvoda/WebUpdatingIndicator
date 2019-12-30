@@ -31,6 +31,10 @@ Při spuštění si tento soubor načte (pokud existuje).
 Nastavení automatické kontroly tedy vydrží i vypnutí a zapnutí aplikace.
 V případě, že měla kontrola proběhnout v momentě, kdy byla aplikace vypnutá, proběhne neprodleně po jejím spuštění.
 
+Když aplikace zaregistruje změnu stránky a není momentálně aktivní, bude se na změnu snažit upozornit.
+Provedení této funkce je částečně závislé na platformě. 
+Aplikace pošle požadavek na vyskočení do popředí, což ve většině případů znamená červené rozblikání dané aplikace případně ikony dané pracovní plochy.
+
 Všechny nalezené změny se zobrazují v tabulce změn umístěné v horní části hlavního okna aplikace.
 O každé změně se zobrazí řádek obsahující jméno stránky, čas detekování změny a jméno souboru, v němž je uložena aktuální verze.
 V případě, že uživatel chce data setřídit podle některé z těchto položek, může tak učinit kliknutím na hlavičku daného sloupce tabulky.
