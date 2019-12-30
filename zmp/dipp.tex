@@ -39,7 +39,6 @@ K aplikaci také bude vypracována rozsáhlá uživatelská i technická dokumen
 Umožním tedy dalším programátorům tuto aplikaci pohodlně modifikovat a upravovat dle svých potřeb.
 Cílem této práce je také aplikaci rozšířit mezi skupinu testovacích uživatelů a použít jejich připomínky a problémy k dalšímu vývoji a stabilizaci aplikace.
 
-\kapitola{Přehled literatury}
 
 \kapitola{Popis fungování a ovládání aplikace}
 
@@ -54,12 +53,36 @@ Cílem této práce je také aplikaci rozšířit mezi skupinu testovacích uži
 
 \sekce{Použitý software}
 \podsekce{Qt}
+Qt je multiplatformní knihovna pro c++ umožnující nejen tvorbu grafických aplikací, ale i práci se soubory, obrázky či sítovým připojením.
+Byla nedílnou součástí vyvíjené aplikace.
+Knihovna podporuje běh samotného jádra aplikace -- načítání webových souborů a také se stará o grafické zobrazování dat.
+Nedílnou součástí jsou její funkce při většině výpočtů aplikace.
+\podsekce{Qt Creator}
+Qt Creaator je vývojové prostředí určené primárně pro vývoj aplikací využívajících knihovny Qt.
+Programátorovi nabízí zvýrazňování syntaxe a doplňování názvů.
+Umožňuje také jednoduché kompilování, spouštění a debugování aplikace pomocí jednoduše ovladatelných nástrojů.
+Dále také umožňuje jednoduché ovládání gitu pomocí zabudovaných nástrojů.
+V tomto prostředí vznikla většina zdrojových kódů aplikace.
 \podsekce{Git}
+Git je systém na správu verzí využitý při vývoji této aplikace.
+Umožňuje oddělení jednotlivých úkonů při vývoji, jejich zdokumentování a možnost zobrazení jejich historie.
+Dále nabízí pomocí vzdálených repositářů jednoduchý způsob, jak aplikaci nahrát na web a zpřístupnit uživatelům.
 
 \sekce{Objektový model, rozdělení problému}
 \sekce{Pozadí aplikace}
 
 \sekce{Grafické uživatelské rozhraní}
 
+\begin{literatura}
+\citace{ucebnice}{Novák, 1991}{\autor{Novák, J.} a~kol.
+\nazev{Konstrukční vlastnosti ocelí třídy 18}. Praha:
+SNTL, 1991. 439~s. ISBN 80-8432-289-9.}
+	\citace{qt}{The Qt Company, 2019}{The Qt Company, 2019. Qt 5.12. \nazev{Qt} [online]. The Qt Company [Cit. 31.11.2019]. Dostupné z: \url{https://doc.qt.io/qt-5.12/index.html}}
+	\citace{sqlite}{Hipp, 2000}{Hipp, D. R. 2000.  Documentation. \nazev{SQLite} [online]. SQLite [Cit. 31.11.2019]. Dostupné z: \url{https://www.sqlite.org/docs.html}}
+	\citace{qt-abc}{Watzke, 2010}{Watzke, D. 2010.  Seriál: Qt 4 - psaní grafických programů. \nazev{AbcLinuxu} [online]. AbcLinuxu [Cit. 31.11.2019]. Dostupné z: \url{http://www.abclinuxu.cz/serialy/qt-4-psani-grafickych-programu}}
+	\citace{git}{Chacon, 2009}{\autor{Chacon, S.} \nazev{Pro Git}. Praha: CZ.NIC, 2009, ISBN: 978-80-904248-1-4.}
+
+% Dominantní tvůrce, rok. Název vedlejší webové stránky. Název hlavní webové stránky / webového sídla: podnázev hlavní webové stránky [typ nosiče]. Další tvůrce. Místo: nakladatel, datum publikování. Datum aktualizace [cit. datum citování]. Dostupné z: DOI nebo adresa. Path: cesta.
+\end{literatura}
 
 \end{document}
