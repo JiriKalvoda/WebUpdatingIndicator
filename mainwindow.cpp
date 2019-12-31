@@ -8,7 +8,7 @@ MainWindow::MainWindow(int argc, char *argv[],QWidget *parent):MainWindow(parent
 {
     for(int i=0;i<argc;i++)
     {
-   console->setText(console->text()+"\n"+argv[i]);
+   //console->setText(console->text()+"\n"+argv[i]);
    if(QString("stayHide")==QString(argv[i])) setWindowState(Qt::WindowMinimized);
 
     }

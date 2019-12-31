@@ -26,7 +26,6 @@ Background::Background(QObject *parent) : QObject(parent),newPages(this)
     for(auto & it:in)
             newPages.insert(it);
 
-    inport("pages.json");
     inportDbSetings();
 
     conTh = new ConectionThread();
@@ -44,6 +43,8 @@ Background::Background(QObject *parent) : QObject(parent),newPages(this)
     connect(&timeNextRun,SIGNAL(change()),this,SLOT(actDbSetings()));
     connect(&actPeriod,SIGNAL(change()),this,SLOT(actDbSetings()));
     connect(&timeStartLastAct,SIGNAL(change()),this,SLOT(actDbSetings()));
+
+    inport("pages.json");
 }
 Background::~Background()
 {
@@ -81,11 +82,24 @@ void Background::inport(QString file_name)
 {
     if(!isOkStart) return;
     QFile file(file_name);
-    file.open(QIODevice::ReadOnly|QIODevice::Text);
+    if(!file.open(QIODevice::ReadOnly|QIODevice::Text))
+    {
+        errorCon(QString("Input file ")+file_name+" don't exists.");
+        insertInConsole(QString("Input file ")+file_name+" don't exists.");
+        setBar(100);
+        return;
+    }
     auto file_data = file.readAll();
     QJsonParseError err;
     QJsonDocument j = QJsonDocument::fromJson(file_data,&err);
     file.close();
+    if(err.error!=QJsonParseError::NoError)
+    {
+        errorCon(QString("Json error: ")+err.errorString());
+        insertInConsole(QString("Json error: ")+err.errorString());
+        setBar(100);
+        return;
+    }
     //D_JSON qDebug() <<err.errorString() ;
     //D_JSON qDebug() << j.isNull() << j.isObject() << j.isEmpty();
     if(j.isArray())
