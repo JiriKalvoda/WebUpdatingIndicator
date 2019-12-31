@@ -18,6 +18,7 @@ PageComparatorGui::PageComparatorGui(int a, int b,Background * bg, QWidget *pare
     connect(button_open,SIGNAL(clicked(bool)),&comp,SLOT(open()));
     l->addWidget(button_open);
     setWindowFlags(Qt::WindowStaysOnTopHint);
+    setWindowTitle("WebUpdatingIndicator compare");
 
     check_sourceCode = new QCheckBox("View source code");
     l->addWidget(check_sourceCode);
