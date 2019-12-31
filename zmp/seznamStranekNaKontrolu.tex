@@ -6,6 +6,7 @@ Soubor musí být validní json.
 V případě, že soubor neexistuje nebo není validní, aplikace vypíše upozornění. % isdo naimplementovat to
 Očekává se, že soubor obsahuje pole struktur.
 Každá z nich obsahuje informace o jedné stránce, která se má kontrolovat.
+\obr{wa-json}{Chybný vstupní soubor.}
 \podsekce{Adresa stránky a název}
 Každou stránku je nutné pojmenovat jednoznačným identifikátorem.
 Proto je nutné u každé stránky definovat položku označenou klíčem \c|name|.
@@ -70,3 +71,4 @@ Například v případě, že je nutné pro získáni informací se na nějakou 
 Pomocí ní lze spojit více stránek do skupiny, ve které si stránky mezi sebou ukládají cookies.
 Stačí pouze u všech stránek vyplnit stejnou hodnotou tagu \c|cookie|.
 Když se některou z stránek nepodaří načíst, v daném průchodu se nebudou načítat ani další stránky ze stejné skupiny.
+\obrazek{\codeF{priklad.json}}{Příklad validního souboru stránek na kontrolu.}{jsoon}

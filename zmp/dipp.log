@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.24)  30 DEC 2019 20:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.24)  31 DEC 2019 22:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1088,16 +1088,8 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 \Hy@SectionHShift=\skip58
 )
 \c@lemmaCounter=\count152
-
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2015/06/04 1.6 listings language file
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-)) (./dipp.aux)
+(./dipp.aux)
 \openout1 = `dipp.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
@@ -1114,8 +1106,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 2.
 LaTeX Font Info:    ... okay on input line 2.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 2.
 LaTeX Font Info:    ... okay on input line 2.
-
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count153
 \scratchdimen=\dimen195
@@ -1184,12 +1175,12 @@ LaTeX Info: Redefining \nameref on input line 2.
 \@outlinefile=\write4
 \openout4 = `dipp.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 10.
+LaTeX Font Info:    Try loading font information for U+msa on input line 21.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 10.
+LaTeX Font Info:    Try loading font information for U+msb on input line 21.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1210,16 +1201,44 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 [9] [10
 
-] [11
+]
+<screenshots/basic_app_small.png, id=132, 607.26875pt x 389.455pt>
+File: screenshots/basic_app_small.png Graphic file (type png)
+<use screenshots/basic_app_small.png>
+Package pdftex.def Info: screenshots/basic_app_small.png  used on input line 52
+.
+(pdftex.def)             Requested size: 256.0748pt x 164.2296pt.
+ [11
 
-] (./instalace.tex
-Underfull \hbox (badness 10000) in paragraph at lines 21--27
+ <./screenshots/basic_app_small.png>] (./instalace.tex
+<screenshots/linux-i3-2.png, id=143, 1445.4pt x 903.375pt>
+File: screenshots/linux-i3-2.png Graphic file (type png)
+<use screenshots/linux-i3-2.png>
+Package pdftex.def Info: screenshots/linux-i3-2.png  used on input line 27.
+(pdftex.def)             Requested size: 256.0748pt x 160.03659pt.
+<screenshots/linux-cinnamon.png, id=144, 1027.84pt x 770.88pt>
+File: screenshots/linux-cinnamon.png Graphic file (type png)
+<use screenshots/linux-cinnamon.png>
+Package pdftex.def Info: screenshots/linux-cinnamon.png  used on input line 28.
 
- []
+(pdftex.def)             Requested size: 256.0748pt x 192.04906pt.
+<screenshots/windows.png, id=145, 770.88pt x 578.16pt>
+File: screenshots/windows.png Graphic file (type png)
+<use screenshots/windows.png>
+Package pdftex.def Info: screenshots/windows.png  used on input line 39.
+(pdftex.def)             Requested size: 256.0748pt x 192.05493pt.
+ [12
 
-[12
-
-]) (./seznamStranekNaKontrolu.tex [13]) (./spousteniTabulkaKonzole.tex
+]
+[13 <./screenshots/linux-i3-2.png> <./screenshots/linux-cinnamon.png>])
+(./seznamStranekNaKontrolu.tex
+<screenshots/wa-json.png, id=164, 607.26875pt x 390.45876pt>
+File: screenshots/wa-json.png Graphic file (type png)
+<use screenshots/wa-json.png>
+Package pdftex.def Info: screenshots/wa-json.png  used on input line 9.
+(pdftex.def)             Requested size: 256.0748pt x 164.65288pt.
+ [14 <./screenshots/windows.png>] [15 <./screenshots/wa-json.png>] (./priklad.j
+son)) (./spousteniTabulkaKonzole.tex
 
 Package hyperref Warning: Composite letter `\textasciicaron+e'
 (hyperref)                not defined in PD1 encoding,
@@ -1235,77 +1254,105 @@ Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
 (hyperref)                removing `\textasciicaron' on input line 1.
 
-[14]
-Overfull \hbox (0.94556pt too wide) in paragraph at lines 13--22
+[16] [17]
+<screenshots/chyba-pristupu.png, id=222, 607.26875pt x 472.76625pt>
+File: screenshots/chyba-pristupu.png Graphic file (type png)
+<use screenshots/chyba-pristupu.png>
+Package pdftex.def Info: screenshots/chyba-pristupu.png  used on input line 22.
+
+(pdftex.def)             Requested size: 256.0748pt x 199.3612pt.
+
+Overfull \hbox (0.94556pt too wide) in paragraph at lines 13--23
 [][][][][][][][][][][][][][][][] \OT1/cmr/m/n/12 zna-men^^Sa ne-do-stup-nost s^
 ^S^^Pt[]ov^^Seho
  []
 
-[15]) (./historie.tex
+[18 <./screenshots/chyba-pristupu.png>]) (./historie.tex
 
 Package hyperref Warning: Composite letter `\textasciicaron+e'
 (hyperref)                not defined in PD1 encoding,
 (hyperref)                removing `\textasciicaron' on input line 1.
 
+[19]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 19.
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 19.
- [16])
-(./grafickePorovnavaniVerzi.tex) [17]
+<screenshots/history.png, id=235, 710.655pt x 389.455pt>
+File: screenshots/history.png Graphic file (type png)
+<use screenshots/history.png>
+Package pdftex.def Info: screenshots/history.png  used on input line 30.
+(pdftex.def)             Requested size: 256.0748pt x 140.33443pt.
+)
+(./grafickePorovnavaniVerzi.tex [20 <./screenshots/history.png>]
+<screenshots/compare.png, id=242, 1927.2pt x 1084.05pt>
+File: screenshots/compare.png Graphic file (type png)
+<use screenshots/compare.png>
+Package pdftex.def Info: screenshots/compare.png  used on input line 26.
+(pdftex.def)             Requested size: 426.79134pt x 240.06316pt.
+) [21 <./screenshots/compare.png>]
+<screenshots/qtcreator.png, id=248, 1275.76625pt x 886.31125pt>
+File: screenshots/qtcreator.png Graphic file (type png)
+<use screenshots/qtcreator.png>
+Package pdftex.def Info: screenshots/qtcreator.png  used on input line 78.
+(pdftex.def)             Requested size: 256.0748pt x 177.89473pt.
+
 
 Package hyperref Warning: Composite letter `\textasciicaron+e'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 71.
+(hyperref)                removing `\textasciicaron' on input line 84.
 
-[18
+[22
 
-]
-Underfull \hbox (badness 1939) in paragraph at lines 81--82
+ <./screenshots/qtcreator.png>] [23]
+Underfull \hbox (badness 1939) in paragraph at lines 94--95
 []\OT1/cmr/m/n/12 Hipp, D. R. 2000. Do-cu-men-tation. \OT1/cmr/m/it/12 SQ-Lite 
 \OT1/cmr/m/n/12 [on-line]. SQ-Lite [Cit.
  []
 
 
 AED: lastpage setting LastPage
-[19]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 88.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 88.
+[24]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 101.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 101.
  (./dipp.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 88.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 88.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 101.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 101.
 Package rerunfilecheck Info: File `dipp.out' has not changed.
 (rerunfilecheck)             Checksum: 624CD89C06310BAB9DD97E05BD364D85;1143.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 29934 strings out of 494312
- 682511 string characters out of 6163334
- 873827 words of memory out of 5000000
- 32690 multiletter control sequences out of 15000+600000
- 16895 words of font info for 65 fonts, out of 8000000 for 9000
+ 29677 strings out of 494312
+ 680078 string characters out of 6163334
+ 865264 words of memory out of 5000000
+ 32387 multiletter control sequences out of 15000+600000
+ 16727 words of font info for 64 fonts, out of 8000000 for 9000
  360 hyphenation exceptions out of 8191
- 64i,9n,96p,828b,1221s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,9n,96p,828b,1235s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-ss17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on dipp.pdf (19 pages, 214382 bytes).
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmss17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+sbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on dipp.pdf (24 pages, 1294789 bytes).
 PDF statistics:
- 274 PDF objects out of 1000 (max. 8388607)
- 234 compressed objects within 3 object streams
- 52 named destinations out of 1000 (max. 500000)
- 133 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 348 PDF objects out of 1000 (max. 8388607)
+ 290 compressed objects within 3 object streams
+ 92 named destinations out of 1000 (max. 500000)
+ 178 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,24 @@
+[
+  {
+    "server": "http://brkos.math.muni.cz",
+    "dir":"mathrace",
+    "file": "index.php",
+    "name": "brkos-mathrace",
+    "diff":{"ignoreSector":[{"start":"<div id=cas>"}]}
+  },
+  {
+    "server": "https://is.jaroska.cz",
+    "file": "login.php",
+    "post": "formUsername=HugoKokoska&formPassword=Heslo",
+    "name": "is-prihlaseni",
+    "cookie": "is.jaroska.cz",
+    "diff": "ignore"
+  },
+  {
+    "server": "https://is.jaroska.cz",
+    "file": "index.php?akce=650",
+    "name": "is-klasifikace",
+    "cookie": "is.jaroska.cz",
+    "diff": {"permutatin":1}
+  }
+]

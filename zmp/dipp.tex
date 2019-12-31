@@ -1,11 +1,22 @@
 \input{hlavicka.tex}
 \begin{document}
 
+\def\obrazek#1#2#3{
+	\begin{figure}[tbhp]
+  \centering
+	{#1}
+	\caption{{#2}}
+  \label{fig:#3}
+\end{figure}
+	}
+\def\obr#1#2{\obrazek{\includegraphics[width=9cm]{screenshots/#1.png}}{#2}{#1}}
+\def\obrsize#1#2#3{\obrazek{\includegraphics[width=#3cm]{screenshots/#1.png}}{#2}{#1}}
 \def\,{\penalty10000\hskip.25em}
 \pagestyle{headings}
 
 \cislovat{2}
 \bakalarska
+
 
 \titul{Vývoj aplikace na kontrolování změn na webových stránkách}{Jiří Kalvoda}{Mgr. Marek Blaha}{Blansko 2020}
 
@@ -38,6 +49,7 @@ Cílem této práce je vyvinout funkční aplikaci umožnující zjišťování 
 K aplikaci také bude vypracována rozsáhlá uživatelská i technická dokumentace, která umožní její další vývoj.
 Umožním tedy dalším programátorům tuto aplikaci pohodlně modifikovat a upravovat dle svých potřeb.
 Cílem této práce je také aplikaci rozšířit mezi skupinu testovacích uživatelů a použít jejich připomínky a problémy k dalšímu vývoji a stabilizaci aplikace.
+\obr{basic_app_small}{Základní okno aplikace.}
 
 
 \kapitola{Popis fungování a ovládání aplikace}
@@ -63,6 +75,7 @@ Programátorovi nabízí zvýrazňování syntaxe a doplňování názvů.
 Umožňuje také jednoduché kompilování, spouštění a debugování aplikace pomocí jednoduše ovladatelných nástrojů.
 Dále také umožňuje jednoduché ovládání gitu pomocí zabudovaných nástrojů.
 V tomto prostředí vznikla většina zdrojových kódů aplikace.
+\obr{qtcreator}{Vývojové prostředí Qt Creator}
 \podsekce{Git}
 Git je systém na správu verzí využitý při vývoji této aplikace.
 Umožňuje oddělení jednotlivých úkonů při vývoji, jejich zdokumentování a možnost zobrazení jejich historie.

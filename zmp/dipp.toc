@@ -6,21 +6,21 @@
 \contentsline {subsection}{\numberline {2.1}Instalace}{12}{subsection.2.1}
 \contentsline {subsubsection}{Kompilace ze zdrojov\IeC {\'e}ho k\IeC {\'o}du}{12}{section*.2}
 \contentsline {subsubsection}{Linux}{12}{section*.3}
-\contentsline {subsubsection}{Windows}{13}{section*.4}
-\contentsline {subsubsection}{macOS}{13}{section*.5}
-\contentsline {subsection}{\numberline {2.2}Seznam str\IeC {\'a}nek na kontrolu}{13}{subsection.2.2}
-\contentsline {subsubsection}{Adresa str\IeC {\'a}nky a n\IeC {\'a}zev}{13}{section*.6}
-\contentsline {subsubsection}{Zp\IeC {\r u}soby kontroly zm\IeC {\v e}n}{14}{section*.7}
-\contentsline {subsubsection}{Skupiny str\IeC {\'a}nek, p\IeC {\v r}ihl\IeC {\'a}\IeC {\v s}en\IeC {\'\i } a pr\IeC {\'a}ce s cookie}{14}{section*.8}
-\contentsline {subsection}{\numberline {2.3}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } kontroly, tabulka zm\IeC {\v e}n, informa\IeC {\v c}n\IeC {\'\i } konzole}{15}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Historie zm\IeC {\v e}n a jej\IeC {\'\i } proch\IeC {\'a}zen\IeC {\'\i }}{16}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Grafick\IeC {\'e} porovn\IeC {\'a}v\IeC {\'a}n\IeC {\'\i } verz\IeC {\'\i } str\IeC {\'a}nek}{17}{subsection.2.5}
-\contentsline {section}{\numberline {3}Implementace aplikace}{18}{section.3}
-\contentsline {subsection}{\numberline {3.1}Pou\IeC {\v z}it\IeC {\'y} software}{18}{subsection.3.1}
-\contentsline {subsubsection}{Qt}{18}{section*.9}
-\contentsline {subsubsection}{Qt Creator}{18}{section*.10}
-\contentsline {subsubsection}{Git}{18}{section*.11}
-\contentsline {subsection}{\numberline {3.2}Objektov\IeC {\'y} model, rozd\IeC {\v e}len\IeC {\'\i } probl\IeC {\'e}mu}{18}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Pozad\IeC {\'\i } aplikace}{18}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Grafick\IeC {\'e} u\IeC {\v z}ivatelsk\IeC {\'e} rozhran\IeC {\'\i }}{18}{subsection.3.4}
-\contentsline {section}{\numberline {4}Reference}{19}{section.4}
+\contentsline {subsubsection}{Windows}{14}{section*.4}
+\contentsline {subsubsection}{macOS}{14}{section*.5}
+\contentsline {subsection}{\numberline {2.2}Seznam str\IeC {\'a}nek na kontrolu}{14}{subsection.2.2}
+\contentsline {subsubsection}{Adresa str\IeC {\'a}nky a n\IeC {\'a}zev}{15}{section*.6}
+\contentsline {subsubsection}{Zp\IeC {\r u}soby kontroly zm\IeC {\v e}n}{16}{section*.7}
+\contentsline {subsubsection}{Skupiny str\IeC {\'a}nek, p\IeC {\v r}ihl\IeC {\'a}\IeC {\v s}en\IeC {\'\i } a pr\IeC {\'a}ce s cookie}{16}{section*.8}
+\contentsline {subsection}{\numberline {2.3}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } kontroly, tabulka zm\IeC {\v e}n, informa\IeC {\v c}n\IeC {\'\i } konzole}{16}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Historie zm\IeC {\v e}n a jej\IeC {\'\i } proch\IeC {\'a}zen\IeC {\'\i }}{19}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Grafick\IeC {\'e} porovn\IeC {\'a}v\IeC {\'a}n\IeC {\'\i } verz\IeC {\'\i } str\IeC {\'a}nek}{20}{subsection.2.5}
+\contentsline {section}{\numberline {3}Implementace aplikace}{22}{section.3}
+\contentsline {subsection}{\numberline {3.1}Pou\IeC {\v z}it\IeC {\'y} software}{22}{subsection.3.1}
+\contentsline {subsubsection}{Qt}{22}{section*.9}
+\contentsline {subsubsection}{Qt Creator}{22}{section*.10}
+\contentsline {subsubsection}{Git}{22}{section*.11}
+\contentsline {subsection}{\numberline {3.2}Objektov\IeC {\'y} model, rozd\IeC {\v e}len\IeC {\'\i } probl\IeC {\'e}mu}{23}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Pozad\IeC {\'\i } aplikace}{23}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Grafick\IeC {\'e} u\IeC {\v z}ivatelsk\IeC {\'e} rozhran\IeC {\'\i }}{23}{subsection.3.4}
+\contentsline {section}{\numberline {4}Reference}{24}{section.4}
