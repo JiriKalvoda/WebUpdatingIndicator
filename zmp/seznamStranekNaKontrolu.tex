@@ -3,7 +3,7 @@
 Při spuštění si aplikace načte seznam stránek ke kontrole.
 Ten je obsažen v souboru \c|pages.json|, který musí být umístěn v adresáři aplikace (respektive v adresáři, kde se aplikace spouští).
 Soubor musí být validní json.
-V případě, že soubor neexistuje nebo není validní, aplikace vypíše upozornění. % TODO naimplementovat to
+V případě, že soubor neexistuje nebo není validní, aplikace vypíše upozornění. % isdo naimplementovat to
 Očekává se, že soubor obsahuje pole struktur.
 Každá z nich obsahuje informace o jedné stránce, která se má kontrolovat.
 \podsekce{Adresa stránky a název}
@@ -57,8 +57,8 @@ Při použití tohoto tagu budou porovnávány pouze změny v těchto úsecích 
 Další možností je využít klíče \c|permutation| s libovolnou hodnotou.
 Jeho použití znamená, že libovolné permutace znaků budou považovány za stejné.
 Toto je vhodné v případě, že se na stránce některé objekty náhodně prohazují.
-% TODO Opravit: řádek 71 v conectionthread.cpp
-% TODO nahradit permutatin -> permutation 
+% isdo Opravit: řádek 71 v conectionthread.cpp
+% isdo nahradit permutatin -> permutation 
 \\
 Tyto omezení porovnávání se provádí v zde uvedeném pořadí.
 
