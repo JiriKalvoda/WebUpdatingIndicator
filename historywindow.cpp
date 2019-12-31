@@ -5,7 +5,7 @@ HistoryWindow::HistoryWindow(Background * BG,QWidget * parent):QWidget(parent)
     bg = BG;
     label = new QLabel;
    l = new QVBoxLayout;
-   label->setText("history of pages");
+   label->setText("<span style=\" font-size:20pt; font-weight:600;\">Access to history of pages changes.</span>");
    l->addWidget(label);
 
    inputL = new QHBoxLayout;
