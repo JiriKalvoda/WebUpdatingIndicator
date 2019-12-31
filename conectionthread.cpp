@@ -68,7 +68,7 @@ bool control(QByteArray & b,QByteArray & a,QJsonValue & diff)
             int cx[countOfChar],cy[countOfChar];
             for(int i=0;i<countOfChar;i++) cx[i]=cy[i]=0;
             for(int i=0;i<x.size();i++) cx[(unsigned char) (x[i])]++;
-            for(int i=0;i<y.size();i++) cy[(unsigned char) (x[i])]++;
+            for(int i=0;i<y.size();i++) cy[(unsigned char) (y[i])]++;
             for(int i=0;i<countOfChar;i++) if(cx[i]!=cy[i]) return 1;
             return 0;
         }
