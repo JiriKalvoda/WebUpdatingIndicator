@@ -141,7 +141,7 @@ void ConectionThread::run()
            disconnect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
            reply->abort();
            page_errors++;
-           textStatus("\n!!!!!!!!!!!!!!!!!!! Conection error - TIME OUT");
+           textStatus("\n!!!!!!!!!!!!!!!!!!! Connection error - TIME OUT");
            error("TIME OUT");
            errorWhitCookieLine[act->cookie]=1;
            continue;
@@ -159,7 +159,7 @@ void ConectionThread::run()
             error(reply->errorString());
             errorWhitCookieLine[act->cookie]=1;
             page_errors++;
-            textStatus("\n!!!!!!!!!!!!!!!!!!! Conection error - "+reply->errorString());
+            textStatus("\n!!!!!!!!!!!!!!!!!!! Connection error - "+reply->errorString());
             error(reply->errorString());
         }
         else
