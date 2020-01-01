@@ -5,12 +5,12 @@
 Qt je multiplatformní knihovna pro c++ umožnující nejen tvorbu grafických aplikací, ale i práci se soubory, obrázky či sítovým připojením.
 Byla nedílnou součástí vyvíjené aplikace.
 Knihovna podporuje běh samotného jádra aplikace -- načítání webových souborů a také se stará o~grafické zobrazování dat.
-Nedílnou součástí jsou její funkce při většině výpočtů aplikace.
+Její funkce jsou tedy použité při většině výpočtů aplikace.
 \podsekce{Qt Creator}
 Qt Creaator je vývojové prostředí určené primárně pro vývoj aplikací využívajících knihovny Qt.
 Programátorovi nabízí zvýrazňování syntaxe a doplňování názvů.
-Umožňuje také jednoduché kompilování, spouštění a debugování aplikace pomocí jednoduše ovladatelných nástrojů.
-Dále také umožňuje jednoduché ovládání gitu pomocí zabudovaných nástrojů.
+Umožňuje také kompilování, spouštění a debugování aplikace pomocí jednoduše ovladatelných nástrojů.
+Dále také umožňuje ovládání gitu pomocí zabudovaných nástrojů.
 V~tomto prostředí vznikla většina zdrojových kódů aplikace.
 \obr{qtcreator}{Vývojové prostředí Qt Creator}
 \podsekce{Git}
@@ -42,9 +42,9 @@ Ta přistupuje do souboru \c|database.db| % TODO přejmenovat to.
 pomocí knihovny SQLite.
 V~databázi jsou uloženy záznamy o~všech verzích stránek a také uživatelské nastavení.
 
-O~ukládání nových změn na stránce se stará \c|NewPageModel|. Tento tabulkový model je pak přímo napojen na zobrazování tabulky změn.
+O~ukládání nových změn na stránce se stará \c|NewPageModel|. Tento tabulkový model je pak přímo napojen na zobrazování změn.
 
-\c|PageComparator| umožňuje porovnávání verzi stránek.
+\c|PageComparator| umožňuje porovnávání verzí stránek.
 Jeho úkolem je najít nejlepší napojení stránek na sebe a následné vytvoření souborů, které zobrazují změny v~prohlížeči.
 
 Třída \c|PageQuery| založená na \c|NewPageModel| obsahuje tabulky dotazu z~databáze na historii změn.

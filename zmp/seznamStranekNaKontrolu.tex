@@ -11,15 +11,15 @@ Každá z~nich obsahuje informace o~jedné stránce, která se má kontrolovat.
 Každou stránku je nutné pojmenovat jednoznačným identifikátorem.
 Proto je nutné u~každé stránky definovat položku označenou klíčem \c|name|.
 Toto jméno se pak zobrazuje v~seznamu změn a také je nutné při vyhledávání v~historii.
-Jméno se také používá jako identifikátor v~databázi i jako identifikátor souborů jednotlivých verzí stránky.
+Také se používá jako identifikátor v~databázi i jako identifikátor souborů jednotlivých verzí stránky.
 
 Dále je nutné u~každé stránky definovat její umístění na webu, tedy její adresu.
 K~tomu slouží položky \c|server|, \c|dir|, \c|file|.
 Ovšem není zapotřebí definovat všechny tyto položky.
 Pod klíčem \c|server| by měla být definována adresa serveru, na kterém je požadovaná stránka včetně přístupového protokolu.
-Tedy například \c|https://is.jaroska.cz| nebo pomocí ip adresy může zápis vypadat následovně \c|http://195.178.65.1|
-V~případě, že není požadovaná stránka na serveru umísténa v~jeho kořenové složce, je doporučeno název složky (popřípadě celou cestu několika zanořených složek) umístit do položky \c|dir|.
-\c|file| obsahuje jméno požadovaného souboru včetně přípony
+Tedy například \c|https://is.jaroska.cz| nebo pomocí ip adresy může zápis vypadat následovně: \c|http://195.178.65.1|
+V~případě, že není požadovaná stránka na serveru umístěna v~jeho kořenové složce, je doporučeno název složky (popřípadě celou cestu několika zanořených složek) umístit do položky \c|dir|.
+\c|file| obsahuje jméno požadovaného souboru včetně přípony.
 V~případě, že je požadován přístup základní soubor (index) na dané adrese, není potřeba \c|file| uvádět.
 Dále zde také můžou být obsaženy parametry stránky, které se předávají metodou \c|GET|.
 Stačí je uvézt za otazník.
@@ -30,13 +30,13 @@ je možné v~zápisu stránky užít klíče \c|post|.
 %\c|formUsername=HugoKokoska&formPassword=BezpecneHeslo|.
 
 Nejjednodušší způsob, jak zjistit tyto informace pro požadovanou stránku je využít prohlížeč.
-Většina prohlížečů totiž umožňuje zobrazit informace o~navázaném spojení.
+Většina prohlížečů umožňuje zobrazit informace o~navázaném spojení.
 Odsud stačí potřebné informace jen zkopírovat.
-V~prohlížečích založených na jádře Chromium lze se lze pomocí klávesy \c|F12| dostat do vývojářského panelu.
+V~prohlížečích založených na jádře Chromium se lze pomocí klávesy \c|F12| dostat do vývojářského panelu.
 V~záložce \c|Network| je možné najít příslušný soubor, jehož hlavičku je třeba použít.
 
 \podsekce{Způsoby kontroly změn}
-U~některých stránek často mění její část, i když sledovaný obsah se nezmění.
+U~některých stránek se často mění její část, i když sledovaný obsah se nezmění.
 Pro omezení kontrolování je proto vhodné užít v~zápisu položky \c|diff|.
 Ta by měla obsahovat speciální strukturu  popisující způsob ignorování změn\footnote{Případně může obsahovat řetězec \c|\"ignore\"|, který má stejný efekt jako \c|\{\"ignore\":1\}|}.
 Tato struktura může obsahovat následující položky:\\
@@ -67,8 +67,8 @@ Tyto omezení porovnávání se provádí v~zde uvedeném pořadí.
 
 
 \podsekce{Skupiny stránek, přihlášení a práce s~cookie}
-Například v~případě, že je nutné pro získáni informací se na nějakou stránku přihlásit, je možné využít v~zápisu stránky položku \c|cookie|.
+Například v~případě, že je nutné se pro získáni informací na nějakou stránku přihlásit, je možné využít v~zápisu stránky položku \c|cookie|.
 Pomocí ní lze spojit více stránek do skupiny, ve které si stránky mezi sebou ukládají cookies.
 Stačí pouze u~všech stránek vyplnit stejnou hodnotou tagu \c|cookie|.
 Když se některou z~stránek nepodaří načíst, v~daném průchodu se nebudou načítat ani další stránky ze stejné skupiny.
-\obrazek{\codeF{priklad.json}}{Příklad validního souboru stránek na kontrolu.}{jsoon}
+\obrazek{\codeF{priklad.json}}{Příklad validního souboru stránek na kontrolu.}{json}
