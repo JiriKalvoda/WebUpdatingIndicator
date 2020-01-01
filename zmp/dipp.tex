@@ -20,12 +20,15 @@
 
 \titul{Vývoj aplikace na kontrolování změn na webových stránkách}{Jiří Kalvoda}{Mgr. Marek Blaha}{Blansko 2020}
 
-\podekovani{TODO poděkování}
+\podekovani{Chtěl bych poděkovat Mgr. Marku Blahovi za odborné vedení práce, věcné připomínky a podání cenných rad.}
 
 \prohlaseni{Prohlašuji, že jsem tuto práci vyřešil samostatně
 s~použitím literatury, kterou uvádím v~seznamu}{V~Blansku dne \today}
 
-\abstract{Kalvoda, J. }{Development an aplication for checking changes on web pages}{abstract}
+\abstract{Kalvoda, J. Development an application for checking changes on web pages}
+{This thesis describe developing and using an application to monitoring changes on web pages.
+This app is produce in c++ language using Qt library. That cause, that the app can be used on multiple platforms.
+This app come under GNU LGPL licence and is available whit source code. This thesis contain description of its working and controlling, implementation and use software when it has been development.}
 
 \abstrakt{Kalvoda, J. \NAZEV}
 {Tato závěrečná práce popisuje vývoj a použití aplikace na monitorování změn na webových stránkách.
@@ -34,26 +37,10 @@ Je dostupná včetně zdrojového kódu pod licencí GNU LGPL. Tato závěrečn�
 
 \obsah
 
-\kapitola{Úvod a~cíl práce}
-\sekce{Úvod do problematiky}
-
-Webové stránky se mohou neustále měnit, proto je dobré automaticky monitorovat jejich aktualizace.
-Tato aplikace umožňuje automatizovat tento problém a tím uživateli ušetřit čas a eliminovat lidský chybový faktor.
-
-Aplikace podporuje různé tolerance při načítání a porovnávání změn stránek.
-Například na stránce, kde se část neustále mění, mohu tuto část vypustit, nebo přímo porovnávat jen nějaké části a podobně. Díky práci s cookies je možné navázat i složitější spojení se serverem a provést definovanou sekvenci úkolů (např. přihlásit se a načíst nějaký soukromý obsah). Historie stránek se může ukládat a pak lze v~ní vyhledávat a zjišťovat rozdíly mezi verzemi pomocí grafického porovnávání napojeného na uživatelův oblíbený prohlížeč.
-
-\sekce{Cíl práce}
-
-Cílem této práce je vyvinout funkční aplikaci umožnující zjišťování aktualizací, archivaci a porovnávání webových stránek (případně i jiných dokumentů) a publikovat ji cílovým uživatelům na různých operačních systémech.
-K aplikaci také bude vypracována rozsáhlá uživatelská i technická dokumentace, která umožní její další vývoj.
-Umožním tedy dalším programátorům tuto aplikaci pohodlně modifikovat a upravovat dle svých potřeb.
-Cílem této práce je také aplikaci rozšířit mezi skupinu testovacích uživatelů a použít jejich připomínky a problémy k dalšímu vývoji a stabilizaci aplikace.
-\obr{basic_app_small}{Základní okno aplikace.}
+\input{uvodACil.tex}
 
 
 \kapitola{Popis fungování a ovládání aplikace}
-
 \input{instalace.tex}
 \input{seznamStranekNaKontrolu.tex}
 \input{spousteniTabulkaKonzole.tex}
@@ -61,41 +48,8 @@ Cílem této práce je také aplikaci rozšířit mezi skupinu testovacích uži
 \input{grafickePorovnavaniVerzi.tex}
 %\sekce{Klávesové zkratky}
 
-\kapitola{Implementace aplikace}
+\input{implemantace.tex}
 
-\sekce{Použitý software}
-\podsekce{Qt}
-Qt je multiplatformní knihovna pro c++ umožnující nejen tvorbu grafických aplikací, ale i práci se soubory, obrázky či sítovým připojením.
-Byla nedílnou součástí vyvíjené aplikace.
-Knihovna podporuje běh samotného jádra aplikace -- načítání webových souborů a také se stará o grafické zobrazování dat.
-Nedílnou součástí jsou její funkce při většině výpočtů aplikace.
-\podsekce{Qt Creator}
-Qt Creaator je vývojové prostředí určené primárně pro vývoj aplikací využívajících knihovny Qt.
-Programátorovi nabízí zvýrazňování syntaxe a doplňování názvů.
-Umožňuje také jednoduché kompilování, spouštění a debugování aplikace pomocí jednoduše ovladatelných nástrojů.
-Dále také umožňuje jednoduché ovládání gitu pomocí zabudovaných nástrojů.
-V tomto prostředí vznikla většina zdrojových kódů aplikace.
-\obr{qtcreator}{Vývojové prostředí Qt Creator}
-\podsekce{Git}
-Git je systém na správu verzí využitý při vývoji této aplikace.
-Umožňuje oddělení jednotlivých úkonů při vývoji, jejich zdokumentování a možnost zobrazení jejich historie.
-Dále nabízí pomocí vzdálených repositářů jednoduchý způsob, jak aplikaci nahrát na web a zpřístupnit uživatelům.
-
-\sekce{Objektový model, rozdělení problému}
-\sekce{Pozadí aplikace}
-
-\sekce{Grafické uživatelské rozhraní}
-
-\begin{literatura}
-\citace{ucebnice}{Novák, 1991}{\autor{Novák, J.} a~kol.
-\nazev{Konstrukční vlastnosti ocelí třídy 18}. Praha:
-SNTL, 1991. 439~s. ISBN 80-8432-289-9.}
-	\citace{qt}{The Qt Company, 2019}{The Qt Company, 2019. Qt 5.12. \nazev{Qt} [online]. The Qt Company [Cit. 31.11.2019]. Dostupné z: \url{https://doc.qt.io/qt-5.12/index.html}}
-	\citace{sqlite}{Hipp, 2000}{Hipp, D. R. 2000.  Documentation. \nazev{SQLite} [online]. SQLite [Cit. 31.11.2019]. Dostupné z: \url{https://www.sqlite.org/docs.html}}
-	\citace{qt-abc}{Watzke, 2010}{Watzke, D. 2010.  Seriál: Qt 4 - psaní grafických programů. \nazev{AbcLinuxu} [online]. AbcLinuxu [Cit. 31.11.2019]. Dostupné z: \url{http://www.abclinuxu.cz/serialy/qt-4-psani-grafickych-programu}}
-	\citace{git}{Chacon, 2009}{\autor{Chacon, S.} \nazev{Pro Git}. Praha: CZ.NIC, 2009, ISBN: 978-80-904248-1-4.}
-
-% Dominantní tvůrce, rok. Název vedlejší webové stránky. Název hlavní webové stránky / webového sídla: podnázev hlavní webové stránky [typ nosiče]. Další tvůrce. Místo: nakladatel, datum publikování. Datum aktualizace [cit. datum citování]. Dostupné z: DOI nebo adresa. Path: cesta.
-\end{literatura}
+\input{literatura.tex}
 
 \end{document}
