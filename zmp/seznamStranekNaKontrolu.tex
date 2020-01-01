@@ -1,74 +1,74 @@
 
 \sekce{Seznam stránek na kontrolu}
 Při spuštění si aplikace načte seznam stránek ke kontrole.
-Ten je obsažen v souboru \c|pages.json|, který musí být umístěn v adresáři aplikace (respektive v adresáři, kde se aplikace spouští).
+Ten je obsažen v~souboru \c|pages.json|, který musí být umístěn v~adresáři aplikace (respektive v~adresáři, kde se aplikace spouští).
 Soubor musí být validní json.
-V případě, že soubor neexistuje nebo není validní, aplikace vypíše upozornění. % isdo naimplementovat to
+V~případě, že soubor neexistuje nebo není validní, aplikace vypíše upozornění. % isdo naimplementovat to
 Očekává se, že soubor obsahuje pole struktur.
-Každá z nich obsahuje informace o jedné stránce, která se má kontrolovat.
+Každá z~nich obsahuje informace o~jedné stránce, která se má kontrolovat.
 \obr{wa-json}{Chybný vstupní soubor.}
 \podsekce{Adresa stránky a název}
 Každou stránku je nutné pojmenovat jednoznačným identifikátorem.
-Proto je nutné u každé stránky definovat položku označenou klíčem \c|name|.
-Toto jméno se pak zobrazuje v seznamu změn a také je nutné při vyhledávání v historii.
-Jméno se také používá jako identifikátor v databázi i jako identifikátor souborů jednotlivých verzí stránky.
+Proto je nutné u~každé stránky definovat položku označenou klíčem \c|name|.
+Toto jméno se pak zobrazuje v~seznamu změn a také je nutné při vyhledávání v~historii.
+Jméno se také používá jako identifikátor v~databázi i jako identifikátor souborů jednotlivých verzí stránky.
 
-Dále je nutné u každé stránky definovat její umístění na webu, tedy její adresu.
-K tomu slouží položky \c|server|, \c|dir|, \c|file|.
+Dále je nutné u~každé stránky definovat její umístění na webu, tedy její adresu.
+K~tomu slouží položky \c|server|, \c|dir|, \c|file|.
 Ovšem není zapotřebí definovat všechny tyto položky.
 Pod klíčem \c|server| by měla být definována adresa serveru, na kterém je požadovaná stránka včetně přístupového protokolu.
 Tedy například \c|https://is.jaroska.cz| nebo pomocí ip adresy může zápis vypadat následovně \c|http://195.178.65.1|
-V případě, že není požadovaná stránka na serveru umísténa v jeho kořenové složce, je doporučeno název složky (popřípadě celou cestu několika zanořených složek) umístit do položky \c|dir|.
+V~případě, že není požadovaná stránka na serveru umísténa v~jeho kořenové složce, je doporučeno název složky (popřípadě celou cestu několika zanořených složek) umístit do položky \c|dir|.
 \c|file| obsahuje jméno požadovaného souboru včetně přípony
-V případě, že je požadován přístup základní soubor (index) na dané adrese, není potřeba \c|file| uvádět.
+V~případě, že je požadován přístup základní soubor (index) na dané adrese, není potřeba \c|file| uvádět.
 Dále zde také můžou být obsaženy parametry stránky, které se předávají metodou \c|GET|.
 Stačí je uvézt za otazník.
 Takový zápis může vypadat následovně: \c|index.php?akce=42&akcicka=0|.
 
-V případě, že je nutné předat stránce informace pomocí protokolu \c|POST| (typicky při přihlašování na stránky), 
-je možné v zápisu stránky užít klíče \c|post|.
+V~případě, že je nutné předat stránce informace pomocí protokolu \c|POST| (typicky při přihlašování na stránky), 
+je možné v~zápisu stránky užít klíče \c|post|.
 %\c|formUsername=HugoKokoska&formPassword=BezpecneHeslo|.
 
 Nejjednodušší způsob, jak zjistit tyto informace pro požadovanou stránku je využít prohlížeč.
-Většina prohlížečů totiž umožňuje zobrazit informace o navázaném spojení.
+Většina prohlížečů totiž umožňuje zobrazit informace o~navázaném spojení.
 Odsud stačí potřebné informace jen zkopírovat.
-V prohlížečích založených na jádře Chromium lze se lze pomocí klávesy \c|F12| dostat do vývojářského panelu.
-V záložce \c|Network| je možné najít příslušný soubor, jehož hlavičku je třeba použít.
+V~prohlížečích založených na jádře Chromium lze se lze pomocí klávesy \c|F12| dostat do vývojářského panelu.
+V~záložce \c|Network| je možné najít příslušný soubor, jehož hlavičku je třeba použít.
 
 \podsekce{Způsoby kontroly změn}
-U některých stránek často mění její část, i když sledovaný obsah se nezmění.
-Pro omezení kontrolování je proto vhodné užít v zápisu položky \c|diff|.
+U~některých stránek často mění její část, i když sledovaný obsah se nezmění.
+Pro omezení kontrolování je proto vhodné užít v~zápisu položky \c|diff|.
 Ta by měla obsahovat speciální strukturu  popisující způsob ignorování změn\footnote{Případně může obsahovat řetězec \c|\"ignore\"|, který má stejný efekt jako \c|\{\"ignore\":1\}|}.
 Tato struktura může obsahovat následující položky:\\
-Klíč \c|ignore| s libovolnou hodnotou znamená, že stránka se vůbec nebude kontrolovat na změny.
-Toto je vhodné například když se jedná pouze o přihlašovací stránku, která neobsahuje žádaná data.\\
+Klíč \c|ignore| s~libovolnou hodnotou znamená, že stránka se vůbec nebude kontrolovat na změny.
+Toto je vhodné například když se jedná pouze o~přihlašovací stránku, která neobsahuje žádaná data.\\
 Tag \c|ignoreSector| může obsahovat pole struktur.
-Každá z nich může obsahovat informace o jednom nutném vynechání pomocí tagů \c|start|, \c|end| a \c|countOfEnd|,
+Každá z~nich může obsahovat informace o~jednom nutném vynechání pomocí tagů \c|start|, \c|end| a \c|countOfEnd|,
 které znamenají, že text od \c|start| po \c|countOfEnd|-tý výskyt řetězce \c|end| bude při porovnávání vynechán.
 Začátek i konec může být definován pomocí regulárního výrazu.
 Na přesnou implementaci regulárních výrazů lze nahlédnout do dokumentace Qt na adrese
 \url{https://doc.qt.io/qt-5/qregexp.html}.
-Tagy \c|end| a \c|countOfEnd| nemusí být uvedeny. V takovém případě je \c|end| nastaveno na konec řádku a \c|countOfEnd| na 1.
+Tagy \c|end| a \c|countOfEnd| nemusí být uvedeny. V~takovém případě je \c|end| nastaveno na konec řádku a \c|countOfEnd| na 1.
 % TODO Implementovat regex
 \\
-Obdobným způsobem lze použít tag \c|onlySector|, který také může obsahovat pole struktur složených z \c|start|, \c|end| a \c|countOfEnd|.
-Při použití tohoto tagu budou porovnávány pouze změny v těchto úsecích (budou ignorovány úseky od začátku k prvnímu výskytu, mezi nimi a od posledního na konec).
+Obdobným způsobem lze použít tag \c|onlySector|, který také může obsahovat pole struktur složených z~\c|start|, \c|end| a \c|countOfEnd|.
+Při použití tohoto tagu budou porovnávány pouze změny v~těchto úsecích (budou ignorovány úseky od začátku k~prvnímu výskytu, mezi nimi a od posledního na konec).
 % TODO Implementace onlySector
 \\
-Další možností je využít klíče \c|permutation| s libovolnou hodnotou.
+Další možností je využít klíče \c|permutation| s~libovolnou hodnotou.
 Jeho použití znamená, že libovolné permutace znaků budou považovány za stejné.
-Toto je vhodné v případě, že se na stránce některé objekty náhodně prohazují.
+Toto je vhodné v~případě, že se na stránce některé objekty náhodně prohazují.
 % isdo Opravit: řádek 71 v conectionthread.cpp
 % isdo nahradit permutatin -> permutation 
 \\
-Tyto omezení porovnávání se provádí v zde uvedeném pořadí.
+Tyto omezení porovnávání se provádí v~zde uvedeném pořadí.
 
 
 
 
-\podsekce{Skupiny stránek, přihlášení a práce s cookie}
-Například v případě, že je nutné pro získáni informací se na nějakou stránku přihlásit, je možné využít v zápisu stránky položku \c|cookie|.
+\podsekce{Skupiny stránek, přihlášení a práce s~cookie}
+Například v~případě, že je nutné pro získáni informací se na nějakou stránku přihlásit, je možné využít v~zápisu stránky položku \c|cookie|.
 Pomocí ní lze spojit více stránek do skupiny, ve které si stránky mezi sebou ukládají cookies.
-Stačí pouze u všech stránek vyplnit stejnou hodnotou tagu \c|cookie|.
-Když se některou z stránek nepodaří načíst, v daném průchodu se nebudou načítat ani další stránky ze stejné skupiny.
+Stačí pouze u~všech stránek vyplnit stejnou hodnotou tagu \c|cookie|.
+Když se některou z~stránek nepodaří načíst, v~daném průchodu se nebudou načítat ani další stránky ze stejné skupiny.
 \obrazek{\codeF{priklad.json}}{Příklad validního souboru stránek na kontrolu.}{jsoon}

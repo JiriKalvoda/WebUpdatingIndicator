@@ -1,31 +1,31 @@
 \sekce{Instalace}
 \podsekce{Kompilace ze zdrojového kódu}
 Způsobem, jak aplikaci nainstalovat na většině používaných operačních systémů je pomocí kompilace ze zdrojového kódu.
-Zdrojové kódy v aktuální stabilní verze je možné stáhnout z \url{gitlab.com/JiriKalvoda/webupdatingindicator/tree/master}.
-V případě, že má uživatel zájem o aktuálně nejnovější funkce, je možné použít testovací verzi produktu dostupnou z \url{gitlab.com/JiriKalvoda/webupdatingindicator/tree/Test}.
-Soubory lze stáhnout pomocí webového rozhraní a nebo je lze naklonovat s použitím gitu.
+Zdrojové kódy v~aktuální stabilní verze je možné stáhnout z~\url{gitlab.com/JiriKalvoda/webupdatingindicator/tree/master}.
+V~případě, že má uživatel zájem o~aktuálně nejnovější funkce, je možné použít testovací verzi produktu dostupnou z~\url{gitlab.com/JiriKalvoda/webupdatingindicator/tree/Test}.
+Soubory lze stáhnout pomocí webového rozhraní a nebo je lze naklonovat s~použitím gitu.
 Aplikaci pak lze zkompilovat za použití Qt knihoven.
-Nejsnazší způsob je využít aplikace Qt Creator. Pomocí ní stačí otevřít soubor \c|WebUpdatingIndicator.pro| a v levém rohu aplikace kliknout na tlačítko pro kompilaci.
-Tímto způsobem by měla vzniknout samostatně spustitelná aplikace, kterou stačí umístit do požadované složky a v ní ji spouštět.
+Nejsnazší způsob je využít aplikace Qt Creator. Pomocí ní stačí otevřít soubor \c|WebUpdatingIndicator.pro| a v~levém rohu aplikace kliknout na tlačítko pro kompilaci.
+Tímto způsobem by měla vzniknout samostatně spustitelná aplikace, kterou stačí umístit do požadované složky a v~ní ji spouštět.
 Podporovaná by měla být libovolná verze Qt větší než 5.4.
 Pro vývoj se používá Qt 5.12.5.
 
-V případě, že uživatel nechce provádět kompilaci ze zdrojového kódu, pro základní architektury a operační systémy je možné využít již zkompilované varianty.
+V~případě, že uživatel nechce provádět kompilaci ze zdrojového kódu, pro základní architektury a operační systémy je možné využít již zkompilované varianty.
 \podsekce{Linux}
-Na operačních systémech postavených na jádře Linuxu stačí pouze stáhnout a rozzipovat složku s programem do uživatelem zvoleného adresáře.
-Pracovní adresář aplikace je pak ten, ze kterého se aplikace spouští (nemusí tedy být shodný s adresářem ve kterém je umístěna aplikace).
+Na operačních systémech postavených na jádře Linuxu stačí pouze stáhnout a rozzipovat složku s~programem do uživatelem zvoleného adresáře.
+Pracovní adresář aplikace je pak ten, ze kterého se aplikace spouští (nemusí tedy být shodný s~adresářem ve kterém je umístěna aplikace).
 Pro jednodušší spouštění je dobré vytvořit bash script, který bude obsahovat přepnutí polohy do pracovního adresáře a spuštění aplikace.
-Příklad takového skriptu je umístěn v stahovací složce pod názvem \c|run.sh|.
-Pro možnost spouštění aplikace z menu či pomocí přímého příkazu je možné tento skript umístit do adresáře \c|usr/bin|.
+Příklad takového skriptu je umístěn v~stahovací složce pod názvem \c|run.sh|.
+Pro možnost spouštění aplikace z~menu či pomocí přímého příkazu je možné tento skript umístit do adresáře \c|usr/bin|.
 
-V případě užívání správce oken i3 je vhodné nastavit, aby se okna porovnávání stránek zobrazovali jako plovoucí.
-Toho lze docílit přidáním řádku \c|for_window [title="WebUpdatingIndicator compare"] floating enable| do konfiguračního souboru i3 umístěného v \c|~/.config/i3/config|.
+V~případě užívání správce oken i3 je vhodné nastavit, aby se okna porovnávání stránek zobrazovali jako plovoucí.
+Toho lze docílit přidáním řádku \c|for_window [title="WebUpdatingIndicator compare"] floating enable| do konfiguračního souboru i3 umístěného v~\c|~/.config/i3/config|.
 Pro snazší spouštění aplikace je také vhodné nadefinovat klávesovou zkratku.
 Případně je možně vyhradit aplikaci speciální pracovní plochu a definovat její spuštění a přepnutí na danou plochu pomocí příkazů (nastaví spuštění na \c|$mod+Shift,| a zobrazení na \c|$mod+,|):\\
 \c|bindsym $mod+Shift+comma workspace WUI;exec WebUpdatingIndicator.sh|\\
 \c|bindsym $mod+comma workspace WUI|\\
-\obr{linux-i3-2}{Aplikace otevřená v operačním systému Linux Mint 18 se správcem oken i3.}
-\obr{linux-cinnamon}{Aplikace otevřená v operačním systému Linux Mint 18 se správcem oken Cinnamon.}
+\obr{linux-i3-2}{Aplikace otevřená v~operačním systému Linux Mint 18 se správcem oken i3.}
+\obr{linux-cinnamon}{Aplikace otevřená v~operačním systému Linux Mint 18 se správcem oken Cinnamon.}
 
 \podsekce{Windows}
 Pro Windows existuje alternativní instalační složka. Jejím stažením a rozzipováním do uživatelem zvolená složky vznikne spustitelná aplikace. 
@@ -36,7 +36,7 @@ Dále je dobré vytvořit zástupce, přes kterého se bude daný program spouš
 Pří jeho vytvářeni se dá zvolit i pracovní adresář.
 Jako ikonku je možné nastavit \c|Logo.ico|.
 Zástupce je pak možné umístit do například na plochu nebo do start menu.
-\obr{windows}{Aplikace otevřená v operačním systému Windows 10.}
+\obr{windows}{Aplikace otevřená v~operačním systému Windows 10.}
 
 \podsekce{macOS}
 Na tomto operačním systému je momentálně možná instalace pouze pomocí kompilace ze zdrojového kódu.

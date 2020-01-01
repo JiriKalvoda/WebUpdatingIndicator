@@ -4,14 +4,14 @@
 \podsekce{Qt}
 Qt je multiplatformní knihovna pro c++ umožnující nejen tvorbu grafických aplikací, ale i práci se soubory, obrázky či sítovým připojením.
 Byla nedílnou součástí vyvíjené aplikace.
-Knihovna podporuje běh samotného jádra aplikace -- načítání webových souborů a také se stará o grafické zobrazování dat.
+Knihovna podporuje běh samotného jádra aplikace -- načítání webových souborů a také se stará o~grafické zobrazování dat.
 Nedílnou součástí jsou její funkce při většině výpočtů aplikace.
 \podsekce{Qt Creator}
 Qt Creaator je vývojové prostředí určené primárně pro vývoj aplikací využívajících knihovny Qt.
 Programátorovi nabízí zvýrazňování syntaxe a doplňování názvů.
 Umožňuje také jednoduché kompilování, spouštění a debugování aplikace pomocí jednoduše ovladatelných nástrojů.
 Dále také umožňuje jednoduché ovládání gitu pomocí zabudovaných nástrojů.
-V tomto prostředí vznikla většina zdrojových kódů aplikace.
+V~tomto prostředí vznikla většina zdrojových kódů aplikace.
 \obr{qtcreator}{Vývojové prostředí Qt Creator}
 \podsekce{Git}
 Git je systém na správu verzí využitý při vývoji této aplikace.
@@ -19,41 +19,41 @@ Umožňuje oddělení jednotlivých úkonů při vývoji, jejich zdokumentován�
 Dále nabízí pomocí vzdálených repositářů jednoduchý způsob, jak aplikaci nahrát na web a zpřístupnit uživatelům.
 
 \sekce{Objektový model, rozdělení problému}
-	Samotná knihovna Qt je psaná objektově a proto je vhodné navázat v objektové orientovaném programování i při vývoji.
+	Samotná knihovna Qt je psaná objektově a proto je vhodné navázat v~objektové orientovaném programování i při vývoji.
 	Program jsem tedy rozčlenil do několika vzájemné provázaných tříd.
 	Pro každou třídu existují dva soubory obsahující hlavičky a samotný program.
 
 	Program jsem dále rozčlenil na téměř samostatné části.
-	Třídy pozadí se starají o samotné načítání a zjišťování rozdílů na stránkách, práci s databází a porovnávání verzí stránek.
-	Ostatní třídy se starají o správné předávání dat uživateli pomocí graficky vykreslených oken a také přijímají pokyny od uživatele a propagují je do příslušných tříd.
-	Díky tomu je možné poměrně jednoduše přepsat celé uživatelské rozhraní například do podoby konzolové aplikace s využitím stávájících funkcí pozadí.
+	Třídy pozadí se starají o~samotné načítání a zjišťování rozdílů na stránkách, práci s~databází a porovnávání verzí stránek.
+	Ostatní třídy se starají o~správné předávání dat uživateli pomocí graficky vykreslených oken a také přijímají pokyny od uživatele a propagují je do příslušných tříd.
+	Díky tomu je možné poměrně jednoduše přepsat celé uživatelské rozhraní například do podoby konzolové aplikace s~využitím stávájících funkcí pozadí.
 
 
 \sekce{Pozadí aplikace}
-Hlavní třídou aplikace je \c|Background|. Ta se stará o inicializaci a propojení ostatních tříd pozadí.
+Hlavní třídou aplikace je \c|Background|. Ta se stará o~inicializaci a propojení ostatních tříd pozadí.
 Dále si také ukládá a načítá seznam stránek na kontrolu.
 
-Třída \c|ConnectionThread| se stará o samotné načítání a hledání rozdílů ve stránkách. Aby byl zajištěn hladký chod aplikace, je tato část programu vykonávána jako speciální vlákno. % TODO přejmenovat to
-Díky tomu lze při načítání libovolně pracovat s aplikací.
-V této třídě je také implementováno ignorování částí změn na základě zadaných podmínek.
+Třída \c|ConnectionThread| se stará o~samotné načítání a hledání rozdílů ve stránkách. Aby byl zajištěn hladký chod aplikace, je tato část programu vykonávána jako speciální vlákno. % TODO přejmenovat to
+Díky tomu lze při načítání libovolně pracovat s~aplikací.
+V~této třídě je také implementováno ignorování částí změn na základě zadaných podmínek.
 
 Pro usnadnění přístupu do databáze slouží třída \c|Database|.
 Ta přistupuje do souboru \c|database.db| % TODO přejmenovat to.
 pomocí knihovny SQLite.
-V databázi jsou uloženy záznamy o všech verzích stránek a také uživatelské nastavení.
+V~databázi jsou uloženy záznamy o~všech verzích stránek a také uživatelské nastavení.
 
-O ukládání nových změn na stránce se stará \c|NewPageModel|. Tento tabulkový model je pak přímo napojen na zobrazování tabulky změn.
+O~ukládání nových změn na stránce se stará \c|NewPageModel|. Tento tabulkový model je pak přímo napojen na zobrazování tabulky změn.
 
 \c|PageComparator| umožňuje porovnávání verzi stránek.
-Jeho úkolem je najít nejlepší napojení stránek na sebe a následné vytvoření souborů, které zobrazují změny v prohlížeči.
+Jeho úkolem je najít nejlepší napojení stránek na sebe a následné vytvoření souborů, které zobrazují změny v~prohlížeči.
 
-Třída \c|PageQuery| založená na \c|NewPageModel| obsahuje tabulky dotazu z databáze na historii změn.
+Třída \c|PageQuery| založená na \c|NewPageModel| obsahuje tabulky dotazu z~databáze na historii změn.
 
 \sekce{Grafické uživatelské rozhraní}
 Hlavní okno aplikace je implementováno pomocí třídy \c|MainWindow|. Toto je hlavní třída celého projektu.
-Z ní se teprve spouští inicializace pozadí aplikace včetně \c|Background|.
+Z~ní se teprve spouští inicializace pozadí aplikace včetně \c|Background|.
 
-O správné vykreslování tabulek změn stránek včetně napojení jejich ovládacích prvků se stará \c|PageViewer|.
-\c|PageComparatorGUI| se stará o okno zobrazené při porovnávání stránek a jeho napojení na \c|PageComparator|.
+O~správné vykreslování tabulek změn stránek včetně napojení jejich ovládacích prvků se stará \c|PageViewer|.
+\c|PageComparatorGUI| se stará o~okno zobrazené při porovnávání stránek a jeho napojení na \c|PageComparator|.
 Okno historie změn zobrazuje \c|HistoryWindow|.
 
