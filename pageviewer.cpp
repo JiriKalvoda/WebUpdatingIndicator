@@ -35,7 +35,7 @@ PageViewer::PageViewer(Background *bg, QWidget *parent) : QWidget(parent),bg(bg)
 
     button_delete->setText("Delete");
     button_hide->setText("Hide");
-    button_compare->setText("Coprare difference");
+    button_compare->setText("Comprare difference");
     buttons->addWidget(button_delete,0);
     buttons->addWidget(button_hide,0);
     buttons->addWidget(buttons_middleLabel,1);

@@ -7,7 +7,7 @@
 Database::Database(QObject *parent) : QObject(parent)
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("webchecker.db");
+    db.setDatabaseName("database.db");
     db.open();
     D_DATABASE if (!db.isOpen())
         qDebug() << db.lastError().text();

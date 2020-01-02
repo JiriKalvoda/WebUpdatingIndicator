@@ -13,7 +13,7 @@
 #include <QLockFile>
 #include <pagequery.h>
 #include <database.h>
-#include "conectionthread.h"
+#include "connectionthread.h"
 #include "monitoredvar.h"
 #include "newpagemodel.h"
 class Background : public QObject
@@ -27,7 +27,7 @@ public:
     void inport(QString file);
     MonitoredVar bar;
     MonitoredVar console;
-    ConectionThread * conTh = 0;
+    ConnectionThread * conTh = 0;
     NewPageModel newPages;
     Database * db;
     QTimer startTimer;

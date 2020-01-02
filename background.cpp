@@ -27,8 +27,11 @@ Background::Background(QObject *parent) : QObject(parent),newPages(this)
             newPages.insert(it);
 
     inportDbSetings();
+    QDir().mkpath("pages");
+    QDir().mkpath("history");
+    QDir().mkpath("comp");
 
-    conTh = new ConectionThread();
+    conTh = new ConnectionThread();
     connect(conTh,SIGNAL(textStatus(QString)),this,SLOT(insertInConsole(QString)));
     connect(conTh,SIGNAL(intStatus(int)),this,SLOT(setBar(int)));
     connect(conTh,SIGNAL(pageChanged(QString,QString)),this,SLOT(pageChanged(QString,QString)));

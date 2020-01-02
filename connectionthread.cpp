@@ -1,4 +1,4 @@
-#include "conectionthread.h"
+#include "connectionthread.h"
 
 #include "background.h"
 #include <QFile>
@@ -12,16 +12,16 @@
 #include <QNetworkCookie>
 
 
-ConectionThread::ConectionThread()
+ConnectionThread::ConnectionThread()
 {
 
 }
-void ConectionThread::init(QVector <pageListItem> PageList)
+void ConnectionThread::init(QVector <pageListItem> PageList)
 {
     pageList=PageList;
 }
 
-void ConectionThread::stopNextPage()
+void ConnectionThread::stopNextPage()
 {
     stop = 1;
 }
@@ -62,7 +62,7 @@ bool control(QByteArray & b,QByteArray & a,QJsonValue & diff)
                }
            }
         }
-        if(diffObj.value("permutatin")!=QJsonValue::Undefined)
+        if(diffObj.value("permutation")!=QJsonValue::Undefined)
         {
             const int countOfChar = 260;
             int cx[countOfChar],cy[countOfChar];
@@ -77,7 +77,7 @@ bool control(QByteArray & b,QByteArray & a,QJsonValue & diff)
     if(diff.isString()&&diff.toString()=="ignore") return 0;
     return a!=b;
 }
-void ConectionThread::run()
+void ConnectionThread::run()
 {
     QNetworkAccessManager manager;
     QMap <QString , QNetworkCookieJar *> cookieJar;

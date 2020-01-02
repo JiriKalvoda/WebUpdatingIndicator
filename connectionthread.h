@@ -38,13 +38,13 @@ public:
     }
 };
 
-class ConectionThread : public QThread
+class ConnectionThread : public QThread
 {
     Q_OBJECT
 public:
-    ConectionThread();
+    ConnectionThread();
     void init(QVector <pageListItem> PageList);
-    virtual ~ConectionThread(){}
+    virtual ~ConnectionThread(){}
     QVector <pageListItem> pageList;
     bool stop=0;
 protected:

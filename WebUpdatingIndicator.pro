@@ -16,11 +16,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
+    connectionthread.cpp \
        mainwindow.cpp \
      pageviewer.cpp \
  #   deleteproxy.cpp \
     background.cpp \
-    conectionthread.cpp \
     monitoredvar.cpp \
     newpagemodel.cpp \
     historywindow.cpp \
@@ -30,7 +30,7 @@ SOURCES += main.cpp\
     database.cpp
 
 HEADERS  += background.h \
-    conectionthread.h \
+    connectionthread.h \
 mainwindow.h \
     monitoredvar.h \
     newpagemodel.h \
