@@ -17,11 +17,11 @@ Dále je nutné u~každé stránky definovat její umístění na webu, tedy jej
 K~tomu slouží položky \c|server|, \c|dir|, \c|file|.
 Ovšem není zapotřebí definovat všechny tyto položky.
 Pod klíčem \c|server| by měla být definována adresa serveru, na kterém je požadovaná stránka včetně přístupového protokolu.
-Tedy například \c|https://is.jaroska.cz| nebo pomocí ip adresy může zápis vypadat následovně: \c|http://195.178.65.1|
+Tedy například \c|https://is.jaroska.cz| nebo pomocí ip adresy může zápis vypadat následovně: \c|http://195.178.65.1|.
 V~případě, že není požadovaná stránka na serveru umístěna v~jeho kořenové složce, je doporučeno název složky (popřípadě celou cestu několika zanořených složek) umístit do položky \c|dir|.
 \c|file| obsahuje jméno požadovaného souboru včetně přípony.
-V~případě, že je požadován přístup základní soubor (index) na dané adrese, není potřeba \c|file| uvádět.
-Dále zde také můžou být obsaženy parametry stránky, které se předávají metodou \c|GET|.
+V~případě, že je požadován přístup na základní soubor (index) na dané adrese, není potřeba \c|file| uvádět.
+Dále zde také mohou být obsaženy parametry stránky, které se předávají metodou \c|GET|.
 Stačí je uvézt za otazník.
 Takový zápis může vypadat následovně: \c|index.php?akce=42&akcicka=0|.
 
@@ -36,7 +36,7 @@ V~prohlížečích založených na jádře Chromium se lze pomocí klávesy \c|F
 V~záložce \c|Network| je možné najít příslušný soubor, jehož hlavičku je třeba použít.
 
 \podsekce{Způsoby kontroly změn}
-U~některých stránek se často mění její část, i když sledovaný obsah se nezmění.
+U~některých stránek se často mění jejich část, i když se sledovaný obsah nezmění.
 Pro omezení kontrolování je proto vhodné užít v~zápisu položky \c|diff|.
 Ta by měla obsahovat speciální strukturu  popisující způsob ignorování změn\footnote{Případně může obsahovat řetězec \c|\"ignore\"|, který má stejný efekt jako \c|\{\"ignore\":1\}|}.
 Tato struktura může obsahovat následující položky:\\

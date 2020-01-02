@@ -5,7 +5,7 @@ Otevřít ho lze pomocí menu v~hlavním okně kliknutím na \c|pages| $\rightar
 Po kliknutí se otevře další okno obsahující formulář na dotaz a pod ním prázdnou tabulku se stejnou strukturou jako původní tabulka změn.
 
 Dotazy do historie se zadávají formou dotazu do databáze. 
-Do políčka lze doplnit podmínky hledání a po kliknutí na talčítko \c|Load| se načte tabulka odpovídajících záznamů. 
+Do políčka lze doplnit podmínky hledání a po kliknutí na tlačítko \c|Load| se načte tabulka odpovídajících záznamů. 
 Tato načtení je jednorázové, tedy v~případě, že se například vygeneruje další záznam, tabulka historie se sama neobnoví.
 Obnovení lze vynutit opětovným stiskem tlačítka \c|Load|.
 Jedinou výjimkou jsou změny provedené v~daném okně historie -- smazání a schování.
@@ -16,7 +16,7 @@ V~tabulce historie jsou schované záznamy zobrazeny červeně bez vyplněného 
 Do dotazů je možné psát libovolný SQL dotaz.
 Zdrojová tabulka by měla být \c|newPage| obsahující informace o~všech změnách. Její struktura je:
 \begin{itemize}
-	\item \c|id INTEGER PRIMARY KEY AUTOINCREMENT| -- jednoznačny identifikátor záznamu
+	\item \c|id INTEGER PRIMARY KEY AUTOINCREMENT| -- jednoznačný identifikátor záznamu
 	\item \c|pageName VARCHAR| -- identifikátor stránky (podle json zdrojového souboru)
 	\item \c|time DATETIME| -- čas zachycení dané změny
 	\item \c|fileName VARCHAR| -- jméno souboru obsahujícího danou změnu
@@ -26,5 +26,5 @@ Zdrojová tabulka by měla být \c|newPage| obsahující informace o~všech změ
 Dotaz by ovšem měl vracet tabulku o~stejných sloupcích jako má \c|newPage|, aby mohl být správně graficky vykreslen.
 V~opačném případě je chování aplikace nedefinované.
 Databáze je implementovaná pomocí SQLite.
-Podrobná dokumentace je uveden na adrese \url{https://www.sqlite.org/lang_select.html}.
+Podrobná dokumentace je uvedena na adrese \url{https://www.sqlite.org/lang_select.html}.
 \obr{history}{Okno přístupu do historie.}
