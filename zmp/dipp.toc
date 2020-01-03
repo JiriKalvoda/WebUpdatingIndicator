@@ -15,12 +15,12 @@
 \contentsline {subsection}{\numberline {2.3}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } kontroly, tabulka zm\IeC {\v e}n, informa\IeC {\v c}n\IeC {\'\i } konzole}{16}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Historie zm\IeC {\v e}n a jej\IeC {\'\i } proch\IeC {\'a}zen\IeC {\'\i }}{19}{subsection.2.4}
 \contentsline {subsection}{\numberline {2.5}Grafick\IeC {\'e} porovn\IeC {\'a}v\IeC {\'a}n\IeC {\'\i } verz\IeC {\'\i } str\IeC {\'a}nek}{20}{subsection.2.5}
-\contentsline {section}{\numberline {3}Implementace aplikace}{23}{section.3}
-\contentsline {subsection}{\numberline {3.1}Pou\IeC {\v z}it\IeC {\'y} software}{23}{subsection.3.1}
-\contentsline {subsubsection}{Qt}{23}{section*.9}
-\contentsline {subsubsection}{Qt Creator}{23}{section*.10}
-\contentsline {subsubsection}{Git}{23}{section*.11}
-\contentsline {subsection}{\numberline {3.2}Objektov\IeC {\'y} model, rozd\IeC {\v e}len\IeC {\'\i } probl\IeC {\'e}mu}{24}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Pozad\IeC {\'\i } aplikace}{24}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Grafick\IeC {\'e} u\IeC {\v z}ivatelsk\IeC {\'e} rozhran\IeC {\'\i }}{24}{subsection.3.4}
-\contentsline {section}{\numberline {4}Seznam pou\IeC {\v z}it\IeC {\'e} literatury}{26}{section.4}
+\contentsline {section}{\numberline {3}Implementace aplikace}{22}{section.3}
+\contentsline {subsection}{\numberline {3.1}Pou\IeC {\v z}it\IeC {\'y} software}{22}{subsection.3.1}
+\contentsline {subsubsection}{Qt}{22}{section*.9}
+\contentsline {subsubsection}{Qt Creator}{22}{section*.10}
+\contentsline {subsubsection}{Git}{22}{section*.11}
+\contentsline {subsection}{\numberline {3.2}Objektov\IeC {\'y} model, rozd\IeC {\v e}len\IeC {\'\i } probl\IeC {\'e}mu}{23}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Pozad\IeC {\'\i } aplikace}{23}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Grafick\IeC {\'e} u\IeC {\v z}ivatelsk\IeC {\'e} rozhran\IeC {\'\i }}{23}{subsection.3.4}
+\contentsline {section}{\numberline {4}Seznam pou\IeC {\v z}it\IeC {\'e} literatury}{25}{section.4}
