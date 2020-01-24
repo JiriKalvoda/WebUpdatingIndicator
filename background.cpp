@@ -13,12 +13,24 @@
 
 
 
-Background::Background(QObject *parent) : QObject(parent),newPages(this)
+Background::Background(QObject *parent,int argc, char ** argv) : QObject(parent),newPages(this)
 {
     isOkStart=0;
-    lockFileLock = new QLockFile("runlock.dat");
-    if(!lockFileLock->tryLock(10)) return;
-    isOkStart=1;
+    bool noLock=0;
+    bool noExit=0;
+    for(int i=1;i<argc;i++)
+    {
+       if(QString("--noLock")==QString(argv[i])) noLock = 1;
+       if(QString("--noExit")==QString(argv[i])) noExit = 1;
+    }
+    if(!noLock)
+    {
+        lockFileLock = new QLockFile("runlock.dat");
+        if(!lockFileLock->tryLock(10)) if(!noExit) return;
+        isOkStart=1;
+    }
+    else
+        isOkStart=1;
     //lockFileLock->lock();
 
     db = new Database;

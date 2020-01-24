@@ -22,7 +22,7 @@ class Background : public QObject
 private:
     bool isOkStart=0;
 public:
-    explicit Background(QObject *parent = 0);
+    explicit Background(QObject *parent = 0,int argc = 0, char ** argv = nullptr);
     virtual ~Background();
     void inport(QString file);
     MonitoredVar bar;

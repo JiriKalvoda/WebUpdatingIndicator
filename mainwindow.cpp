@@ -4,22 +4,17 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <historywindow.h>
-MainWindow::MainWindow(int argc, char *argv[],QWidget *parent):MainWindow(parent)
-{
-    for(int i=0;i<argc;i++)
-    {
-   //console->setText(console->text()+"\n"+argv[i]);
-   if(QString("stayHide")==QString(argv[i])) setWindowState(Qt::WindowMinimized);
 
-    }
-}
-
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget *parent, int argc, char ** argv)
     : QMainWindow(parent)
 {
+    for(int i=1;i<argc;i++)
+    {
+       //console->setText(console->text()+"\n"+argv[i]);
+       if(QString("--stayHide")==QString(argv[i])) setWindowState(Qt::WindowMinimized);
+    }
     setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinMaxButtonsHint);
-
-    bg = new Background();
+    bg = new Background(this,argc,argv);
     if(bg->errorStarting()) {close(); return;}
     basicLayout = new QVBoxLayout();
     basicWidget = new QWidget();
