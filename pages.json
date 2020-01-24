@@ -1,0 +1,19 @@
+[
+  {
+    "server": "http://ksp.mff.cuni.cz",
+    "dir":  "profil",
+    "file": "profil.cgi?uid=4973",
+    "name": "ksp-cz"
+  },
+  {
+    "server": "http://brkos.math.muni.cz",
+    "file": "index.php?s=vysledky",
+    "name": "brkos"
+  },
+  {
+    "server": "https://www.ksp.sk",
+    "dir":"ulohy",
+    "name": "ksp-sk-ulohy",
+    "diff":{"ignoreSector":[{"start":"<input type=\"hidden\" name=\"csrfmiddlewaretoken\""}]}
+  }
+]
