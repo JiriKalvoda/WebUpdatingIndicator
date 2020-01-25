@@ -45,6 +45,8 @@ public:
     QPushButton * stop;
     QLabel * timeInfo;
     QSpinBox * actPeriod;
+    QHBoxLayout * actPeriodLayout;
+    QLabel * actPeriodLabel;
     QGroupBox * consoleBox;
 
     QIcon logo = QIcon("Logo.ico");
@@ -53,7 +55,7 @@ public:
  //   QStandardItemModel model;
     //NewPageModel newPageModel;
 
-
+    //virtual void keyPressEvent(QKeyEvent *event);
 
     Background * bg;
 public slots:
@@ -70,6 +72,9 @@ public slots:
 
     void closeEvent (QCloseEvent *event);
     void exit();
+
+protected:
+     bool eventFilter(QObject *obj, QEvent *event);
 };
 
 #endif // MAINWINDOW_H
