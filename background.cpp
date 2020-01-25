@@ -18,10 +18,13 @@ Background::Background(QObject *parent,int argc, char ** argv) : QObject(parent)
     isOkStart=0;
     bool noLock=0;
     bool noExit=0;
+    bool debugDiff=0;
     for(int i=1;i<argc;i++)
     {
        if(QString("--noLock")==QString(argv[i])) noLock = 1;
        if(QString("--noExit")==QString(argv[i])) noExit = 1;
+       if(QString("--debug")==QString(argv[i])) debugDiff = 1;
+       if(QString("--debugDiff")==QString(argv[i])) debugDiff = 1;
     }
     if(!noLock)
     {
@@ -39,11 +42,14 @@ Background::Background(QObject *parent,int argc, char ** argv) : QObject(parent)
             newPages.insert(it);
 
     inportDbSetings();
+    QDir().mkpath("comp");
+    QDir("comp").removeRecursively();
     QDir().mkpath("pages");
     QDir().mkpath("history");
     QDir().mkpath("comp");
 
     conTh = new ConnectionThread();
+    conTh->debugDiff=debugDiff;
     connect(conTh,SIGNAL(textStatus(QString)),this,SLOT(insertInConsole(QString)));
     connect(conTh,SIGNAL(intStatus(int)),this,SLOT(setBar(int)));
     connect(conTh,SIGNAL(pageChanged(QString,QString)),this,SLOT(pageChanged(QString,QString)));

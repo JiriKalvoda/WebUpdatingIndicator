@@ -43,10 +43,13 @@ class ConnectionThread : public QThread
     Q_OBJECT
 public:
     ConnectionThread();
+    bool debugDiff;
     void init(QVector <pageListItem> PageList);
     virtual ~ConnectionThread(){}
     QVector <pageListItem> pageList;
     bool stop=0;
+    static bool control(const QByteArray &,const QByteArray &,QJsonValue & diff,QString  outputFile="");
+    static QByteArray diffIgnore(QByteArray in, QJsonValue & diff);
 protected:
     void run();
 signals:

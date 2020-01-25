@@ -37,45 +37,103 @@ void replaceByteArr(QByteArray & a,QByteArray start,QByteArray end,int countOfEn
         a.replace(s,e-s,QByteArray(""));
     }
 }
-bool control(QByteArray & b,QByteArray & a,QJsonValue & diff)
+bool ConnectionThread::control(const QByteArray & a,const QByteArray & b,QJsonValue & diff,QString outputFile)
+{
+    auto x =diffIgnore(a,diff);
+    auto y =diffIgnore(b,diff);
+    if(outputFile!="")
+    {
+        QFile file("comp/diffIgnore-"+outputFile+".html");
+        file.open(QIODevice::WriteOnly);
+        file.write(y);
+        file.close();
+    }
+    return x!=y;
+}
+QByteArray ConnectionThread::diffIgnore(QByteArray in, QJsonValue & diff)
 {
     if(diff.isObject())
     {
         auto diffObj = diff.toObject();
-        if(diffObj.value("ignore")!=QJsonValue::Undefined) return 0;
-        QByteArray x=a;
-        QByteArray y=b;
+        if(diffObj.value("ignore")!=QJsonValue::Undefined) return "";
         if(diffObj.value("ignoreSector").isArray())
         {
-           auto arr = diffObj["ignoreSector"].toArray();
-           for(int i=0;i<arr.size();i++)
-           {
-               if(arr[i].isObject())
-               {
-                   auto obj = arr[i].toObject();
-                   if(!obj["start"].isString()) continue;
-                   QString start = obj["start"].toString();
-                   QString end = obj["end"].isString() ? obj["end"].toString() : "\n";
-                   int countOfEnd = obj["countOfEnd"].isDouble() ? int(obj["countOfEnd"].toDouble()+0.2) : 1;
-                   replaceByteArr(x,start.toUtf8(),end.toUtf8(),countOfEnd);
-                   replaceByteArr(y,start.toUtf8(),end.toUtf8(),countOfEnd);
-               }
-           }
+            auto arr = diffObj["ignoreSector"].toArray();
+            for(int i=0;i<arr.size();i++)
+            {
+                QVector<int> charToDelete(in.size());
+                if(arr[i].isObject())
+                {
+                    auto obj = arr[i].toObject();
+                    if(!obj["start"].isString()) continue;
+                    QString start = obj["start"].toString();
+                    QString end = obj["end"].isString() ? obj["end"].toString() : "\n";
+                    int countOfEnd = obj["countOfEnd"].isDouble() ? int(obj["countOfEnd"].toDouble()+0.2) : 1;
+                    for(int s=0;;s++)
+                    {
+                        s = in.indexOf(start,s);
+                        if(s==-1) break;
+                        int e = s+1;
+                        for(int i=0;i<countOfEnd;i++)
+                            e = e==-1 ? -1 : in.indexOf(end,e)+end.size();
+                        if(e==-1) e = in.size();
+                        for(int i=s;i<e;i++)
+                            charToDelete[i]=1;
+                    }
+                }
+                QByteArray out;
+                for(int i=0;i<in.size();i++)
+                    if(!charToDelete[i])
+                        out.push_back(in[i]);
+                out.swap(in);
+            }
+        }
+        if(diffObj.value("onlySector").isArray())
+        {
+            auto arr = diffObj["onlySector"].toArray();
+            for(int i=0;i<arr.size();i++)
+            {
+                QVector<int> charToDelete(in.size());
+                if(arr[i].isObject())
+                {
+                    auto obj = arr[i].toObject();
+                    if(!obj["start"].isString()) continue;
+                    QString start = obj["start"].toString();
+                    QString end = obj["end"].isString() ? obj["end"].toString() : "\n";
+                    int countOfEnd = obj["countOfEnd"].isDouble() ? int(obj["countOfEnd"].toDouble()+0.2) : 1;
+                    for(int s=0;;s++)
+                    {
+                        s = in.indexOf(start,s);
+                        if(s==-1) break;
+                        int e = s+1;
+                        for(int i=0;i<countOfEnd;i++)
+                            e = e==-1 ? -1 : in.indexOf(end,e)+end.size();
+                        if(e==-1) e = in.size();
+                        for(int i=s;i<e;i++)
+                            charToDelete[i]=1;
+                    }
+                }
+                QByteArray out;
+                for(int i=0;i<in.size();i++)
+                    if(charToDelete[i])
+                        out.push_back(in[i]);
+                out.swap(in);
+            }
         }
         if(diffObj.value("permutation")!=QJsonValue::Undefined)
         {
             const int countOfChar = 260;
-            int cx[countOfChar],cy[countOfChar];
-            for(int i=0;i<countOfChar;i++) cx[i]=cy[i]=0;
-            for(int i=0;i<x.size();i++) cx[(unsigned char) (x[i])]++;
-            for(int i=0;i<y.size();i++) cy[(unsigned char) (y[i])]++;
-            for(int i=0;i<countOfChar;i++) if(cx[i]!=cy[i]) return 1;
-            return 0;
+            int c[countOfChar];
+            for(int i=0;i<countOfChar;i++) c[i]=0;
+            for(int i=0;i<in.size();i++) c[(unsigned char) (in[i])]++;
+            in.clear();
+            for(int i=0;i<countOfChar;i++)
+                in.push_back((QString::number(c[i])+"\n").toUtf8());
         }
-        return x!=y;
     }
-    if(diff.isString()&&diff.toString()=="ignore") return 0;
-    return a!=b;
+    if(diff.isString()&&diff.toString()=="ignore") return "";
+    return in;
+
 }
 void ConnectionThread::run()
 {
@@ -173,7 +231,7 @@ void ConnectionThread::run()
                 fileData = fileR.readAll();
                 fileR.close();
             }
-            if(control(fileData,data,act->diff))
+            if(control(fileData,data,act->diff,debugDiff?act->name_func():""))
             {
                 QFile fileW("pages/"+name+".html");
                 fileW.open(QIODevice::WriteOnly);
