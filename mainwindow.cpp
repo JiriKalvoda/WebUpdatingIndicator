@@ -4,6 +4,7 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <historywindow.h>
+#include <QApplication>
 
 MainWindow::MainWindow(QWidget *parent, int argc, char ** argv)
     : QMainWindow(parent)
@@ -69,7 +70,7 @@ MainWindow::MainWindow(QWidget *parent, int argc, char ** argv)
     basicLayout->addWidget(consoleBox);
     consoleBox->setCheckable(1);
     consoleBox->setChecked(0);
-    consoleBox->setTitle("View more information");
+    consoleBox->setTitle("Vie&w more information");
     consoleBox->setLayout(consoleLayout);
     consoleLayout->setMargin(0);
     connect(consoleBox,SIGNAL(toggled(bool)),this,SLOT(viewConsole(bool)));
@@ -211,12 +212,18 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
     if (event->type() == QEvent::KeyPress)
     {
         QKeyEvent *key = static_cast<QKeyEvent *>(event);
+        int k = key->key();
         if(key->key()==Qt::Key_Escape) setFocus();
         if(obj == this || obj == newPages || obj == newPages->table)
         {
             if(key->key()==Qt::Key_C) start->click();
             else if(key->key()==Qt::Key_E) stop->click();
             else if(key->key()==Qt::Key_P) actPeriod->setFocus();
+            else if(key->key()==Qt::Key_W) consoleBox->setChecked(!consoleBox->isChecked());
+            else if(k==Qt::Key_J && QApplication::keyboardModifiers().testFlag(Qt::ShiftModifier) == true)
+                consoleScr->verticalScrollBar()->setValue(consoleScr->verticalScrollBar()->value()+consoleScr->verticalScrollBar()->singleStep()*3);
+            else if(k==Qt::Key_K && QApplication::keyboardModifiers().testFlag(Qt::ShiftModifier) == true)
+                consoleScr->verticalScrollBar()->setValue(consoleScr->verticalScrollBar()->value()-consoleScr->verticalScrollBar()->singleStep()*3);
             else
             {
                 if(obj != newPages && obj != newPages->table)
