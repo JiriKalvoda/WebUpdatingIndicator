@@ -15,10 +15,10 @@ V~případě, že bar má červenou barvu, alespoň jedna stránka nebyla při p
 Po kliknutí na zaškrtávací políčko \c|View more information| se zobrazí záznam o~provedených kontrolách a případně důvod jejich neúspěchu v~informační konzoli.
 Všechny chybové hlášky jsou obsaženy na řádcích uvozených několika vykřičníky.
 Nejčastěji se může uživatel setkat s~těmito chybami:\\
-\c|Connection error - TIME OUT| nastane v~případě, že načítání stránky bylo moc pomalé a tedy byl překročen časový limit na přístup na jednu stránku.\\ %isdo Opravit conection -> connection aplikaci
-\c|Cookie error - cookie not available| se zobrazí v~případě, že nastala chyba při načítání některé z~předcházejících stránek ze stejné cookie skupiny.\\
+\c|Connection error - TIME OUT.| nastane v~případě, že načítání stránky bylo moc pomalé a tedy byl překročen časový limit na přístup na jednu stránku.\\ %isdo Opravit conection -> connection aplikaci
+\c|Cookie error - cookie not available.| se zobrazí v~případě, že nastala chyba při načítání některé z~předcházejících stránek ze stejné cookie skupiny.\\
 \c|Connection error - Network access is disabled.| znamená nedostupnost síťového připojení.\\
-\c|Connection error - Host not found.| informuje o~nedostupnosti daného serveru. S~největší pravděpodobností se  jedná o~chybně zadanou stránku, nebo byla přesunutá.
+\c|Connection error - Host not found.| informuje o~nedostupnosti daného serveru. S~největší pravděpodobností se  jedná o~chybně zadanou stránku nebo byla přesunutá.
 \obr{chyba-pristupu}{Výpis chyby v~informační konzoli.}
 
 V~boxu vpravo od tlačítek je možno nastavit automatické spouštění kontrolování.
@@ -41,13 +41,13 @@ O~každé změně se zobrazí řádek obsahující jméno stránky, čas detekov
 V~případě, že uživatel chce data setřídit podle některé z~těchto položek, může tak učinit kliknutím na hlavičku daného sloupce tabulky.
 Kliknutím na jméno souboru se ve výchozím prohlížeči otevře daná verze stránky.
 Aby bylo zajištěno správné fungovaní zobrazení, jsou všechny relativní odkazy (v~rámci serveru) přepsány na absolutní.
-Před všechny odkazy v~atributech \c|href| s~\c|src|, které neobsahují absolutní cestu je tedy doplněn název serveru a složky.
+Před všechny odkazy v~atributech \c|href| a \c|src|, které neobsahují absolutní cestu je tedy doplněn název serveru a složky.
 Díky tomu se při kontrole načítá pouze samostatná stránka, ale při zobrazení se načtou i obrázky, styly a další odkazované elementy.
 
 V~případě, že už si uživatel danou změnu prohlédl, kliknutím na buňku v~sloupci \c|Delete| ji může z~tabulky změn odstranit.
 Tímto odstraněním nedojde k~smazání záznamu o~změně ani odstranění souboru s~danou verzí stránky.
 Změna se již nebude zobrazovat v~tabulce změn.
-Jiným způsobem odstraněni je vybrat jeden nebo několik řádků a pak kliknout na tlačítko \c|Hide| těsně pod tabulkou.
+Jiným způsobem odstranění je vybrat jeden nebo několik řádků a pak kliknout na tlačítko \c|Hide| těsně pod tabulkou.
 
 Vybráním řádků a kliknutím na tlačítko \c|Delete| dojde k~smazání vybraných záznamů změn včetně souborů obsahujících dané verze stránek.
 

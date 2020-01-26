@@ -29,7 +29,7 @@ V~případě, že je nutné předat stránce informace pomocí protokolu \c|POST
 je možné v~zápisu stránky užít klíče \c|post|.
 %\c|formUsername=HugoKokoska&formPassword=BezpecneHeslo|.
 
-Nejjednodušší způsob, jak zjistit tyto informace pro požadovanou stránku je využít prohlížeč.
+Nejjednodušší způsob, jak zjistit tyto informace pro požadovanou stránku, je využít prohlížeč.
 Většina prohlížečů umožňuje zobrazit informace o~navázaném spojení.
 Odsud stačí potřebné informace jen zkopírovat.
 V~prohlížečích založených na jádře Chromium se lze pomocí klávesy \c|F12| dostat do vývojářského panelu.
@@ -45,15 +45,10 @@ Toto je vhodné například když se jedná pouze o~přihlašovací stránku, kt
 Tag \c|ignoreSector| může obsahovat pole struktur.
 Každá z~nich může obsahovat informace o~jednom nutném vynechání pomocí tagů \c|start|, \c|end| a \c|countOfEnd|,
 které znamenají, že text od \c|start| po \c|countOfEnd|-tý výskyt řetězce \c|end| bude při porovnávání vynechán.
-Začátek i konec může být definován pomocí regulárního výrazu.
-Na přesnou implementaci regulárních výrazů lze nahlédnout do dokumentace Qt na adrese
-\url{https://doc.qt.io/qt-5/qregexp.html}.
 Tagy \c|end| a \c|countOfEnd| nemusí být uvedeny. V~takovém případě je \c|end| nastaveno na konec řádku a \c|countOfEnd| na 1.
-% TODO Implementovat regex
 \\
-Obdobným způsobem lze použít tag \c|onlySector|, který také může obsahovat pole struktur složených z~\c|start|, \c|end| a \c|countOfEnd|.
+Obdobným způsobem lze použít tag \c|onlySector|, který také může obsahovat pole struktur složených ze \c|start|, \c|end| a \c|countOfEnd|.
 Při použití tohoto tagu budou porovnávány pouze změny v~těchto úsecích (budou ignorovány úseky od začátku k~prvnímu výskytu, mezi nimi a od posledního na konec).
-% TODO Implementace onlySector
 \\
 Další možností je využít klíče \c|permutation| s~libovolnou hodnotou.
 Jeho použití znamená, že libovolné permutace znaků budou považovány za stejné.
@@ -61,7 +56,7 @@ Toto je vhodné v~případě, že se na stránce některé objekty náhodně pro
 % isdo Opravit: řádek 71 v conectionthread.cpp
 % isdo nahradit permutatin -> permutation 
 \\
-Tyto omezení porovnávání se provádí v~zde uvedeném pořadí.
+Tato omezení porovnávání se provádí ve zde uvedeném pořadí.
 
 
 
@@ -70,5 +65,5 @@ Tyto omezení porovnávání se provádí v~zde uvedeném pořadí.
 Například v~případě, že je nutné se pro získáni informací na nějakou stránku přihlásit, je možné využít v~zápisu stránky položku \c|cookie|.
 Pomocí ní lze spojit více stránek do skupiny, ve které si stránky mezi sebou ukládají cookies.
 Stačí pouze u~všech stránek vyplnit stejnou hodnotou tagu \c|cookie|.
-Když se některou z~stránek nepodaří načíst, v~daném průchodu se nebudou načítat ani další stránky ze stejné skupiny.
+Když se některou ze stránek nepodaří načíst, v~daném průchodu se nebudou načítat ani další stránky ze stejné skupiny.
 \obrazek{\codeF{priklad.json}}{Příklad validního souboru stránek na kontrolu.}{json}

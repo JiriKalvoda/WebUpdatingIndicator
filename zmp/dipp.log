@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.24)  3 JAN 2020 11:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.24)  26 JAN 2020 13:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1212,16 +1212,17 @@ Package pdftex.def Info: screenshots/basic_app_small.png  used on input line 16
 
  <./screenshots/basic_app_small.png>]
 (./instalace.tex
-Overfull \hbox (27.46405pt too wide) in paragraph at lines 3--12
-\OT1/cmr/m/n/12 st^^Sahnout z []$\OT1/cmtt/m/n/12 gitlab . com / JiriKalvoda / 
-webupdatingindicator / tree / master$[]\OT1/cmr/m/n/12 . V p^^Tr^^S^^Ppad^^Te,
- []
-
 <screenshots/linux-i3-2.png, id=144, 1156.32pt x 867.24pt>
 File: screenshots/linux-i3-2.png Graphic file (type png)
 <use screenshots/linux-i3-2.png>
 Package pdftex.def Info: screenshots/linux-i3-2.png  used on input line 30.
 (pdftex.def)             Requested size: 256.0748pt x 192.05052pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 30--30
+[]\OT1/cmr/m/n/12 Obr^^Sazek 2: []Aplikace otev^^Tren^^Sa v opera^^Tcn^^S^^Pm s
+yst^^Semu Li-nux Mint 19
+ []
+
 <screenshots/linux-cinnamon.png, id=145, 1156.32pt x 867.24pt>
 File: screenshots/linux-cinnamon.png Graphic file (type png)
 <use screenshots/linux-cinnamon.png>
@@ -1266,7 +1267,7 @@ Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                removing `\textasciicaron' on input line 1.
 
 [16] [17]
-<screenshots/chyba-pristupu.png, id=223, 602.25pt x 393.47pt>
+<screenshots/chyba-pristupu.png, id=222, 602.25pt x 393.47pt>
 File: screenshots/chyba-pristupu.png Graphic file (type png)
 <use screenshots/chyba-pristupu.png>
 Package pdftex.def Info: screenshots/chyba-pristupu.png  used on input line 22.
@@ -1291,21 +1292,21 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 19.
-<screenshots/history.png, id=236, 700.6175pt x 380.42125pt>
+<screenshots/history.png, id=235, 700.6175pt x 380.42125pt>
 File: screenshots/history.png Graphic file (type png)
 <use screenshots/history.png>
 Package pdftex.def Info: screenshots/history.png  used on input line 30.
 (pdftex.def)             Requested size: 256.0748pt x 139.04704pt.
 )
 (./grafickePorovnavaniVerzi.tex [20 <./screenshots/history.png>]
-<screenshots/compare.png, id=243, 1927.2pt x 1084.05pt>
+<screenshots/compare.png, id=242, 1927.2pt x 1084.05pt>
 File: screenshots/compare.png Graphic file (type png)
 <use screenshots/compare.png>
 Package pdftex.def Info: screenshots/compare.png  used on input line 26.
 (pdftex.def)             Requested size: 426.79134pt x 240.06316pt.
 )
 (./implemantace.tex [21 <./screenshots/compare.png>]
-<screenshots/qtcreator.png, id=249, 1275.76625pt x 886.31125pt>
+<screenshots/qtcreator.png, id=248, 1275.76625pt x 886.31125pt>
 File: screenshots/qtcreator.png Graphic file (type png)
 <use screenshots/qtcreator.png>
 Package pdftex.def Info: screenshots/qtcreator.png  used on input line 15.
@@ -1338,7 +1339,7 @@ Package rerunfilecheck Info: File `dipp.out' has not changed.
 Here is how much of TeX's memory you used:
  29686 strings out of 494312
  680187 string characters out of 6163334
- 865412 words of memory out of 5000000
+ 865410 words of memory out of 5000000
  32388 multiletter control sequences out of 15000+600000
  16727 words of font info for 64 fonts, out of 8000000 for 9000
  360 hyphenation exceptions out of 8191
@@ -1357,10 +1358,10 @@ sbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on dipp.pdf (25 pages, 1414966 bytes).
+Output written on dipp.pdf (25 pages, 1414565 bytes).
 PDF statistics:
- 353 PDF objects out of 1000 (max. 8388607)
- 294 compressed objects within 3 object streams
+ 352 PDF objects out of 1000 (max. 8388607)
+ 293 compressed objects within 3 object streams
  92 named destinations out of 1000 (max. 500000)
  178 words of extra memory for PDF output out of 10000 (max. 10000000)
 
