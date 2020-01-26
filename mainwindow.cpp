@@ -237,8 +237,8 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
         if(key->key()==Qt::Key_Escape) setFocus();
         if(obj == this || obj == newPages || obj == newPages->table)
         {
-            if(key->key()==Qt::Key_C) start->click();
-            else if(key->key()==Qt::Key_E) stop->click();
+            if(key->key()==Qt::Key_C) start->animateClick();
+            else if(key->key()==Qt::Key_E) stop->animateClick();
             else if(key->key()==Qt::Key_P) actPeriod->setFocus();
             else if(key->key()==Qt::Key_W) consoleBox->setChecked(!consoleBox->isChecked());
             else if(k==Qt::Key_J && QApplication::keyboardModifiers().testFlag(Qt::ShiftModifier) == true)

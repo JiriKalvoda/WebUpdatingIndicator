@@ -194,13 +194,11 @@ bool PageViewer::eventFilter(QObject *obj, QEvent *event)
                 numInput=0;
             }
             else if(k==Qt::Key_L)
-            {
-                button_delete->click();
-            }
+                button_delete->animateClick();
             else if(k==Qt::Key_I)
-                button_hide->click();
+                button_hide->animateClick();
             else if(k==Qt::Key_O)
-                button_compare->click();
+                button_compare->animateClick();
             else if(k==Qt::Key_J)
                 table->verticalScrollBar()->setValue(table->verticalScrollBar()->value()+table->verticalScrollBar()->singleStep()*3);
             else if(k==Qt::Key_K)

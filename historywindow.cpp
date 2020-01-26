@@ -60,7 +60,7 @@ bool HistoryWindow::eventFilter(QObject *obj, QEvent *event)
         if(obj == this || obj == viewer || obj == viewer->table)
         {
             if(k==Qt::Key_C)
-                inputButton->click();
+                inputButton->animateClick();
             if(k==Qt::Key_W)
                 inputInput->setFocus();
             if(k==Qt::Key_Q)
