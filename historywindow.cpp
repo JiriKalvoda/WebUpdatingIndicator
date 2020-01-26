@@ -59,7 +59,6 @@ bool HistoryWindow::eventFilter(QObject *obj, QEvent *event)
         if(key->key()==Qt::Key_Escape) setFocus();
         if(obj == this || obj == viewer || obj == viewer->table)
         {
-        qDebug() << "KEY in HistoryWindow";
             if(k==Qt::Key_C)
                 inputButton->click();
             if(k==Qt::Key_W)
