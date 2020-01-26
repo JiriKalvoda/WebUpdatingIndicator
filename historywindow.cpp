@@ -14,10 +14,10 @@ HistoryWindow::HistoryWindow(Background * BG,QWidget * parent):QWidget(parent)
    inputL->addWidget(inputPrefix);
    inputInput = new QLineEdit;
    inputInput->setText("1");
-   inputL->addWidget(inputInput);
+   inputL->addWidget(inputInput,1);
    inputSufix = new QLabel;
    inputSufix->setText("");
-   inputL->addWidget(inputPrefix);
+   inputL->addWidget(inputSufix,0);
    inputButton = new QPushButton;
    inputL->addWidget(inputButton);
    inputButton->setText("&Calculate");
