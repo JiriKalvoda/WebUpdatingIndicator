@@ -28,6 +28,8 @@ signals:
 
 public slots:
     void generate();
+protected:
+    bool eventFilter(QObject *obj, QEvent *event);
 };
 
 #endif // PAGECOMPARATORGUI_H
