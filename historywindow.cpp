@@ -10,7 +10,7 @@ HistoryWindow::HistoryWindow(Background * BG,QWidget * parent):QWidget(parent)
 
    inputL = new QHBoxLayout;
    inputPrefix = new QLabel;
-   inputPrefix->setText("select * from newPage where ");
+   inputPrefix->setText("select * from newPage <u>w</u>here ");
    inputL->addWidget(inputPrefix);
    inputInput = new QLineEdit;
    inputInput->setText("1");
@@ -20,8 +20,9 @@ HistoryWindow::HistoryWindow(Background * BG,QWidget * parent):QWidget(parent)
    inputL->addWidget(inputPrefix);
    inputButton = new QPushButton;
    inputL->addWidget(inputButton);
-   inputButton->setText("Load");
+   inputButton->setText("&Calculate");
    connect(inputButton,SIGNAL(clicked(bool)),this,SLOT(load()));
+   connect(inputInput,SIGNAL(returnPressed()),this,SLOT(load()));
    l->addLayout(inputL);
    viewer = new PageViewer(bg);
    connect(viewer,SIGNAL(needActualization()),this,SLOT(reload()));
@@ -29,6 +30,8 @@ HistoryWindow::HistoryWindow(Background * BG,QWidget * parent):QWidget(parent)
    setLayout(l);
 
    setAttribute(Qt::WA_DeleteOnClose);
+
+    qApp->installEventFilter(this);
 }
 
 void HistoryWindow::load()
@@ -45,4 +48,33 @@ void HistoryWindow::reload()
     if(query) delete query;
     if(lastQueryString!="") query = bg->history(QString(" where ")+lastQueryString+"");
     viewer->setModel(query);
+}
+
+bool HistoryWindow::eventFilter(QObject *obj, QEvent *event)
+{
+    if (event->type() == QEvent::KeyPress)
+    {
+        QKeyEvent *key = static_cast<QKeyEvent *>(event);
+        int k = key->key();
+        if(key->key()==Qt::Key_Escape) setFocus();
+        if(obj == this || obj == viewer || obj == viewer->table)
+        {
+        qDebug() << "KEY in HistoryWindow";
+            if(k==Qt::Key_C)
+                inputButton->click();
+            if(k==Qt::Key_W)
+                inputInput->setFocus();
+            if(k==Qt::Key_Q)
+                close();
+            else
+            {
+                if(obj != viewer && obj != viewer->table)
+                    viewer->eventFilter(viewer,event);
+                return QObject::eventFilter(obj, event);
+            }
+            return true;
+
+        }
+    }
+    return QObject::eventFilter(obj, event);
 }

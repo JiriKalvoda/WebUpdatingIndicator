@@ -33,6 +33,9 @@ signals:
 public slots:
     void load();
     void reload();
+
+protected:
+     bool eventFilter(QObject *obj, QEvent *event);
 };
 
 #endif // HISTORYWINDOW_H
