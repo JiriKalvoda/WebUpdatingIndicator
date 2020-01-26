@@ -35,6 +35,10 @@ public slots:
     void hideSlot();
     void deleteSlot();
     void compareSlot();
+
+public:
+     bool eventFilter(QObject *obj, QEvent *event);
+     int numInput=0;
 };
 
 #endif // DELETETABLEVIEWER_H

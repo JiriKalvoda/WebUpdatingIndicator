@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent, int argc, char ** argv)
 
     buttonL = new QHBoxLayout();
     start = new QPushButton();
-    start->setText("&Start checking");
+    start->setText("Start &checking");
     connect(start,SIGNAL(pressed()),bg,SLOT(actualization()));
     buttonL->addWidget(start,1);
     stop  = new QPushButton();
@@ -214,9 +214,17 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
         if(key->key()==Qt::Key_Escape) setFocus();
         if(obj == this || obj == newPages || obj == newPages->table)
         {
-            if(key->key()==Qt::Key_S) start->click();
-            if(key->key()==Qt::Key_E) stop->click();
-            if(key->key()==Qt::Key_P) actPeriod->setFocus();
+            if(key->key()==Qt::Key_C) start->click();
+            else if(key->key()==Qt::Key_E) stop->click();
+            else if(key->key()==Qt::Key_P) actPeriod->setFocus();
+            else
+            {
+                if(obj != newPages && obj != newPages->table)
+                    newPages->eventFilter(newPages,event);
+                return QObject::eventFilter(obj, event);
+            }
+            return true;
+
         }
     }
     return QObject::eventFilter(obj, event);
