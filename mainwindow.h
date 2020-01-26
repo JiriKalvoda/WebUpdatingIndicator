@@ -69,6 +69,8 @@ public slots:
     void redIcon();
     void makeHistoryWindow(bool);
     void viewConsole(bool isYes);
+    void about();
+    void aboutQt();
 
     void closeEvent (QCloseEvent *event);
     void exit();

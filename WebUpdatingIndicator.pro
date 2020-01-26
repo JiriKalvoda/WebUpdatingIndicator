@@ -43,3 +43,8 @@ mainwindow.h \
     debug.h \
     database.h
 
+
+VERSION = 2.2
+
+DEFINES += APP_NAME=\"\\\"WebUpdatingindicator\\\"\"
+DEFINES += APP_VERSION=\"\\\"$${VERSION}.\\\"\"

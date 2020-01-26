@@ -79,14 +79,19 @@ MainWindow::MainWindow(QWidget *parent, int argc, char ** argv)
     setCentralWidget(basicWidget);
 
     {
-        auto pages = menuBar()->addMenu("pages");
-        QAction * pages_history = pages->addAction("history");
+        auto pages = menuBar()->addMenu("Pages");
+        QAction * pages_history = pages->addAction("History");
         connect(pages_history,SIGNAL(triggered(bool)),this,SLOT(makeHistoryWindow(bool)));
         pages_history->setShortcut(Qt::Key_H);
-        auto app = menuBar()->addMenu("app");
-        QAction * app_quit = app->addAction("quit");
+        auto app = menuBar()->addMenu("App");
+        QAction * app_quit = app->addAction("Quit");
         app_quit->setShortcut(Qt::CTRL+Qt::Key_Q);
         connect(app_quit,SIGNAL(triggered(bool)),this,SLOT(exit()));
+        app->addSeparator();
+        QAction * app_about = app->addAction("About");
+        connect(app_about,SIGNAL(triggered(bool)),this,SLOT(about()));
+        QAction * app_aboutQt = app->addAction("About Qt");
+        connect(app_aboutQt,SIGNAL(triggered(bool)),this,SLOT(aboutQt()));
     }
 
 
@@ -100,6 +105,8 @@ MainWindow::MainWindow(QWidget *parent, int argc, char ** argv)
     setWindowIcon(logo);
     connect(bg,SIGNAL(pageChanged_signal(NewPageItem)),this,SLOT(redIcon()));
 
+    setWindowIcon(QIcon("Logo.ico"));
+
     qApp->installEventFilter(this);
     //setWindowFlags(Qt::CoverWindow);
 //    stico = new QSystemTrayIcon(this);
@@ -109,7 +116,21 @@ MainWindow::MainWindow(QWidget *parent, int argc, char ** argv)
 //    connect(stico,SIGNAL(messageClicked()),this,SLOT(jumpOnView()));
 //    connect(stico,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(jumpOnView()));
 }
-
+void MainWindow::about()
+{
+    QMessageBox::about(this,"About " APP_NAME,
+                       "This is " APP_NAME " version " APP_VERSION "<br><br>"
+                       "Copyright by Jiří Kalvoda.<br>"
+                       "This is an open source application under GNU LGPL licence.<br>"
+                        "Built on " __DATE__ " " __TIME__ "<br><br>"
+                         "Source code available at <a href=\"https://gitlab.com/JiriKalvoda/webupdatingindicator\">gitlab.com/JiriKalvoda/webupdatingindicator</a>.<br>"
+                         "Installation package available at <a href=\"https://gitlab.com/JiriKalvoda/webupdatingindicator-install\">gitlab.com/JiriKalvoda/webupdatingindicator-install</a><br>"
+                       );
+}
+void MainWindow::aboutQt()
+{
+    QMessageBox::aboutQt(this);
+}
 MainWindow::~MainWindow()
 {
 
