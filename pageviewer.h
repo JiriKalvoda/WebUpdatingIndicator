@@ -38,6 +38,7 @@ public slots:
 
 public:
      bool eventFilter(QObject *obj, QEvent *event);
+     static QString keyHelp();
      int numInput=0;
 };
 

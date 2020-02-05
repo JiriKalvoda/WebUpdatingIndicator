@@ -183,16 +183,6 @@ bool PageViewer::eventFilter(QObject *obj, QEvent *event)
                     }
                 numInput=0;
             }
-            else if(k==Qt::Key_D)
-            {
-                for(int i=0;i<sort->rowCount();i++)
-                    if(sort->headerData(i,Qt::Vertical)==QString::number(numInput))
-                    {
-                        table->pressed(sort->index(i,3));
-                        break;
-                    }
-                numInput=0;
-            }
             else if(k==Qt::Key_L)
                 button_delete->animateClick();
             else if(k==Qt::Key_I)
@@ -227,4 +217,46 @@ bool PageViewer::eventFilter(QObject *obj, QEvent *event)
         }
     }
     return QObject::eventFilter(obj, event);
+}
+
+QString PageViewer::keyHelp()
+{
+    return
+            "<h2>Table shortcuts</h2>"
+            //"<table style=\"width:100%; border: 1px solid black;\">"
+            "<p><table border=\"1\" cellpadding=\"2\" cellspacing=\"0\">"
+        "<tr>"
+          "<td>num+d</td>"
+          "<td>Press <u>D</u>elete on line num</td>"
+        "</tr>"
+        "<tr>"
+          "<td>num+f</td>"
+          "<td>Press <u>F</u>ile on line num</td>"
+        "</tr>"
+        "<tr>"
+          "<td>num+s</td>"
+          "<td><u>S</u>elect line num</td>"
+        "</tr>"
+        "<tr>"
+          "<td>num+a</td>"
+          "<td><u>A</u>ppend to selection line num</td>"
+        "</tr>"
+        "<tr>"
+          "<td>j</td>"
+          "<td>Scroll down</td>"
+        "</tr>"
+        "<tr>"
+          "<td>k</td>"
+          "<td>Scroll up</td>"
+        "</tr>"
+        "<tr>"
+          "<td>v,b,n,m</td>"
+          "<td>Sort by column 1,2,3,4</td>"
+        "</tr>"
+        "<tr>"
+          "<td>V,B,N,M</td>"
+          "<td>Sort by column 1,2,3,4 in reverse order</td>"
+        "</tr>"
+      "</table></p>"
+      "<p>Every underlie letter is shortcut for its button</p>";
 }

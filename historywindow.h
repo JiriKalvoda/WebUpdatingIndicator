@@ -28,11 +28,14 @@ public:
     PageQuery * query = 0;
     Background * bg;
 
+    static QString keyHelp();
+
 signals:
 
 public slots:
     void load();
     void reload();
+    void openKeyHelp();
 
 protected:
      bool eventFilter(QObject *obj, QEvent *event);

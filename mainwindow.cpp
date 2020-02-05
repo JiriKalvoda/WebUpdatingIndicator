@@ -88,6 +88,10 @@ MainWindow::MainWindow(QWidget *parent, int argc, char ** argv)
         app_quit->setShortcut(Qt::CTRL+Qt::Key_Q);
         connect(app_quit,SIGNAL(triggered(bool)),this,SLOT(exit()));
         app->addSeparator();
+        QAction * app_keyHelp = app->addAction("Shortcut help");
+        app_keyHelp->setShortcut(Qt::Key_Question);
+        connect(app_keyHelp,SIGNAL(triggered(bool)),this,SLOT(openKeyHelp()));
+        app->addSeparator();
         QAction * app_about = app->addAction("About");
         connect(app_about,SIGNAL(triggered(bool)),this,SLOT(about()));
         QAction * app_aboutQt = app->addAction("About Qt");
@@ -245,6 +249,8 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
                 consoleScr->verticalScrollBar()->setValue(consoleScr->verticalScrollBar()->value()+consoleScr->verticalScrollBar()->singleStep()*3);
             else if(k==Qt::Key_K && QApplication::keyboardModifiers().testFlag(Qt::ShiftModifier) == true)
                 consoleScr->verticalScrollBar()->setValue(consoleScr->verticalScrollBar()->value()-consoleScr->verticalScrollBar()->singleStep()*3);
+            else if(k==Qt::Key_Question)
+                openKeyHelp();
             else
             {
                 if(obj != newPages && obj != newPages->table)
@@ -256,4 +262,48 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
         }
     }
     return QObject::eventFilter(obj, event);
+}
+
+QString  MainWindow::keyHelp()
+{
+    return QString()+
+            "<h1>Main window shortcut</h1>"+
+           "<p>Every underlie letter is shortcut for its button</p>"+
+            "<p><table border=\"1\" cellpadding=\"2\" cellspacing=\"0\">"
+                "<tr>"
+                  "<td>Esc</td>"
+                  "<td>Reset focus</td>"
+                "</tr>"
+                "<tr>"
+                  "<td>Ctrl+q</td>"
+                  "<td>Quit</td>"
+                "</tr>"
+                "<tr>"
+                  "<td>h</td>"
+                  "<td>Open history window</td>"
+                "</tr>"
+            "</table></p>"+
+           PageViewer::keyHelp()
+            +
+            "<h2>Console shortcuts</h2>"
+              "<p><table border=\"1\" cellpadding=\"2\" cellspacing=\"0\">"
+              "<tr>"
+            "<td>w</td>"
+            "<td>Vie<u>w</u> console</td>"
+              "</tr>"
+              "<tr>"
+            "<td>J</td>"
+            "<td>Scroll down</td>"
+              "</tr>"
+              "<tr>"
+            "<td>K</td>"
+            "<td>Scroll up</td>"
+              "</tr>"
+            "</table></p>"
+            ;
+}
+
+void MainWindow::openKeyHelp()
+{
+    QMessageBox::information(this,"Shortcut help",keyHelp());
 }

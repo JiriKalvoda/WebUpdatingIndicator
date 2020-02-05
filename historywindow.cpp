@@ -61,10 +61,12 @@ bool HistoryWindow::eventFilter(QObject *obj, QEvent *event)
         {
             if(k==Qt::Key_C)
                 inputButton->animateClick();
-            if(k==Qt::Key_W)
+            else if(k==Qt::Key_W)
                 inputInput->setFocus();
-            if(k==Qt::Key_Q)
+            else if(k==Qt::Key_Q)
                 close();
+            else if(k==Qt::Key_Question)
+                openKeyHelp();
             else
             {
                 if(obj != viewer && obj != viewer->table)
@@ -76,4 +78,27 @@ bool HistoryWindow::eventFilter(QObject *obj, QEvent *event)
         }
     }
     return QObject::eventFilter(obj, event);
+}
+
+QString  HistoryWindow::keyHelp()
+{
+    return QString()+
+            "<h1>History window shortcut</h1>"+
+           "<p>Every underlie letter is shortcut for its button or box</p>"+
+            "<p><table border=\"1\" cellpadding=\"2\" cellspacing=\"0\">"
+                "<tr>"
+                  "<td>Esc</td>"
+                  "<td>Reset focus</td>"
+                "</tr>"
+                "<tr>"
+                  "<td>q</td>"
+                  "<td>Quit window</td>"
+                "</tr>"
+            "</table></p>"+
+           PageViewer::keyHelp();
+}
+
+void HistoryWindow::openKeyHelp()
+{
+    QMessageBox::information(this,"Shortcut help",keyHelp());
 }

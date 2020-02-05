@@ -71,12 +71,14 @@ public slots:
     void viewConsole(bool isYes);
     void about();
     void aboutQt();
+    void openKeyHelp();
 
     void closeEvent (QCloseEvent *event);
     void exit();
 
 protected:
      bool eventFilter(QObject *obj, QEvent *event);
+     static QString  keyHelp();
 };
 
 #endif // MAINWINDOW_H
