@@ -31,6 +31,8 @@ HistoryWindow::HistoryWindow(Background * BG,QWidget * parent):QWidget(parent)
 
    setAttribute(Qt::WA_DeleteOnClose);
 
+    resize(700,800);
+
     qApp->installEventFilter(this);
 }
 
