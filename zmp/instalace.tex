@@ -16,7 +16,7 @@ Ty jsou dostupné na adrese \url{gitlab.com/JiriKalvoda/webupdatingindicator-ins
 Na operačních systémech postavených na jádře Linuxu stačí pouze stáhnout a rozzipovat složku s~programem do uživatelem zvoleného adresáře.
 Pracovní adresář aplikace je pak ten, ze kterého se aplikace spouští (nemusí tedy být shodný s~adresářem, ve kterém je umístěna aplikace).
 Pro jednodušší spouštění je dobré vytvořit bash script, který bude obsahovat přepnutí polohy do pracovního adresáře a spuštění aplikace.
-Příklad takového skriptu je uložen ve složce, ve které je umístěn program, pod názvem \c|run.sh|.
+%Příklad takového skriptu je uložen ve složce, ve které je umístěn program, pod názvem \c|run.sh|.
 Pro možnost spouštění aplikace z~menu či pomocí přímého příkazu je možné tento skript umístit do adresáře \c|usr/bin|.
 
 V~případě užívání správce oken i3 je vhodné nastavit, aby se okna porovnávání stránek zobrazovala jako plovoucí.
@@ -27,15 +27,32 @@ Případně je možně vyhradit aplikaci speciální pracovní plochu a definova
 \c|bindsym $mod+Shift+comma workspace WUI;exec WebUpdatingIndicator.sh|\\
 \c|bindsym $mod+comma workspace WUI|\\
 \end{tabular}
-\obr{linux-i3-2}{Aplikace otevřená v~operačním systému Linux Mint 19 \protect\linebreak se správcem oken i3.}
-\obr{linux-cinnamon}{Aplikace otevřená v~operačním systému Linux Mint 19 se správcem oken Cinnamon.}
+%\obr{linux-i3-2}{Aplikace otevřená v~operačním systému Linux Mint 19 \protect\linebreak se správcem oken i3.}
+%\def\obr#1\obrazek{}{#2}{#1}}
+\begin{figure}[tbhp]
+  \centering
+	\includegraphics[width=9cm]{screenshots/linux-i3-2.png}
+		\begin{minipage}{0.8\textwidth}
+			\caption{Aplikace otevřená v~operačním systému Linux Mint 19 se správcem oken i3.}
+		\end{minipage}
+  \label{fig:linux-i3-2}
+\end{figure}
+\begin{figure}[tbhp]
+  \centering
+	\includegraphics[width=9cm]{screenshots/linux-cinnamon.png}
+		\begin{minipage}{0.8\textwidth}
+			\caption{Aplikace otevřená v~operačním systému Linux Mint 19 se správcem oken Cinnamon.}
+		\end{minipage}
+  \label{fig:linux-cinnamon}
+\end{figure}
+%\obr{linux-cinnamon}{Aplikace otevřená v~operačním systému Linux Mint 19 se správcem oken Cinnamon.}
 
 \podsekce{Windows}
 Pro Windows existuje alternativní instalační složka. Jejím stažením a rozzipováním do uživatelem zvolené složky vznikne spustitelná aplikace. 
-Jelikož na tomto operačním systému nejsou běžně dostupné potřebné dynamicky linkované knihovny Qt,
-instalační složka je přímo obsahuje.
-Důsledkem této skutečnosti je, že aplikace zabírá mnohem více diskového prostoru.
-Dále je dobré vytvořit zástupce, přes kterého se bude daný program spouštět.
+%Jelikož na tomto operačním systému nejsou běžně dostupné potřebné dynamicky linkované knihovny Qt,
+%instalační složka je přímo obsahuje.
+%Důsledkem této skutečnosti je, že aplikace zabírá mnohem více diskového prostoru.
+Je dobré vytvořit zástupce, přes kterého se bude daný program spouštět.
 Při jeho vytváření se dá zvolit i pracovní adresář.
 Jako ikonku je možné nastavit \c|Logo.ico|.
 Zástupce je pak možné umístit například na plochu nebo do Start menu.

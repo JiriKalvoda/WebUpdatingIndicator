@@ -44,10 +44,29 @@ V~databázi jsou uloženy záznamy o~všech verzích stránek a také uživatels
 
 O~ukládání nových změn na stránce se stará \c|NewPageModel|. Tento tabulkový model je pak přímo napojen na zobrazování změn.
 
+Třída \c|PageQuery| založená na \c|NewPageModel| obsahuje tabulky dotazu z~databáze na historii změn.
+
+\podsekce{Porovnávání verzí stránek}
 \c|PageComparator| umožňuje porovnávání verzí stránek.
 Jeho úkolem je najít nejlepší napojení stránek na sebe a následné vytvoření souborů, které zobrazují změny v~prohlížeči.
 
-Třída \c|PageQuery| založená na \c|NewPageModel| obsahuje tabulky dotazu z~databáze na historii změn.
+Obě dvě verze stránky si rozdělí na jednotlivá slova a tagy. S~nimi se dále pracuje jako se znaky.
+Poté hledá nejdelší shodný podřetězec.
+Na to využívá dynamického programování.
+Pro každou dvojici prefixů z~obou řetězců si spočítá délku nejdelšího shodného podřetězce.
+K~výpočtu ovšem využívá toho, že tuto hodnotu již zná pro kratší prefixy.
+Když je poslední slovo v~obou prefixech stejné, tak oproti dvojici, v~niž jsou oba prefixy o~jedno slovo kratší, může být délka podřetězce o~jedna delší (toto odpovídá variantě, že poslední slovo přibude ve shodném podřetězci).
+Délka podřetězce ovšem může být stejná jako délka podřetězce v~dvojicích, které mají jeden sufix o~jedna kratší (toto odpovídá variantě, že shodný podřetězec zůstane stejný).
+Z~těchto variant vybere maximum.
+
+Poté již není problém zrekonstruovat tvar podřetězce.
+Stačí projít takto vytvořenou tabulku od prefixů obsahujících celé řetězce směrem odkud vzniklo maximum v~dané buňce.
+
+Při tomto průchodu si poznačí, které části vstupu jsou součástí shodného podřetězce a které nikoliv.
+Části, které nejsou součástí podřetězce pak zobrazuje jako změny, tedy je barevně zvýrazní obalením je do tagu \c|span|.
+
+
+
 
 \sekce{Grafické uživatelské rozhraní}
 Hlavní okno aplikace je implementováno pomocí třídy \c|MainWindow|. Toto je hlavní třída celého projektu.

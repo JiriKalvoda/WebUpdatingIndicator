@@ -22,5 +22,6 @@
 \contentsline {subsubsection}{Git}{22}{section*.11}
 \contentsline {subsection}{\numberline {3.2}Objektov\IeC {\'y} model, rozd\IeC {\v e}len\IeC {\'\i } probl\IeC {\'e}mu}{23}{subsection.3.2}
 \contentsline {subsection}{\numberline {3.3}Pozad\IeC {\'\i } aplikace}{23}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Grafick\IeC {\'e} u\IeC {\v z}ivatelsk\IeC {\'e} rozhran\IeC {\'\i }}{23}{subsection.3.4}
+\contentsline {subsubsection}{Porovn\IeC {\'a}v\IeC {\'a}n\IeC {\'\i } verz\IeC {\'\i } str\IeC {\'a}nek}{23}{section*.12}
+\contentsline {subsection}{\numberline {3.4}Grafick\IeC {\'e} u\IeC {\v z}ivatelsk\IeC {\'e} rozhran\IeC {\'\i }}{24}{subsection.3.4}
 \contentsline {section}{\numberline {4}Seznam pou\IeC {\v z}it\IeC {\'e} literatury}{25}{section.4}
