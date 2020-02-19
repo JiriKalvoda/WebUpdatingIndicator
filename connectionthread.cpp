@@ -207,6 +207,16 @@ void ConnectionThread::run()
         }
         //----------------------------------------------
         data = reply->readAll();
+                {
+                    auto rhplist = reply->rawHeaderPairs();
+                    auto rhpi = rhplist.constBegin() ;
+                    for (;rhpi!=rhplist.constEnd(); rhpi++) {
+                      if ((rhpi->first=="Content-Encoding")) {
+                          textStatus(QString()+" ["+rhpi->second+"]");
+                      }
+                    }
+                }
+
         {
             QString root = act->url_server;
             QString dir = act->url_serverDir()+"/";
