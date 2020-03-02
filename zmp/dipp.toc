@@ -24,4 +24,5 @@
 \contentsline {subsection}{\numberline {3.3}Pozad\IeC {\'\i } aplikace}{23}{subsection.3.3}
 \contentsline {subsubsection}{Porovn\IeC {\'a}v\IeC {\'a}n\IeC {\'\i } verz\IeC {\'\i } str\IeC {\'a}nek}{23}{section*.12}
 \contentsline {subsection}{\numberline {3.4}Grafick\IeC {\'e} u\IeC {\v z}ivatelsk\IeC {\'e} rozhran\IeC {\'\i }}{24}{subsection.3.4}
-\contentsline {section}{\numberline {4}Seznam pou\IeC {\v z}it\IeC {\'e} literatury}{25}{section.4}
+\contentsline {section}{\numberline {4}Z\IeC {\'a}v\IeC {\v e}r}{25}{section.4}
+\contentsline {section}{\numberline {5}Seznam pou\IeC {\v z}it\IeC {\'e} literatury}{26}{section.5}
