@@ -1,0 +1,43 @@
+ I developed an desktop application.
+ It help people with monitoring changes on web pages.
+
+ You can easy install it by unzip one directory and then you can type pages, which you want to monitoring to configuration file.
+ It look like this.
+ You can specify page address and lots of useful things here.
+ For example, you can put there information how to automatically log in to page.
+
+After configuration you can open the application.
+This is main window.
+In the top section in the table you can observe last changes on monitored pages.
+Every detected page update insert one line to the table.
+Then you can clear the table by button.
+
+In the down section you can start or stop checking page manually or set period of automatic page checking.
+
+If you delete some line from this window, it will by still available in special window for look into all history.
+You simply type your requirement here and the result  will be displayed in this table.
+
+The main feature of this app is graphic comparing.
+You can select two version of some page and then click to compare button.
+It open this two version of page in you web browser and highlight the difference.
+In this control panel you can set some preference.
+Form example you can join this two version to one page where is new things highlighted by green color and deleted things by red.
+
+Now I will tel you something about development of this application.
+I used Qt libraly for almost everything.
+It is very big tool kit for programming in c plus plus.
+It help me with with rendering this graphic user interference and connecting to server for downloading pages.
+
+Because I used Qt library, the best chose was writing code in Qt Creator IDE.
+This is part of my code in this text editor.
+There is very simple to compile and run all project, but text editor support lot's of advanced tool like code hinting.
+
+I used GIT for version control, back up and publishing code.
+
+Application is running on most operation system such as Linux, Windows and maybe Mac OS.
+Some people is testing the app now and I use it every day.
+It is available for everybody as installation package or source code.
+Now it is all from me, thank's for attention.
+
+--------------------------------------
+I'm interested in programming and I need this app, because before I deployed it, I spend lot's of time by checking some pages manually.

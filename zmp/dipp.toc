@@ -1,28 +1,29 @@
 \babel@toc {czech}{}
-\contentsline {section}{\numberline {1}\IeC {\'U}vod a~c\IeC {\'\i }l pr\IeC {\'a}ce}{11}{section.1}
-\contentsline {subsection}{\numberline {1.1}\IeC {\'U}vod do problematiky}{11}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}C\IeC {\'\i }l pr\IeC {\'a}ce}{11}{subsection.1.2}
-\contentsline {section}{\numberline {2}Popis fungov\IeC {\'a}n\IeC {\'\i } a ovl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i } aplikace}{12}{section.2}
-\contentsline {subsection}{\numberline {2.1}Instalace}{12}{subsection.2.1}
-\contentsline {subsubsection}{Kompilace ze zdrojov\IeC {\'e}ho k\IeC {\'o}du}{12}{section*.2}
-\contentsline {subsubsection}{Linux}{12}{section*.3}
-\contentsline {subsubsection}{Windows}{14}{section*.4}
-\contentsline {subsubsection}{macOS}{14}{section*.5}
-\contentsline {subsection}{\numberline {2.2}Seznam str\IeC {\'a}nek na kontrolu}{14}{subsection.2.2}
-\contentsline {subsubsection}{Adresa str\IeC {\'a}nky a n\IeC {\'a}zev}{15}{section*.6}
-\contentsline {subsubsection}{Zp\IeC {\r u}soby kontroly zm\IeC {\v e}n}{16}{section*.7}
-\contentsline {subsubsection}{Skupiny str\IeC {\'a}nek, p\IeC {\v r}ihl\IeC {\'a}\IeC {\v s}en\IeC {\'\i } a pr\IeC {\'a}ce s~cookie}{16}{section*.8}
-\contentsline {subsection}{\numberline {2.3}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } kontroly, tabulka zm\IeC {\v e}n, informa\IeC {\v c}n\IeC {\'\i } konzole}{16}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Historie zm\IeC {\v e}n a jej\IeC {\'\i } proch\IeC {\'a}zen\IeC {\'\i }}{19}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Grafick\IeC {\'e} porovn\IeC {\'a}v\IeC {\'a}n\IeC {\'\i } verz\IeC {\'\i } str\IeC {\'a}nek}{20}{subsection.2.5}
-\contentsline {section}{\numberline {3}Implementace aplikace}{22}{section.3}
-\contentsline {subsection}{\numberline {3.1}Pou\IeC {\v z}it\IeC {\'y} software}{22}{subsection.3.1}
-\contentsline {subsubsection}{Qt}{22}{section*.9}
-\contentsline {subsubsection}{Qt Creator}{22}{section*.10}
-\contentsline {subsubsection}{Git}{22}{section*.11}
-\contentsline {subsection}{\numberline {3.2}Objektov\IeC {\'y} model, rozd\IeC {\v e}len\IeC {\'\i } probl\IeC {\'e}mu}{23}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Pozad\IeC {\'\i } aplikace}{23}{subsection.3.3}
-\contentsline {subsubsection}{Porovn\IeC {\'a}v\IeC {\'a}n\IeC {\'\i } verz\IeC {\'\i } str\IeC {\'a}nek}{23}{section*.12}
-\contentsline {subsection}{\numberline {3.4}Grafick\IeC {\'e} u\IeC {\v z}ivatelsk\IeC {\'e} rozhran\IeC {\'\i }}{24}{subsection.3.4}
-\contentsline {section}{\numberline {4}Z\IeC {\'a}v\IeC {\v e}r}{25}{section.4}
-\contentsline {section}{\numberline {5}Seznam pou\IeC {\v z}it\IeC {\'e} literatury}{26}{section.5}
+\contentsline {section}{\numberline {1}Úvod a~cíl práce}{11}{section.1}% 
+\contentsline {subsection}{\numberline {1.1}Úvod do problematiky}{11}{subsection.1.1}% 
+\contentsline {subsection}{\numberline {1.2}Cíl práce}{11}{subsection.1.2}% 
+\contentsline {section}{\numberline {2}Popis fungování a ovládání aplikace}{12}{section.2}% 
+\contentsline {subsection}{\numberline {2.1}Instalace}{12}{subsection.2.1}% 
+\contentsline {subsubsection}{Kompilace ze zdrojového kódu}{12}{section*.2}% 
+\contentsline {subsubsection}{Linux}{12}{section*.3}% 
+\contentsline {subsubsection}{Windows}{14}{section*.4}% 
+\contentsline {subsubsection}{macOS}{14}{section*.5}% 
+\contentsline {subsection}{\numberline {2.2}Seznam stránek na kontrolu}{14}{subsection.2.2}% 
+\contentsline {subsubsection}{Adresa stránky a název}{15}{section*.6}% 
+\contentsline {subsubsection}{Způsoby kontroly změn}{16}{section*.7}% 
+\contentsline {subsubsection}{Skupiny stránek, přihlášení a práce s~cookie}{16}{section*.8}% 
+\contentsline {subsection}{\numberline {2.3}Spuštění kontroly, tabulka změn, informační konzole}{16}{subsection.2.3}% 
+\contentsline {subsection}{\numberline {2.4}Historie změn a její procházení}{19}{subsection.2.4}% 
+\contentsline {subsection}{\numberline {2.5}Grafické porovnávání verzí stránek}{20}{subsection.2.5}% 
+\contentsline {section}{\numberline {3}Implementace aplikace}{22}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}Použitý software}{22}{subsection.3.1}% 
+\contentsline {subsubsection}{Qt}{22}{section*.9}% 
+\contentsline {subsubsection}{Qt Creator}{22}{section*.10}% 
+\contentsline {subsubsection}{Git}{22}{section*.11}% 
+\contentsline {subsection}{\numberline {3.2}Objektový model, rozdělení problému}{23}{subsection.3.2}% 
+\contentsline {subsection}{\numberline {3.3}Pozadí aplikace}{23}{subsection.3.3}% 
+\contentsline {subsubsection}{Porovnávání verzí stránek}{23}{section*.12}% 
+\contentsline {subsection}{\numberline {3.4}Grafické uživatelské rozhraní}{24}{subsection.3.4}% 
+\contentsline {section}{\numberline {4}Závěr}{25}{section.4}% 
+\contentsline {section}{\numberline {5}Resume}{26}{section.5}% 
+\contentsline {section}{\numberline {6}Seznam použité literatury}{27}{section.6}% 
